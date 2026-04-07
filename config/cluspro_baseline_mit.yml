@@ -19,7 +19,7 @@ model:
 
 train:
   dataset: mit-states
-  dataset_path: /home/dkkim/.gemini/antigravity/scratch/csp/data/mit-states
+  dataset_path: ./data/mit-states
   optimizer: Adam
   scheduler: StepLR
   step_size: 5
