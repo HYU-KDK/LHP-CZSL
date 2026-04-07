@@ -60,7 +60,23 @@ python train.py --yml_path config/cluspro_baseline_mit.yml --lr 0.00005 --epochs
 ```bash
 python test.py --yml_path config/cluspro_baseline_mit.yml --load_model checkpoint/cluspro_baseline_b16_mit/best_model.pt
 ```
+## 5. 결과 저장 (Output & Saving)
 
+실행 결과는 기본적으로 `--save_path` 인자로 지정된 디렉토리에 저장됩니다.
+
+### `train.py` 실행 결과
+학습 중 생성되는 파일들은 설정된 저장 경로에 위치합니다:
+- **`val_best.pt`**: 검증 세트에서 가장 좋은 성능을 보인 모델 체크포인트
+- **`epoch_N.pt`**: 매 `n` 에폭마다 저장되는 체크포인트 (기본 5에폭 간격)
+- **`final_model.pt`**: 학습 완료 후의 최종 모델 상태
+- **`config.json` / `config.pkl`**: 학습에 사용된 상세 설정 및 파라미터 정보
+
+### `test.py` 실행 결과
+평가 결과는 JSON 형식으로 저장되며, 위치는 `--load_model` 경로를 따르거나 `--save_path`에 저장됩니다:
+- **`closed.json`**: Closed-world 평가 결과 (기본값)
+- **`open.calibrated.json`**: Open-world 평가 결과 (`--open_world` 옵션 사용 시)
+
+---
 ## 주요 파라미터 안내 (`parameters.py`)
 - `--model_name`: 사용할 모델 이름 (기본값: `cluspro_baseline`)
 - `--dataset`: 데이터셋 이름 (`mit-states`, `ut-zappos`, `cgqa`)
