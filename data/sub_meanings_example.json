@@ -1,0 +1,56 @@
+{
+  "_comment": "Example format for sub_meanings.json. Generate this via LLM (Phase 0). Keys must match dataset primitive names exactly.",
+  "attrs": {
+    "old": {
+      "sub": ["worn", "faded", "aged"],
+      "K": 3,
+      "d_sem": {
+        "worn-faded": 0.3,
+        "worn-aged": 0.5,
+        "faded-aged": 0.4
+      }
+    },
+    "broken": {
+      "sub": ["cracked", "shattered"],
+      "K": 2,
+      "d_sem": {
+        "cracked-shattered": 0.6
+      }
+    },
+    "translucent": {
+      "sub": ["translucent"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "new": {
+      "sub": ["fresh", "unused", "pristine", "mint"],
+      "K": 4,
+      "d_sem": {
+        "fresh-unused": 0.2,
+        "fresh-pristine": 0.3,
+        "fresh-mint": 0.25,
+        "unused-pristine": 0.15,
+        "unused-mint": 0.2,
+        "pristine-mint": 0.1
+      }
+    }
+  },
+  "objs": {
+    "car": {
+      "sub": ["sedan", "suv", "truck"],
+      "K": 3,
+      "d_sem": {
+        "sedan-suv": 0.4,
+        "sedan-truck": 0.6,
+        "suv-truck": 0.3
+      }
+    },
+    "knife": {
+      "sub": ["kitchen_knife", "pocket_knife"],
+      "K": 2,
+      "d_sem": {
+        "kitchen_knife-pocket_knife": 0.5
+      }
+    }
+  }
+}
