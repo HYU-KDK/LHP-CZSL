@@ -1,0 +1,4796 @@
+{
+  "attrs": {
+    "ancient": {
+      "sub": [
+        "ruined",
+        "fossilized",
+        "archaic",
+        "timeworn"
+      ],
+      "K": 4,
+      "d_sem": {
+        "ruined-fossilized": 0.7,
+        "ruined-archaic": 0.5,
+        "ruined-timeworn": 0.3,
+        "fossilized-archaic": 0.6,
+        "fossilized-timeworn": 0.5,
+        "archaic-timeworn": 0.3
+      }
+    },
+    "barren": {
+      "sub": [
+        "desolate",
+        "stripped",
+        "bare"
+      ],
+      "K": 3,
+      "d_sem": {
+        "desolate-stripped": 0.5,
+        "desolate-bare": 0.4,
+        "stripped-bare": 0.2
+      }
+    },
+    "bent": {
+      "sub": [
+        "curved_metal",
+        "buckled",
+        "warped"
+      ],
+      "K": 3,
+      "d_sem": {
+        "curved_metal-buckled": 0.4,
+        "curved_metal-warped": 0.3,
+        "buckled-warped": 0.3
+      }
+    },
+    "blunt": {
+      "sub": [
+        "dulled_edge",
+        "rounded_tip",
+        "flattened"
+      ],
+      "K": 3,
+      "d_sem": {
+        "dulled_edge-rounded_tip": 0.3,
+        "dulled_edge-flattened": 0.4,
+        "rounded_tip-flattened": 0.3
+      }
+    },
+    "bright": {
+      "sub": [
+        "reflective_shine",
+        "luminous_glow",
+        "vivid_color"
+      ],
+      "K": 3,
+      "d_sem": {
+        "reflective_shine-luminous_glow": 0.5,
+        "reflective_shine-vivid_color": 0.6,
+        "luminous_glow-vivid_color": 0.5
+      }
+    },
+    "broken": {
+      "sub": [
+        "cracked_surface",
+        "snapped",
+        "shattered_pieces"
+      ],
+      "K": 3,
+      "d_sem": {
+        "cracked_surface-snapped": 0.5,
+        "cracked_surface-shattered_pieces": 0.4,
+        "snapped-shattered_pieces": 0.5
+      }
+    },
+    "browned": {
+      "sub": [
+        "oxidized",
+        "seared",
+        "sun_browned"
+      ],
+      "K": 3,
+      "d_sem": {
+        "oxidized-seared": 0.5,
+        "oxidized-sun_browned": 0.4,
+        "seared-sun_browned": 0.5
+      }
+    },
+    "brushed": {
+      "sub": [
+        "brushed_metal",
+        "groomed",
+        "swept"
+      ],
+      "K": 3,
+      "d_sem": {
+        "brushed_metal-groomed": 0.6,
+        "brushed_metal-swept": 0.5,
+        "groomed-swept": 0.4
+      }
+    },
+    "burnt": {
+      "sub": [
+        "charred",
+        "scorched",
+        "singed"
+      ],
+      "K": 3,
+      "d_sem": {
+        "charred-scorched": 0.3,
+        "charred-singed": 0.5,
+        "scorched-singed": 0.4
+      }
+    },
+    "caramelized": {
+      "sub": [
+        "golden_crust",
+        "glazed_sugar",
+        "toasted_brown"
+      ],
+      "K": 3,
+      "d_sem": {
+        "golden_crust-glazed_sugar": 0.3,
+        "golden_crust-toasted_brown": 0.2,
+        "glazed_sugar-toasted_brown": 0.4
+      }
+    },
+    "chipped": {
+      "sub": [
+        "edge_chipped",
+        "paint_chipped",
+        "stone_chipped"
+      ],
+      "K": 3,
+      "d_sem": {
+        "edge_chipped-paint_chipped": 0.4,
+        "edge_chipped-stone_chipped": 0.3,
+        "paint_chipped-stone_chipped": 0.4
+      }
+    },
+    "clean": {
+      "sub": [
+        "polished",
+        "sterile",
+        "spotless"
+      ],
+      "K": 3,
+      "d_sem": {
+        "polished-sterile": 0.4,
+        "polished-spotless": 0.2,
+        "sterile-spotless": 0.3
+      }
+    },
+    "clear": {
+      "sub": [
+        "transparent",
+        "cloudless",
+        "limpid"
+      ],
+      "K": 3,
+      "d_sem": {
+        "transparent-cloudless": 0.6,
+        "transparent-limpid": 0.2,
+        "cloudless-limpid": 0.6
+      }
+    },
+    "closed": {
+      "sub": [
+        "shut",
+        "sealed",
+        "latched"
+      ],
+      "K": 3,
+      "d_sem": {
+        "shut-sealed": 0.3,
+        "shut-latched": 0.3,
+        "sealed-latched": 0.4
+      }
+    },
+    "cloudy": {
+      "sub": [
+        "overcast",
+        "hazy_liquid",
+        "foggy_glass"
+      ],
+      "K": 3,
+      "d_sem": {
+        "overcast-hazy_liquid": 0.7,
+        "overcast-foggy_glass": 0.6,
+        "hazy_liquid-foggy_glass": 0.3
+      }
+    },
+    "cluttered": {
+      "sub": [
+        "messy_pile",
+        "overcrowded",
+        "jumbled"
+      ],
+      "K": 3,
+      "d_sem": {
+        "messy_pile-overcrowded": 0.3,
+        "messy_pile-jumbled": 0.2,
+        "overcrowded-jumbled": 0.3
+      }
+    },
+    "coiled": {
+      "sub": [
+        "spiraled",
+        "wound_tight",
+        "looped"
+      ],
+      "K": 3,
+      "d_sem": {
+        "spiraled-wound_tight": 0.3,
+        "spiraled-looped": 0.4,
+        "wound_tight-looped": 0.3
+      }
+    },
+    "cooked": {
+      "sub": [
+        "boiled",
+        "roasted",
+        "fried"
+      ],
+      "K": 3,
+      "d_sem": {
+        "boiled-roasted": 0.6,
+        "boiled-fried": 0.5,
+        "roasted-fried": 0.4
+      }
+    },
+    "cored": {
+      "sub": [
+        "hollowed_center",
+        "seed_removed",
+        "drilled_out"
+      ],
+      "K": 3,
+      "d_sem": {
+        "hollowed_center-seed_removed": 0.4,
+        "hollowed_center-drilled_out": 0.3,
+        "seed_removed-drilled_out": 0.5
+      }
+    },
+    "cracked": {
+      "sub": [
+        "hairline_crack",
+        "deep_fracture",
+        "crazed_surface"
+      ],
+      "K": 3,
+      "d_sem": {
+        "hairline_crack-deep_fracture": 0.5,
+        "hairline_crack-crazed_surface": 0.4,
+        "deep_fracture-crazed_surface": 0.5
+      }
+    },
+    "creased": {
+      "sub": [
+        "fold_line",
+        "wrinkle_pressed",
+        "crumple_crease"
+      ],
+      "K": 3,
+      "d_sem": {
+        "fold_line-wrinkle_pressed": 0.3,
+        "fold_line-crumple_crease": 0.4,
+        "wrinkle_pressed-crumple_crease": 0.3
+      }
+    },
+    "crinkled": {
+      "sub": [
+        "paper_crinkle",
+        "fabric_crinkle",
+        "foil_crinkle"
+      ],
+      "K": 3,
+      "d_sem": {
+        "paper_crinkle-fabric_crinkle": 0.3,
+        "paper_crinkle-foil_crinkle": 0.4,
+        "fabric_crinkle-foil_crinkle": 0.4
+      }
+    },
+    "crumpled": {
+      "sub": [
+        "balled_up",
+        "crushed_flat",
+        "wrinkled_mass"
+      ],
+      "K": 3,
+      "d_sem": {
+        "balled_up-crushed_flat": 0.5,
+        "balled_up-wrinkled_mass": 0.3,
+        "crushed_flat-wrinkled_mass": 0.4
+      }
+    },
+    "crushed": {
+      "sub": [
+        "flattened",
+        "pulverized",
+        "compacted"
+      ],
+      "K": 3,
+      "d_sem": {
+        "flattened-pulverized": 0.6,
+        "flattened-compacted": 0.3,
+        "pulverized-compacted": 0.5
+      }
+    },
+    "curved": {
+      "sub": [
+        "arched",
+        "bowed",
+        "serpentine"
+      ],
+      "K": 3,
+      "d_sem": {
+        "arched-bowed": 0.2,
+        "arched-serpentine": 0.5,
+        "bowed-serpentine": 0.5
+      }
+    },
+    "cut": {
+      "sub": [
+        "sliced_clean",
+        "chopped_rough",
+        "carved"
+      ],
+      "K": 3,
+      "d_sem": {
+        "sliced_clean-chopped_rough": 0.4,
+        "sliced_clean-carved": 0.5,
+        "chopped_rough-carved": 0.4
+      }
+    },
+    "damp": {
+      "sub": [
+        "moist_surface",
+        "dewy",
+        "lightly_wet"
+      ],
+      "K": 3,
+      "d_sem": {
+        "moist_surface-dewy": 0.3,
+        "moist_surface-lightly_wet": 0.2,
+        "dewy-lightly_wet": 0.3
+      }
+    },
+    "dark": {
+      "sub": [
+        "shadowed",
+        "blackened",
+        "dim"
+      ],
+      "K": 3,
+      "d_sem": {
+        "shadowed-blackened": 0.5,
+        "shadowed-dim": 0.3,
+        "blackened-dim": 0.5
+      }
+    },
+    "deflated": {
+      "sub": [
+        "collapsed_flat",
+        "sagging",
+        "shrunken"
+      ],
+      "K": 3,
+      "d_sem": {
+        "collapsed_flat-sagging": 0.4,
+        "collapsed_flat-shrunken": 0.4,
+        "sagging-shrunken": 0.3
+      }
+    },
+    "dented": {
+      "sub": [
+        "impact_dent",
+        "pressed_in",
+        "buckled_dent"
+      ],
+      "K": 3,
+      "d_sem": {
+        "impact_dent-pressed_in": 0.3,
+        "impact_dent-buckled_dent": 0.2,
+        "pressed_in-buckled_dent": 0.3
+      }
+    },
+    "diced": {
+      "sub": [
+        "fine_dice",
+        "rough_cube",
+        "irregular_chop"
+      ],
+      "K": 3,
+      "d_sem": {
+        "fine_dice-rough_cube": 0.3,
+        "fine_dice-irregular_chop": 0.5,
+        "rough_cube-irregular_chop": 0.3
+      }
+    },
+    "dirty": {
+      "sub": [
+        "mud_covered",
+        "stained",
+        "dust_coated",
+        "grimy_buildup"
+      ],
+      "K": 4,
+      "d_sem": {
+        "mud_covered-stained": 0.5,
+        "mud_covered-dust_coated": 0.4,
+        "mud_covered-grimy_buildup": 0.3,
+        "stained-dust_coated": 0.5,
+        "stained-grimy_buildup": 0.4,
+        "dust_coated-grimy_buildup": 0.3
+      }
+    },
+    "draped": {
+      "sub": [
+        "hanging_loose",
+        "layered_over",
+        "cascading"
+      ],
+      "K": 3,
+      "d_sem": {
+        "hanging_loose-layered_over": 0.3,
+        "hanging_loose-cascading": 0.3,
+        "layered_over-cascading": 0.4
+      }
+    },
+    "dry": {
+      "sub": [
+        "parched",
+        "dehydrated",
+        "arid_surface"
+      ],
+      "K": 3,
+      "d_sem": {
+        "parched-dehydrated": 0.3,
+        "parched-arid_surface": 0.2,
+        "dehydrated-arid_surface": 0.3
+      }
+    },
+    "dull": {
+      "sub": [
+        "matte_finish",
+        "faded_color",
+        "tarnished"
+      ],
+      "K": 3,
+      "d_sem": {
+        "matte_finish-faded_color": 0.4,
+        "matte_finish-tarnished": 0.5,
+        "faded_color-tarnished": 0.4
+      }
+    },
+    "empty": {
+      "sub": [
+        "hollow_inside",
+        "vacant_space",
+        "drained"
+      ],
+      "K": 3,
+      "d_sem": {
+        "hollow_inside-vacant_space": 0.4,
+        "hollow_inside-drained": 0.4,
+        "vacant_space-drained": 0.5
+      }
+    },
+    "engraved": {
+      "sub": [
+        "etched_line",
+        "deep_carved",
+        "laser_engraved"
+      ],
+      "K": 3,
+      "d_sem": {
+        "etched_line-deep_carved": 0.4,
+        "etched_line-laser_engraved": 0.3,
+        "deep_carved-laser_engraved": 0.5
+      }
+    },
+    "eroded": {
+      "sub": [
+        "water_worn",
+        "wind_eroded",
+        "chemically_eroded"
+      ],
+      "K": 3,
+      "d_sem": {
+        "water_worn-wind_eroded": 0.4,
+        "water_worn-chemically_eroded": 0.5,
+        "wind_eroded-chemically_eroded": 0.4
+      }
+    },
+    "fallen": {
+      "sub": [
+        "toppled_over",
+        "dropped_ground",
+        "collapsed_down"
+      ],
+      "K": 3,
+      "d_sem": {
+        "toppled_over-dropped_ground": 0.3,
+        "toppled_over-collapsed_down": 0.3,
+        "dropped_ground-collapsed_down": 0.4
+      }
+    },
+    "filled": {
+      "sub": [
+        "brimming",
+        "stuffed",
+        "packed_full"
+      ],
+      "K": 3,
+      "d_sem": {
+        "brimming-stuffed": 0.4,
+        "brimming-packed_full": 0.2,
+        "stuffed-packed_full": 0.3
+      }
+    },
+    "foggy": {
+      "sub": [
+        "mist_covered",
+        "condensation_fog",
+        "hazy_atmosphere"
+      ],
+      "K": 3,
+      "d_sem": {
+        "mist_covered-condensation_fog": 0.4,
+        "mist_covered-hazy_atmosphere": 0.3,
+        "condensation_fog-hazy_atmosphere": 0.5
+      }
+    },
+    "folded": {
+      "sub": [
+        "neatly_folded",
+        "casually_folded",
+        "origami_fold"
+      ],
+      "K": 3,
+      "d_sem": {
+        "neatly_folded-casually_folded": 0.3,
+        "neatly_folded-origami_fold": 0.5,
+        "casually_folded-origami_fold": 0.5
+      }
+    },
+    "frayed": {
+      "sub": [
+        "unraveled_threads",
+        "worn_edges",
+        "splitting_fibers"
+      ],
+      "K": 3,
+      "d_sem": {
+        "unraveled_threads-worn_edges": 0.3,
+        "unraveled_threads-splitting_fibers": 0.3,
+        "worn_edges-splitting_fibers": 0.4
+      }
+    },
+    "fresh": {
+      "sub": [
+        "just_picked",
+        "newly_made",
+        "crisp_clean"
+      ],
+      "K": 3,
+      "d_sem": {
+        "just_picked-newly_made": 0.4,
+        "just_picked-crisp_clean": 0.5,
+        "newly_made-crisp_clean": 0.3
+      }
+    },
+    "frozen": {
+      "sub": [
+        "ice_coated",
+        "frost_covered",
+        "solid_frozen"
+      ],
+      "K": 3,
+      "d_sem": {
+        "ice_coated-frost_covered": 0.3,
+        "ice_coated-solid_frozen": 0.4,
+        "frost_covered-solid_frozen": 0.4
+      }
+    },
+    "full": {
+      "sub": [
+        "overflowing",
+        "filled_to_brim",
+        "tightly_packed"
+      ],
+      "K": 3,
+      "d_sem": {
+        "overflowing-filled_to_brim": 0.2,
+        "overflowing-tightly_packed": 0.4,
+        "filled_to_brim-tightly_packed": 0.3
+      }
+    },
+    "grimy": {
+      "sub": [
+        "oil_grimy",
+        "soot_coated",
+        "caked_dirt"
+      ],
+      "K": 3,
+      "d_sem": {
+        "oil_grimy-soot_coated": 0.4,
+        "oil_grimy-caked_dirt": 0.4,
+        "soot_coated-caked_dirt": 0.3
+      }
+    },
+    "heavy": {
+      "sub": [
+        "massive_bulk",
+        "dense_weight",
+        "laden"
+      ],
+      "K": 3,
+      "d_sem": {
+        "massive_bulk-dense_weight": 0.3,
+        "massive_bulk-laden": 0.4,
+        "dense_weight-laden": 0.4
+      }
+    },
+    "huge": {
+      "sub": [
+        "towering",
+        "sprawling",
+        "oversized"
+      ],
+      "K": 3,
+      "d_sem": {
+        "towering-sprawling": 0.5,
+        "towering-oversized": 0.3,
+        "sprawling-oversized": 0.4
+      }
+    },
+    "inflated": {
+      "sub": [
+        "air_filled",
+        "puffed_up",
+        "ballooned"
+      ],
+      "K": 3,
+      "d_sem": {
+        "air_filled-puffed_up": 0.2,
+        "air_filled-ballooned": 0.3,
+        "puffed_up-ballooned": 0.2
+      }
+    },
+    "large": {
+      "sub": [
+        "big_scale",
+        "wide_spread",
+        "bulky"
+      ],
+      "K": 3,
+      "d_sem": {
+        "big_scale-wide_spread": 0.3,
+        "big_scale-bulky": 0.3,
+        "wide_spread-bulky": 0.4
+      }
+    },
+    "lightweight": {
+      "sub": [
+        "thin_material",
+        "airy",
+        "featherweight"
+      ],
+      "K": 3,
+      "d_sem": {
+        "thin_material-airy": 0.3,
+        "thin_material-featherweight": 0.2,
+        "airy-featherweight": 0.3
+      }
+    },
+    "loose": {
+      "sub": [
+        "slack_fit",
+        "unfastened",
+        "dangling"
+      ],
+      "K": 3,
+      "d_sem": {
+        "slack_fit-unfastened": 0.4,
+        "slack_fit-dangling": 0.4,
+        "unfastened-dangling": 0.3
+      }
+    },
+    "mashed": {
+      "sub": [
+        "smooth_puree",
+        "chunky_mash",
+        "pressed_flat"
+      ],
+      "K": 3,
+      "d_sem": {
+        "smooth_puree-chunky_mash": 0.4,
+        "smooth_puree-pressed_flat": 0.5,
+        "chunky_mash-pressed_flat": 0.4
+      }
+    },
+    "melted": {
+      "sub": [
+        "pooled_liquid",
+        "dripping_melt",
+        "softened_form"
+      ],
+      "K": 3,
+      "d_sem": {
+        "pooled_liquid-dripping_melt": 0.3,
+        "pooled_liquid-softened_form": 0.4,
+        "dripping_melt-softened_form": 0.4
+      }
+    },
+    "modern": {
+      "sub": [
+        "sleek_design",
+        "minimalist",
+        "high_tech"
+      ],
+      "K": 3,
+      "d_sem": {
+        "sleek_design-minimalist": 0.3,
+        "sleek_design-high_tech": 0.4,
+        "minimalist-high_tech": 0.5
+      }
+    },
+    "moldy": {
+      "sub": [
+        "fuzzy_mold",
+        "spotted_mold",
+        "black_mold"
+      ],
+      "K": 3,
+      "d_sem": {
+        "fuzzy_mold-spotted_mold": 0.4,
+        "fuzzy_mold-black_mold": 0.4,
+        "spotted_mold-black_mold": 0.3
+      }
+    },
+    "molten": {
+      "sub": [
+        "glowing_liquid",
+        "flowing_lava",
+        "liquid_metal"
+      ],
+      "K": 3,
+      "d_sem": {
+        "glowing_liquid-flowing_lava": 0.3,
+        "glowing_liquid-liquid_metal": 0.3,
+        "flowing_lava-liquid_metal": 0.4
+      }
+    },
+    "mossy": {
+      "sub": [
+        "green_carpet",
+        "patchy_moss",
+        "lichen_covered"
+      ],
+      "K": 3,
+      "d_sem": {
+        "green_carpet-patchy_moss": 0.3,
+        "green_carpet-lichen_covered": 0.5,
+        "patchy_moss-lichen_covered": 0.4
+      }
+    },
+    "muddy": {
+      "sub": [
+        "thick_mud",
+        "splattered_mud",
+        "sludge_coated"
+      ],
+      "K": 3,
+      "d_sem": {
+        "thick_mud-splattered_mud": 0.3,
+        "thick_mud-sludge_coated": 0.2,
+        "splattered_mud-sludge_coated": 0.4
+      }
+    },
+    "murky": {
+      "sub": [
+        "turbid_water",
+        "dim_hazy",
+        "opaque_cloudy"
+      ],
+      "K": 3,
+      "d_sem": {
+        "turbid_water-dim_hazy": 0.5,
+        "turbid_water-opaque_cloudy": 0.3,
+        "dim_hazy-opaque_cloudy": 0.4
+      }
+    },
+    "narrow": {
+      "sub": [
+        "thin_strip",
+        "constricted",
+        "slender"
+      ],
+      "K": 3,
+      "d_sem": {
+        "thin_strip-constricted": 0.3,
+        "thin_strip-slender": 0.2,
+        "constricted-slender": 0.4
+      }
+    },
+    "new": {
+      "sub": [
+        "fresh_unworn",
+        "pristine",
+        "mint_condition",
+        "unused"
+      ],
+      "K": 4,
+      "d_sem": {
+        "fresh_unworn-pristine": 0.2,
+        "fresh_unworn-mint_condition": 0.2,
+        "fresh_unworn-unused": 0.1,
+        "pristine-mint_condition": 0.1,
+        "pristine-unused": 0.2,
+        "mint_condition-unused": 0.2
+      }
+    },
+    "old": {
+      "sub": [
+        "worn_out",
+        "faded",
+        "aged_patina",
+        "weathered_old",
+        "antique"
+      ],
+      "K": 5,
+      "d_sem": {
+        "worn_out-faded": 0.3,
+        "worn_out-aged_patina": 0.4,
+        "worn_out-weathered_old": 0.3,
+        "worn_out-antique": 0.5,
+        "faded-aged_patina": 0.4,
+        "faded-weathered_old": 0.4,
+        "faded-antique": 0.5,
+        "aged_patina-weathered_old": 0.3,
+        "aged_patina-antique": 0.3,
+        "weathered_old-antique": 0.4
+      }
+    },
+    "open": {
+      "sub": [
+        "ajar",
+        "wide_open",
+        "unlidded"
+      ],
+      "K": 3,
+      "d_sem": {
+        "ajar-wide_open": 0.4,
+        "ajar-unlidded": 0.5,
+        "wide_open-unlidded": 0.4
+      }
+    },
+    "painted": {
+      "sub": [
+        "brush_stroked",
+        "spray_painted",
+        "color_coated"
+      ],
+      "K": 3,
+      "d_sem": {
+        "brush_stroked-spray_painted": 0.4,
+        "brush_stroked-color_coated": 0.3,
+        "spray_painted-color_coated": 0.3
+      }
+    },
+    "peeled": {
+      "sub": [
+        "skin_removed",
+        "paint_peeling",
+        "bark_stripped"
+      ],
+      "K": 3,
+      "d_sem": {
+        "skin_removed-paint_peeling": 0.6,
+        "skin_removed-bark_stripped": 0.5,
+        "paint_peeling-bark_stripped": 0.4
+      }
+    },
+    "pierced": {
+      "sub": [
+        "punctured_hole",
+        "skewered",
+        "perforated"
+      ],
+      "K": 3,
+      "d_sem": {
+        "punctured_hole-skewered": 0.4,
+        "punctured_hole-perforated": 0.3,
+        "skewered-perforated": 0.5
+      }
+    },
+    "pressed": {
+      "sub": [
+        "ironed_flat",
+        "compressed",
+        "stamped"
+      ],
+      "K": 3,
+      "d_sem": {
+        "ironed_flat-compressed": 0.5,
+        "ironed_flat-stamped": 0.6,
+        "compressed-stamped": 0.4
+      }
+    },
+    "pureed": {
+      "sub": [
+        "smooth_blend",
+        "thick_paste",
+        "liquid_puree"
+      ],
+      "K": 3,
+      "d_sem": {
+        "smooth_blend-thick_paste": 0.3,
+        "smooth_blend-liquid_puree": 0.3,
+        "thick_paste-liquid_puree": 0.4
+      }
+    },
+    "raw": {
+      "sub": [
+        "uncooked_meat",
+        "unprocessed",
+        "natural_state"
+      ],
+      "K": 3,
+      "d_sem": {
+        "uncooked_meat-unprocessed": 0.4,
+        "uncooked_meat-natural_state": 0.5,
+        "unprocessed-natural_state": 0.2
+      }
+    },
+    "ripe": {
+      "sub": [
+        "fully_colored",
+        "soft_ripe",
+        "fragrant_mature"
+      ],
+      "K": 3,
+      "d_sem": {
+        "fully_colored-soft_ripe": 0.3,
+        "fully_colored-fragrant_mature": 0.3,
+        "soft_ripe-fragrant_mature": 0.2
+      }
+    },
+    "ripped": {
+      "sub": [
+        "torn_fabric",
+        "shredded",
+        "split_open"
+      ],
+      "K": 3,
+      "d_sem": {
+        "torn_fabric-shredded": 0.4,
+        "torn_fabric-split_open": 0.4,
+        "shredded-split_open": 0.5
+      }
+    },
+    "rough": {
+      "sub": [
+        "coarse_grain",
+        "jagged_surface",
+        "textured_bumpy"
+      ],
+      "K": 3,
+      "d_sem": {
+        "coarse_grain-jagged_surface": 0.4,
+        "coarse_grain-textured_bumpy": 0.3,
+        "jagged_surface-textured_bumpy": 0.3
+      }
+    },
+    "ruffled": {
+      "sub": [
+        "gathered_frill",
+        "wind_ruffled",
+        "feather_ruffled"
+      ],
+      "K": 3,
+      "d_sem": {
+        "gathered_frill-wind_ruffled": 0.4,
+        "gathered_frill-feather_ruffled": 0.5,
+        "wind_ruffled-feather_ruffled": 0.4
+      }
+    },
+    "runny": {
+      "sub": [
+        "dripping_liquid",
+        "thin_consistency",
+        "oozing"
+      ],
+      "K": 3,
+      "d_sem": {
+        "dripping_liquid-thin_consistency": 0.3,
+        "dripping_liquid-oozing": 0.3,
+        "thin_consistency-oozing": 0.4
+      }
+    },
+    "rusty": {
+      "sub": [
+        "surface_rust",
+        "deep_corrosion",
+        "rust_flaking"
+      ],
+      "K": 3,
+      "d_sem": {
+        "surface_rust-deep_corrosion": 0.5,
+        "surface_rust-rust_flaking": 0.3,
+        "deep_corrosion-rust_flaking": 0.3
+      }
+    },
+    "scratched": {
+      "sub": [
+        "light_scuff",
+        "deep_scratch",
+        "cross_hatched"
+      ],
+      "K": 3,
+      "d_sem": {
+        "light_scuff-deep_scratch": 0.5,
+        "light_scuff-cross_hatched": 0.4,
+        "deep_scratch-cross_hatched": 0.3
+      }
+    },
+    "sharp": {
+      "sub": [
+        "razor_edge",
+        "pointed_tip",
+        "keen_blade"
+      ],
+      "K": 3,
+      "d_sem": {
+        "razor_edge-pointed_tip": 0.4,
+        "razor_edge-keen_blade": 0.2,
+        "pointed_tip-keen_blade": 0.4
+      }
+    },
+    "shattered": {
+      "sub": [
+        "glass_shards",
+        "fragmented",
+        "exploded_pieces"
+      ],
+      "K": 3,
+      "d_sem": {
+        "glass_shards-fragmented": 0.3,
+        "glass_shards-exploded_pieces": 0.4,
+        "fragmented-exploded_pieces": 0.3
+      }
+    },
+    "shiny": {
+      "sub": [
+        "mirror_finish",
+        "glossy_surface",
+        "sparkling"
+      ],
+      "K": 3,
+      "d_sem": {
+        "mirror_finish-glossy_surface": 0.3,
+        "mirror_finish-sparkling": 0.4,
+        "glossy_surface-sparkling": 0.4
+      }
+    },
+    "short": {
+      "sub": [
+        "stubby",
+        "cropped",
+        "low_height"
+      ],
+      "K": 3,
+      "d_sem": {
+        "stubby-cropped": 0.4,
+        "stubby-low_height": 0.3,
+        "cropped-low_height": 0.4
+      }
+    },
+    "sliced": {
+      "sub": [
+        "thin_slice",
+        "thick_slab",
+        "wedge_cut"
+      ],
+      "K": 3,
+      "d_sem": {
+        "thin_slice-thick_slab": 0.4,
+        "thin_slice-wedge_cut": 0.5,
+        "thick_slab-wedge_cut": 0.3
+      }
+    },
+    "small": {
+      "sub": [
+        "miniature",
+        "compact",
+        "petite"
+      ],
+      "K": 3,
+      "d_sem": {
+        "miniature-compact": 0.3,
+        "miniature-petite": 0.3,
+        "compact-petite": 0.3
+      }
+    },
+    "smooth": {
+      "sub": [
+        "polished_smooth",
+        "silky_texture",
+        "flat_even"
+      ],
+      "K": 3,
+      "d_sem": {
+        "polished_smooth-silky_texture": 0.4,
+        "polished_smooth-flat_even": 0.3,
+        "silky_texture-flat_even": 0.4
+      }
+    },
+    "spilled": {
+      "sub": [
+        "pooled_spill",
+        "splattered",
+        "overflowed"
+      ],
+      "K": 3,
+      "d_sem": {
+        "pooled_spill-splattered": 0.4,
+        "pooled_spill-overflowed": 0.3,
+        "splattered-overflowed": 0.4
+      }
+    },
+    "splintered": {
+      "sub": [
+        "wood_splinter",
+        "fractured_shard",
+        "jagged_break"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wood_splinter-fractured_shard": 0.4,
+        "wood_splinter-jagged_break": 0.3,
+        "fractured_shard-jagged_break": 0.3
+      }
+    },
+    "squished": {
+      "sub": [
+        "flattened_soft",
+        "compressed_shape",
+        "squeezed_out"
+      ],
+      "K": 3,
+      "d_sem": {
+        "flattened_soft-compressed_shape": 0.3,
+        "flattened_soft-squeezed_out": 0.4,
+        "compressed_shape-squeezed_out": 0.4
+      }
+    },
+    "standing": {
+      "sub": [
+        "upright_pose",
+        "erect_vertical",
+        "propped_up"
+      ],
+      "K": 3,
+      "d_sem": {
+        "upright_pose-erect_vertical": 0.2,
+        "upright_pose-propped_up": 0.4,
+        "erect_vertical-propped_up": 0.4
+      }
+    },
+    "steaming": {
+      "sub": [
+        "vapor_rising",
+        "steam_billowing",
+        "mist_emanating"
+      ],
+      "K": 3,
+      "d_sem": {
+        "vapor_rising-steam_billowing": 0.3,
+        "vapor_rising-mist_emanating": 0.3,
+        "steam_billowing-mist_emanating": 0.3
+      }
+    },
+    "straight": {
+      "sub": [
+        "rigid_line",
+        "aligned",
+        "unbent"
+      ],
+      "K": 3,
+      "d_sem": {
+        "rigid_line-aligned": 0.3,
+        "rigid_line-unbent": 0.2,
+        "aligned-unbent": 0.3
+      }
+    },
+    "sunny": {
+      "sub": [
+        "bright_daylight",
+        "sunlit_warm",
+        "golden_hour"
+      ],
+      "K": 3,
+      "d_sem": {
+        "bright_daylight-sunlit_warm": 0.2,
+        "bright_daylight-golden_hour": 0.5,
+        "sunlit_warm-golden_hour": 0.4
+      }
+    },
+    "tall": {
+      "sub": [
+        "towering_height",
+        "elongated",
+        "high_rising"
+      ],
+      "K": 3,
+      "d_sem": {
+        "towering_height-elongated": 0.4,
+        "towering_height-high_rising": 0.2,
+        "elongated-high_rising": 0.3
+      }
+    },
+    "thawed": {
+      "sub": [
+        "partially_melted",
+        "softened_defrost",
+        "water_releasing"
+      ],
+      "K": 3,
+      "d_sem": {
+        "partially_melted-softened_defrost": 0.3,
+        "partially_melted-water_releasing": 0.3,
+        "softened_defrost-water_releasing": 0.3
+      }
+    },
+    "thick": {
+      "sub": [
+        "dense_layer",
+        "chunky_volume",
+        "heavy_gauge"
+      ],
+      "K": 3,
+      "d_sem": {
+        "dense_layer-chunky_volume": 0.4,
+        "dense_layer-heavy_gauge": 0.3,
+        "chunky_volume-heavy_gauge": 0.4
+      }
+    },
+    "thin": {
+      "sub": [
+        "paper_thin",
+        "slender_narrow",
+        "sheer_translucent"
+      ],
+      "K": 3,
+      "d_sem": {
+        "paper_thin-slender_narrow": 0.4,
+        "paper_thin-sheer_translucent": 0.4,
+        "slender_narrow-sheer_translucent": 0.5
+      }
+    },
+    "tight": {
+      "sub": [
+        "stretched_taut",
+        "snug_fit",
+        "constricted_tight"
+      ],
+      "K": 3,
+      "d_sem": {
+        "stretched_taut-snug_fit": 0.3,
+        "stretched_taut-constricted_tight": 0.3,
+        "snug_fit-constricted_tight": 0.3
+      }
+    },
+    "tiny": {
+      "sub": [
+        "microscopic",
+        "minuscule",
+        "bite_sized"
+      ],
+      "K": 3,
+      "d_sem": {
+        "microscopic-minuscule": 0.2,
+        "microscopic-bite_sized": 0.5,
+        "minuscule-bite_sized": 0.4
+      }
+    },
+    "toppled": {
+      "sub": [
+        "knocked_over",
+        "fallen_sideways",
+        "overturned"
+      ],
+      "K": 3,
+      "d_sem": {
+        "knocked_over-fallen_sideways": 0.2,
+        "knocked_over-overturned": 0.3,
+        "fallen_sideways-overturned": 0.3
+      }
+    },
+    "torn": {
+      "sub": [
+        "ripped_edge",
+        "shredded_pieces",
+        "pulled_apart"
+      ],
+      "K": 3,
+      "d_sem": {
+        "ripped_edge-shredded_pieces": 0.4,
+        "ripped_edge-pulled_apart": 0.3,
+        "shredded_pieces-pulled_apart": 0.4
+      }
+    },
+    "unpainted": {
+      "sub": [
+        "raw_wood",
+        "bare_metal",
+        "unfinished_surface"
+      ],
+      "K": 3,
+      "d_sem": {
+        "raw_wood-bare_metal": 0.6,
+        "raw_wood-unfinished_surface": 0.3,
+        "bare_metal-unfinished_surface": 0.4
+      }
+    },
+    "unripe": {
+      "sub": [
+        "green_immature",
+        "hard_firm",
+        "pale_undeveloped"
+      ],
+      "K": 3,
+      "d_sem": {
+        "green_immature-hard_firm": 0.3,
+        "green_immature-pale_undeveloped": 0.3,
+        "hard_firm-pale_undeveloped": 0.4
+      }
+    },
+    "upright": {
+      "sub": [
+        "vertical_standing",
+        "balanced_erect",
+        "stiff_upright"
+      ],
+      "K": 3,
+      "d_sem": {
+        "vertical_standing-balanced_erect": 0.2,
+        "vertical_standing-stiff_upright": 0.2,
+        "balanced_erect-stiff_upright": 0.3
+      }
+    },
+    "verdant": {
+      "sub": [
+        "lush_green",
+        "leafy_dense",
+        "vibrant_foliage"
+      ],
+      "K": 3,
+      "d_sem": {
+        "lush_green-leafy_dense": 0.3,
+        "lush_green-vibrant_foliage": 0.2,
+        "leafy_dense-vibrant_foliage": 0.3
+      }
+    },
+    "viscous": {
+      "sub": [
+        "thick_syrup",
+        "gel_like",
+        "slow_flowing"
+      ],
+      "K": 3,
+      "d_sem": {
+        "thick_syrup-gel_like": 0.4,
+        "thick_syrup-slow_flowing": 0.3,
+        "gel_like-slow_flowing": 0.4
+      }
+    },
+    "weathered": {
+      "sub": [
+        "sun_bleached",
+        "rain_worn",
+        "wind_battered",
+        "frost_damaged"
+      ],
+      "K": 4,
+      "d_sem": {
+        "sun_bleached-rain_worn": 0.5,
+        "sun_bleached-wind_battered": 0.5,
+        "sun_bleached-frost_damaged": 0.6,
+        "rain_worn-wind_battered": 0.3,
+        "rain_worn-frost_damaged": 0.4,
+        "wind_battered-frost_damaged": 0.4
+      }
+    },
+    "wet": {
+      "sub": [
+        "soaked_through",
+        "surface_wet",
+        "dripping_wet"
+      ],
+      "K": 3,
+      "d_sem": {
+        "soaked_through-surface_wet": 0.4,
+        "soaked_through-dripping_wet": 0.2,
+        "surface_wet-dripping_wet": 0.3
+      }
+    },
+    "whipped": {
+      "sub": [
+        "fluffy_peaks",
+        "creamy_smooth",
+        "airy_foam"
+      ],
+      "K": 3,
+      "d_sem": {
+        "fluffy_peaks-creamy_smooth": 0.3,
+        "fluffy_peaks-airy_foam": 0.3,
+        "creamy_smooth-airy_foam": 0.3
+      }
+    },
+    "wide": {
+      "sub": [
+        "broad_span",
+        "expansive",
+        "stretched_wide"
+      ],
+      "K": 3,
+      "d_sem": {
+        "broad_span-expansive": 0.3,
+        "broad_span-stretched_wide": 0.3,
+        "expansive-stretched_wide": 0.4
+      }
+    },
+    "wilted": {
+      "sub": [
+        "drooping_leaves",
+        "shriveled",
+        "limp_soft"
+      ],
+      "K": 3,
+      "d_sem": {
+        "drooping_leaves-shriveled": 0.4,
+        "drooping_leaves-limp_soft": 0.3,
+        "shriveled-limp_soft": 0.4
+      }
+    },
+    "windblown": {
+      "sub": [
+        "swept_back",
+        "scattered_wind",
+        "tousled"
+      ],
+      "K": 3,
+      "d_sem": {
+        "swept_back-scattered_wind": 0.4,
+        "swept_back-tousled": 0.3,
+        "scattered_wind-tousled": 0.4
+      }
+    },
+    "winding": {
+      "sub": [
+        "serpentine_path",
+        "twisting_spiral",
+        "meandering"
+      ],
+      "K": 3,
+      "d_sem": {
+        "serpentine_path-twisting_spiral": 0.4,
+        "serpentine_path-meandering": 0.3,
+        "twisting_spiral-meandering": 0.5
+      }
+    },
+    "worn": {
+      "sub": [
+        "threadbare",
+        "scuffed_surface",
+        "faded_worn",
+        "eroded_edges"
+      ],
+      "K": 4,
+      "d_sem": {
+        "threadbare-scuffed_surface": 0.5,
+        "threadbare-faded_worn": 0.3,
+        "threadbare-eroded_edges": 0.5,
+        "scuffed_surface-faded_worn": 0.4,
+        "scuffed_surface-eroded_edges": 0.3,
+        "faded_worn-eroded_edges": 0.4
+      }
+    },
+    "wrinkled": {
+      "sub": [
+        "fine_wrinkles",
+        "deep_creases",
+        "puckered"
+      ],
+      "K": 3,
+      "d_sem": {
+        "fine_wrinkles-deep_creases": 0.4,
+        "fine_wrinkles-puckered": 0.3,
+        "deep_creases-puckered": 0.4
+      }
+    },
+    "young": {
+      "sub": [
+        "budding",
+        "juvenile",
+        "seedling"
+      ],
+      "K": 3,
+      "d_sem": {
+        "budding-juvenile": 0.3,
+        "budding-seedling": 0.4,
+        "juvenile-seedling": 0.4
+      }
+    }
+  },
+  "objs": {
+    "aluminum": {
+      "sub": [
+        "aluminum sheet",
+        "aluminum foil",
+        "aluminum can"
+      ],
+      "K": 3,
+      "d_sem": {
+        "aluminum sheet-aluminum foil": 0.4,
+        "aluminum sheet-aluminum can": 0.6,
+        "aluminum foil-aluminum can": 0.5
+      }
+    },
+    "animal": {
+      "sub": [
+        "mammal",
+        "bird",
+        "reptile",
+        "insect"
+      ],
+      "K": 4,
+      "d_sem": {
+        "mammal-bird": 0.7,
+        "mammal-reptile": 0.6,
+        "mammal-insect": 0.9,
+        "bird-reptile": 0.7,
+        "bird-insect": 0.8,
+        "insect-reptile": 0.7
+      }
+    },
+    "apple": {
+      "sub": [
+        "red apple",
+        "green apple",
+        "sliced apple"
+      ],
+      "K": 3,
+      "d_sem": {
+        "red apple-green apple": 0.3,
+        "red apple-sliced apple": 0.5,
+        "green apple-sliced apple": 0.5
+      }
+    },
+    "armor": {
+      "sub": [
+        "plate armor",
+        "chain mail",
+        "leather armor"
+      ],
+      "K": 3,
+      "d_sem": {
+        "plate armor-chain mail": 0.6,
+        "plate armor-leather armor": 0.5,
+        "chain mail-leather armor": 0.6
+      }
+    },
+    "bag": {
+      "sub": [
+        "backpack",
+        "handbag",
+        "plastic bag",
+        "paper bag",
+        "duffle bag"
+      ],
+      "K": 5,
+      "d_sem": {
+        "backpack-handbag": 0.6,
+        "backpack-plastic bag": 0.8,
+        "backpack-paper bag": 0.7,
+        "backpack-duffle bag": 0.4,
+        "handbag-plastic bag": 0.7,
+        "handbag-paper bag": 0.6,
+        "handbag-duffle bag": 0.6,
+        "plastic bag-paper bag": 0.4,
+        "plastic bag-duffle bag": 0.8,
+        "paper bag-duffle bag": 0.7
+      }
+    },
+    "ball": {
+      "sub": [
+        "soccer ball",
+        "tennis ball",
+        "basketball",
+        "rubber ball"
+      ],
+      "K": 4,
+      "d_sem": {
+        "soccer ball-tennis ball": 0.5,
+        "soccer ball-basketball": 0.3,
+        "soccer ball-rubber ball": 0.4,
+        "tennis ball-basketball": 0.5,
+        "tennis ball-rubber ball": 0.3,
+        "basketball-rubber ball": 0.4
+      }
+    },
+    "balloon": {
+      "sub": [
+        "round balloon",
+        "long balloon",
+        "hot air balloon"
+      ],
+      "K": 3,
+      "d_sem": {
+        "round balloon-long balloon": 0.4,
+        "round balloon-hot air balloon": 0.8,
+        "long balloon-hot air balloon": 0.8
+      }
+    },
+    "banana": {
+      "sub": [
+        "whole banana",
+        "peeled banana",
+        "banana bunch"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole banana-peeled banana": 0.4,
+        "whole banana-banana bunch": 0.3,
+        "peeled banana-banana bunch": 0.5
+      }
+    },
+    "basement": {
+      "sub": [
+        "finished basement",
+        "unfinished basement",
+        "cellar"
+      ],
+      "K": 3,
+      "d_sem": {
+        "finished basement-unfinished basement": 0.5,
+        "finished basement-cellar": 0.5,
+        "unfinished basement-cellar": 0.3
+      }
+    },
+    "basket": {
+      "sub": [
+        "wicker basket",
+        "wire basket",
+        "laundry basket"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wicker basket-wire basket": 0.5,
+        "wicker basket-laundry basket": 0.4,
+        "wire basket-laundry basket": 0.4
+      }
+    },
+    "bathroom": {
+      "sub": [
+        "modern bathroom",
+        "tiled bathroom",
+        "rustic bathroom"
+      ],
+      "K": 3,
+      "d_sem": {
+        "modern bathroom-tiled bathroom": 0.3,
+        "modern bathroom-rustic bathroom": 0.6,
+        "tiled bathroom-rustic bathroom": 0.5
+      }
+    },
+    "bay": {
+      "sub": [
+        "coastal bay",
+        "harbor bay",
+        "rocky bay"
+      ],
+      "K": 3,
+      "d_sem": {
+        "coastal bay-harbor bay": 0.4,
+        "coastal bay-rocky bay": 0.3,
+        "harbor bay-rocky bay": 0.4
+      }
+    },
+    "beach": {
+      "sub": [
+        "sandy beach",
+        "rocky beach",
+        "tropical beach"
+      ],
+      "K": 3,
+      "d_sem": {
+        "sandy beach-rocky beach": 0.5,
+        "sandy beach-tropical beach": 0.3,
+        "rocky beach-tropical beach": 0.5
+      }
+    },
+    "bean": {
+      "sub": [
+        "kidney bean",
+        "green bean",
+        "coffee bean"
+      ],
+      "K": 3,
+      "d_sem": {
+        "kidney bean-green bean": 0.5,
+        "kidney bean-coffee bean": 0.5,
+        "green bean-coffee bean": 0.6
+      }
+    },
+    "bear": {
+      "sub": [
+        "brown bear",
+        "polar bear",
+        "black bear"
+      ],
+      "K": 3,
+      "d_sem": {
+        "brown bear-polar bear": 0.5,
+        "brown bear-black bear": 0.3,
+        "polar bear-black bear": 0.5
+      }
+    },
+    "bed": {
+      "sub": [
+        "single bed",
+        "double bed",
+        "bunk bed",
+        "canopy bed"
+      ],
+      "K": 4,
+      "d_sem": {
+        "single bed-double bed": 0.2,
+        "single bed-bunk bed": 0.5,
+        "single bed-canopy bed": 0.5,
+        "double bed-bunk bed": 0.5,
+        "double bed-canopy bed": 0.4,
+        "bunk bed-canopy bed": 0.6
+      }
+    },
+    "beef": {
+      "sub": [
+        "raw steak",
+        "ground beef",
+        "roast beef"
+      ],
+      "K": 3,
+      "d_sem": {
+        "raw steak-ground beef": 0.5,
+        "raw steak-roast beef": 0.4,
+        "ground beef-roast beef": 0.5
+      }
+    },
+    "belt": {
+      "sub": [
+        "leather belt",
+        "fabric belt",
+        "chain belt"
+      ],
+      "K": 3,
+      "d_sem": {
+        "leather belt-fabric belt": 0.4,
+        "leather belt-chain belt": 0.6,
+        "fabric belt-chain belt": 0.6
+      }
+    },
+    "berry": {
+      "sub": [
+        "blueberry",
+        "strawberry",
+        "raspberry"
+      ],
+      "K": 3,
+      "d_sem": {
+        "blueberry-strawberry": 0.5,
+        "blueberry-raspberry": 0.4,
+        "strawberry-raspberry": 0.3
+      }
+    },
+    "bike": {
+      "sub": [
+        "road bike",
+        "mountain bike",
+        "BMX bike"
+      ],
+      "K": 3,
+      "d_sem": {
+        "road bike-mountain bike": 0.4,
+        "road bike-BMX bike": 0.5,
+        "mountain bike-BMX bike": 0.4
+      }
+    },
+    "blade": {
+      "sub": [
+        "knife blade",
+        "saw blade",
+        "razor blade"
+      ],
+      "K": 3,
+      "d_sem": {
+        "knife blade-saw blade": 0.5,
+        "knife blade-razor blade": 0.4,
+        "saw blade-razor blade": 0.5
+      }
+    },
+    "boat": {
+      "sub": [
+        "rowboat",
+        "sailboat",
+        "motorboat",
+        "kayak"
+      ],
+      "K": 4,
+      "d_sem": {
+        "rowboat-sailboat": 0.5,
+        "rowboat-motorboat": 0.4,
+        "rowboat-kayak": 0.5,
+        "sailboat-motorboat": 0.5,
+        "sailboat-kayak": 0.6,
+        "motorboat-kayak": 0.6
+      }
+    },
+    "book": {
+      "sub": [
+        "hardcover book",
+        "paperback book",
+        "open book"
+      ],
+      "K": 3,
+      "d_sem": {
+        "hardcover book-paperback book": 0.2,
+        "hardcover book-open book": 0.4,
+        "paperback book-open book": 0.4
+      }
+    },
+    "bottle": {
+      "sub": [
+        "glass bottle",
+        "plastic bottle",
+        "wine bottle"
+      ],
+      "K": 3,
+      "d_sem": {
+        "glass bottle-plastic bottle": 0.4,
+        "glass bottle-wine bottle": 0.2,
+        "plastic bottle-wine bottle": 0.5
+      }
+    },
+    "boulder": {
+      "sub": [
+        "round boulder",
+        "jagged boulder",
+        "mossy boulder"
+      ],
+      "K": 3,
+      "d_sem": {
+        "round boulder-jagged boulder": 0.4,
+        "round boulder-mossy boulder": 0.3,
+        "jagged boulder-mossy boulder": 0.4
+      }
+    },
+    "bowl": {
+      "sub": [
+        "ceramic bowl",
+        "wooden bowl",
+        "metal bowl"
+      ],
+      "K": 3,
+      "d_sem": {
+        "ceramic bowl-wooden bowl": 0.4,
+        "ceramic bowl-metal bowl": 0.4,
+        "wooden bowl-metal bowl": 0.5
+      }
+    },
+    "box": {
+      "sub": [
+        "cardboard box",
+        "wooden box",
+        "gift box",
+        "plastic box"
+      ],
+      "K": 4,
+      "d_sem": {
+        "cardboard box-wooden box": 0.4,
+        "cardboard box-gift box": 0.5,
+        "cardboard box-plastic box": 0.4,
+        "wooden box-gift box": 0.5,
+        "wooden box-plastic box": 0.5,
+        "gift box-plastic box": 0.5
+      }
+    },
+    "bracelet": {
+      "sub": [
+        "bead bracelet",
+        "chain bracelet",
+        "bangle bracelet"
+      ],
+      "K": 3,
+      "d_sem": {
+        "bead bracelet-chain bracelet": 0.5,
+        "bead bracelet-bangle bracelet": 0.5,
+        "chain bracelet-bangle bracelet": 0.4
+      }
+    },
+    "branch": {
+      "sub": [
+        "tree branch",
+        "bare branch",
+        "leafy branch"
+      ],
+      "K": 3,
+      "d_sem": {
+        "tree branch-bare branch": 0.2,
+        "tree branch-leafy branch": 0.2,
+        "bare branch-leafy branch": 0.4
+      }
+    },
+    "brass": {
+      "sub": [
+        "polished brass",
+        "tarnished brass",
+        "brass fitting"
+      ],
+      "K": 3,
+      "d_sem": {
+        "polished brass-tarnished brass": 0.4,
+        "polished brass-brass fitting": 0.3,
+        "tarnished brass-brass fitting": 0.3
+      }
+    },
+    "bread": {
+      "sub": [
+        "sliced bread",
+        "baguette",
+        "flatbread",
+        "roll"
+      ],
+      "K": 4,
+      "d_sem": {
+        "sliced bread-baguette": 0.5,
+        "sliced bread-flatbread": 0.5,
+        "sliced bread-roll": 0.4,
+        "baguette-flatbread": 0.6,
+        "baguette-roll": 0.5,
+        "flatbread-roll": 0.5
+      }
+    },
+    "bridge": {
+      "sub": [
+        "suspension bridge",
+        "stone bridge",
+        "wooden bridge"
+      ],
+      "K": 3,
+      "d_sem": {
+        "suspension bridge-stone bridge": 0.6,
+        "suspension bridge-wooden bridge": 0.6,
+        "stone bridge-wooden bridge": 0.4
+      }
+    },
+    "bronze": {
+      "sub": [
+        "bronze statue",
+        "bronze plate",
+        "bronze coin"
+      ],
+      "K": 3,
+      "d_sem": {
+        "bronze statue-bronze plate": 0.6,
+        "bronze statue-bronze coin": 0.6,
+        "bronze plate-bronze coin": 0.4
+      }
+    },
+    "bubble": {
+      "sub": [
+        "soap bubble",
+        "water bubble",
+        "foam bubble"
+      ],
+      "K": 3,
+      "d_sem": {
+        "soap bubble-water bubble": 0.3,
+        "soap bubble-foam bubble": 0.3,
+        "water bubble-foam bubble": 0.3
+      }
+    },
+    "bucket": {
+      "sub": [
+        "metal bucket",
+        "plastic bucket",
+        "wooden bucket"
+      ],
+      "K": 3,
+      "d_sem": {
+        "metal bucket-plastic bucket": 0.4,
+        "metal bucket-wooden bucket": 0.5,
+        "plastic bucket-wooden bucket": 0.5
+      }
+    },
+    "building": {
+      "sub": [
+        "skyscraper",
+        "house",
+        "warehouse",
+        "office building"
+      ],
+      "K": 4,
+      "d_sem": {
+        "skyscraper-house": 0.7,
+        "skyscraper-warehouse": 0.5,
+        "skyscraper-office building": 0.3,
+        "house-warehouse": 0.5,
+        "house-office building": 0.5,
+        "warehouse-office building": 0.4
+      }
+    },
+    "bus": {
+      "sub": [
+        "city bus",
+        "school bus",
+        "double-decker bus"
+      ],
+      "K": 3,
+      "d_sem": {
+        "city bus-school bus": 0.3,
+        "city bus-double-decker bus": 0.4,
+        "school bus-double-decker bus": 0.5
+      }
+    },
+    "bush": {
+      "sub": [
+        "flowering bush",
+        "hedge bush",
+        "wild bush"
+      ],
+      "K": 3,
+      "d_sem": {
+        "flowering bush-hedge bush": 0.5,
+        "flowering bush-wild bush": 0.3,
+        "hedge bush-wild bush": 0.4
+      }
+    },
+    "butter": {
+      "sub": [
+        "butter stick",
+        "butter pat",
+        "melted butter"
+      ],
+      "K": 3,
+      "d_sem": {
+        "butter stick-butter pat": 0.3,
+        "butter stick-melted butter": 0.5,
+        "butter pat-melted butter": 0.5
+      }
+    },
+    "cabinet": {
+      "sub": [
+        "kitchen cabinet",
+        "filing cabinet",
+        "display cabinet"
+      ],
+      "K": 3,
+      "d_sem": {
+        "kitchen cabinet-filing cabinet": 0.6,
+        "kitchen cabinet-display cabinet": 0.4,
+        "filing cabinet-display cabinet": 0.5
+      }
+    },
+    "cable": {
+      "sub": [
+        "electrical cable",
+        "steel cable",
+        "USB cable"
+      ],
+      "K": 3,
+      "d_sem": {
+        "electrical cable-steel cable": 0.5,
+        "electrical cable-USB cable": 0.3,
+        "steel cable-USB cable": 0.6
+      }
+    },
+    "cake": {
+      "sub": [
+        "layered cake",
+        "cupcake",
+        "sheet cake"
+      ],
+      "K": 3,
+      "d_sem": {
+        "layered cake-cupcake": 0.5,
+        "layered cake-sheet cake": 0.3,
+        "cupcake-sheet cake": 0.5
+      }
+    },
+    "camera": {
+      "sub": [
+        "DSLR camera",
+        "compact camera",
+        "vintage camera"
+      ],
+      "K": 3,
+      "d_sem": {
+        "DSLR camera-compact camera": 0.4,
+        "DSLR camera-vintage camera": 0.5,
+        "compact camera-vintage camera": 0.5
+      }
+    },
+    "candle": {
+      "sub": [
+        "pillar candle",
+        "taper candle",
+        "tea light candle"
+      ],
+      "K": 3,
+      "d_sem": {
+        "pillar candle-taper candle": 0.4,
+        "pillar candle-tea light candle": 0.5,
+        "taper candle-tea light candle": 0.5
+      }
+    },
+    "candy": {
+      "sub": [
+        "hard candy",
+        "gummy candy",
+        "chocolate candy"
+      ],
+      "K": 3,
+      "d_sem": {
+        "hard candy-gummy candy": 0.4,
+        "hard candy-chocolate candy": 0.5,
+        "gummy candy-chocolate candy": 0.4
+      }
+    },
+    "canyon": {
+      "sub": [
+        "red rock canyon",
+        "river canyon",
+        "slot canyon"
+      ],
+      "K": 3,
+      "d_sem": {
+        "red rock canyon-river canyon": 0.4,
+        "red rock canyon-slot canyon": 0.4,
+        "river canyon-slot canyon": 0.5
+      }
+    },
+    "car": {
+      "sub": [
+        "sedan",
+        "SUV",
+        "sports car",
+        "pickup truck"
+      ],
+      "K": 4,
+      "d_sem": {
+        "sedan-SUV": 0.4,
+        "sedan-sports car": 0.4,
+        "sedan-pickup truck": 0.5,
+        "SUV-sports car": 0.6,
+        "SUV-pickup truck": 0.3,
+        "sports car-pickup truck": 0.7
+      }
+    },
+    "card": {
+      "sub": [
+        "playing card",
+        "greeting card",
+        "business card"
+      ],
+      "K": 3,
+      "d_sem": {
+        "playing card-greeting card": 0.5,
+        "playing card-business card": 0.5,
+        "greeting card-business card": 0.5
+      }
+    },
+    "carpet": {
+      "sub": [
+        "shag carpet",
+        "patterned carpet",
+        "flat carpet"
+      ],
+      "K": 3,
+      "d_sem": {
+        "shag carpet-patterned carpet": 0.4,
+        "shag carpet-flat carpet": 0.4,
+        "patterned carpet-flat carpet": 0.3
+      }
+    },
+    "castle": {
+      "sub": [
+        "medieval castle",
+        "ruined castle",
+        "palace castle"
+      ],
+      "K": 3,
+      "d_sem": {
+        "medieval castle-ruined castle": 0.3,
+        "medieval castle-palace castle": 0.4,
+        "ruined castle-palace castle": 0.6
+      }
+    },
+    "cat": {
+      "sub": [
+        "tabby cat",
+        "black cat",
+        "white cat",
+        "calico cat"
+      ],
+      "K": 4,
+      "d_sem": {
+        "tabby cat-black cat": 0.4,
+        "tabby cat-white cat": 0.4,
+        "tabby cat-calico cat": 0.3,
+        "black cat-white cat": 0.5,
+        "black cat-calico cat": 0.4,
+        "white cat-calico cat": 0.4
+      }
+    },
+    "cave": {
+      "sub": [
+        "limestone cave",
+        "sea cave",
+        "ice cave"
+      ],
+      "K": 3,
+      "d_sem": {
+        "limestone cave-sea cave": 0.4,
+        "limestone cave-ice cave": 0.6,
+        "sea cave-ice cave": 0.6
+      }
+    },
+    "ceiling": {
+      "sub": [
+        "flat ceiling",
+        "vaulted ceiling",
+        "tiled ceiling"
+      ],
+      "K": 3,
+      "d_sem": {
+        "flat ceiling-vaulted ceiling": 0.4,
+        "flat ceiling-tiled ceiling": 0.3,
+        "vaulted ceiling-tiled ceiling": 0.4
+      }
+    },
+    "ceramic": {
+      "sub": [
+        "glazed ceramic",
+        "terracotta ceramic",
+        "porcelain ceramic"
+      ],
+      "K": 3,
+      "d_sem": {
+        "glazed ceramic-terracotta ceramic": 0.5,
+        "glazed ceramic-porcelain ceramic": 0.3,
+        "terracotta ceramic-porcelain ceramic": 0.5
+      }
+    },
+    "chains": {
+      "sub": [
+        "metal chain",
+        "gold chain",
+        "heavy chain"
+      ],
+      "K": 3,
+      "d_sem": {
+        "metal chain-gold chain": 0.3,
+        "metal chain-heavy chain": 0.2,
+        "gold chain-heavy chain": 0.4
+      }
+    },
+    "chair": {
+      "sub": [
+        "wooden chair",
+        "office chair",
+        "armchair",
+        "folding chair"
+      ],
+      "K": 4,
+      "d_sem": {
+        "wooden chair-office chair": 0.6,
+        "wooden chair-armchair": 0.4,
+        "wooden chair-folding chair": 0.4,
+        "office chair-armchair": 0.5,
+        "office chair-folding chair": 0.5,
+        "armchair-folding chair": 0.6
+      }
+    },
+    "cheese": {
+      "sub": [
+        "sliced cheese",
+        "block cheese",
+        "shredded cheese"
+      ],
+      "K": 3,
+      "d_sem": {
+        "sliced cheese-block cheese": 0.3,
+        "sliced cheese-shredded cheese": 0.4,
+        "block cheese-shredded cheese": 0.5
+      }
+    },
+    "chicken": {
+      "sub": [
+        "whole chicken",
+        "chicken breast",
+        "fried chicken"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole chicken-chicken breast": 0.4,
+        "whole chicken-fried chicken": 0.5,
+        "chicken breast-fried chicken": 0.4
+      }
+    },
+    "chocolate": {
+      "sub": [
+        "chocolate bar",
+        "chocolate truffle",
+        "melted chocolate"
+      ],
+      "K": 3,
+      "d_sem": {
+        "chocolate bar-chocolate truffle": 0.4,
+        "chocolate bar-melted chocolate": 0.5,
+        "chocolate truffle-melted chocolate": 0.5
+      }
+    },
+    "church": {
+      "sub": [
+        "cathedral",
+        "chapel",
+        "wooden church"
+      ],
+      "K": 3,
+      "d_sem": {
+        "cathedral-chapel": 0.5,
+        "cathedral-wooden church": 0.5,
+        "chapel-wooden church": 0.3
+      }
+    },
+    "city": {
+      "sub": [
+        "downtown skyline",
+        "suburban city",
+        "old town"
+      ],
+      "K": 3,
+      "d_sem": {
+        "downtown skyline-suburban city": 0.6,
+        "downtown skyline-old town": 0.5,
+        "suburban city-old town": 0.4
+      }
+    },
+    "clay": {
+      "sub": [
+        "raw clay",
+        "fired clay",
+        "clay pot"
+      ],
+      "K": 3,
+      "d_sem": {
+        "raw clay-fired clay": 0.4,
+        "raw clay-clay pot": 0.5,
+        "fired clay-clay pot": 0.3
+      }
+    },
+    "cliff": {
+      "sub": [
+        "sea cliff",
+        "mountain cliff",
+        "sandstone cliff"
+      ],
+      "K": 3,
+      "d_sem": {
+        "sea cliff-mountain cliff": 0.3,
+        "sea cliff-sandstone cliff": 0.4,
+        "mountain cliff-sandstone cliff": 0.3
+      }
+    },
+    "clock": {
+      "sub": [
+        "wall clock",
+        "alarm clock",
+        "grandfather clock"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wall clock-alarm clock": 0.5,
+        "wall clock-grandfather clock": 0.5,
+        "alarm clock-grandfather clock": 0.7
+      }
+    },
+    "clothes": {
+      "sub": [
+        "folded clothes",
+        "hanging clothes",
+        "piled clothes"
+      ],
+      "K": 3,
+      "d_sem": {
+        "folded clothes-hanging clothes": 0.4,
+        "folded clothes-piled clothes": 0.3,
+        "hanging clothes-piled clothes": 0.4
+      }
+    },
+    "cloud": {
+      "sub": [
+        "cumulus cloud",
+        "wispy cloud",
+        "storm cloud"
+      ],
+      "K": 3,
+      "d_sem": {
+        "cumulus cloud-wispy cloud": 0.4,
+        "cumulus cloud-storm cloud": 0.4,
+        "wispy cloud-storm cloud": 0.5
+      }
+    },
+    "coal": {
+      "sub": [
+        "lump coal",
+        "charcoal",
+        "coal dust"
+      ],
+      "K": 3,
+      "d_sem": {
+        "lump coal-charcoal": 0.3,
+        "lump coal-coal dust": 0.5,
+        "charcoal-coal dust": 0.5
+      }
+    },
+    "coast": {
+      "sub": [
+        "rocky coast",
+        "sandy coast",
+        "cliff coast"
+      ],
+      "K": 3,
+      "d_sem": {
+        "rocky coast-sandy coast": 0.5,
+        "rocky coast-cliff coast": 0.3,
+        "sandy coast-cliff coast": 0.5
+      }
+    },
+    "coat": {
+      "sub": [
+        "winter coat",
+        "trench coat",
+        "fur coat"
+      ],
+      "K": 3,
+      "d_sem": {
+        "winter coat-trench coat": 0.4,
+        "winter coat-fur coat": 0.4,
+        "trench coat-fur coat": 0.5
+      }
+    },
+    "coffee": {
+      "sub": [
+        "black coffee",
+        "latte coffee",
+        "coffee beans"
+      ],
+      "K": 3,
+      "d_sem": {
+        "black coffee-latte coffee": 0.3,
+        "black coffee-coffee beans": 0.6,
+        "latte coffee-coffee beans": 0.6
+      }
+    },
+    "coin": {
+      "sub": [
+        "gold coin",
+        "silver coin",
+        "copper coin"
+      ],
+      "K": 3,
+      "d_sem": {
+        "gold coin-silver coin": 0.3,
+        "gold coin-copper coin": 0.3,
+        "silver coin-copper coin": 0.3
+      }
+    },
+    "column": {
+      "sub": [
+        "stone column",
+        "marble column",
+        "wooden column"
+      ],
+      "K": 3,
+      "d_sem": {
+        "stone column-marble column": 0.2,
+        "stone column-wooden column": 0.5,
+        "marble column-wooden column": 0.5
+      }
+    },
+    "computer": {
+      "sub": [
+        "desktop computer",
+        "laptop computer",
+        "tablet computer"
+      ],
+      "K": 3,
+      "d_sem": {
+        "desktop computer-laptop computer": 0.4,
+        "desktop computer-tablet computer": 0.6,
+        "laptop computer-tablet computer": 0.4
+      }
+    },
+    "concrete": {
+      "sub": [
+        "smooth concrete",
+        "cracked concrete",
+        "textured concrete"
+      ],
+      "K": 3,
+      "d_sem": {
+        "smooth concrete-cracked concrete": 0.4,
+        "smooth concrete-textured concrete": 0.3,
+        "cracked concrete-textured concrete": 0.3
+      }
+    },
+    "cookie": {
+      "sub": [
+        "chocolate chip cookie",
+        "sugar cookie",
+        "sandwich cookie"
+      ],
+      "K": 3,
+      "d_sem": {
+        "chocolate chip cookie-sugar cookie": 0.3,
+        "chocolate chip cookie-sandwich cookie": 0.4,
+        "sugar cookie-sandwich cookie": 0.4
+      }
+    },
+    "copper": {
+      "sub": [
+        "copper pipe",
+        "copper wire",
+        "copper sheet"
+      ],
+      "K": 3,
+      "d_sem": {
+        "copper pipe-copper wire": 0.5,
+        "copper pipe-copper sheet": 0.4,
+        "copper wire-copper sheet": 0.5
+      }
+    },
+    "cord": {
+      "sub": [
+        "electrical cord",
+        "rope cord",
+        "bungee cord"
+      ],
+      "K": 3,
+      "d_sem": {
+        "electrical cord-rope cord": 0.5,
+        "electrical cord-bungee cord": 0.4,
+        "rope cord-bungee cord": 0.4
+      }
+    },
+    "cotton": {
+      "sub": [
+        "raw cotton",
+        "cotton fabric",
+        "cotton ball"
+      ],
+      "K": 3,
+      "d_sem": {
+        "raw cotton-cotton fabric": 0.5,
+        "raw cotton-cotton ball": 0.4,
+        "cotton fabric-cotton ball": 0.5
+      }
+    },
+    "creek": {
+      "sub": [
+        "rocky creek",
+        "forest creek",
+        "dry creek"
+      ],
+      "K": 3,
+      "d_sem": {
+        "rocky creek-forest creek": 0.3,
+        "rocky creek-dry creek": 0.5,
+        "forest creek-dry creek": 0.5
+      }
+    },
+    "deck": {
+      "sub": [
+        "wooden deck",
+        "composite deck",
+        "ship deck"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wooden deck-composite deck": 0.3,
+        "wooden deck-ship deck": 0.5,
+        "composite deck-ship deck": 0.5
+      }
+    },
+    "desert": {
+      "sub": [
+        "sandy desert",
+        "rocky desert",
+        "salt flat desert"
+      ],
+      "K": 3,
+      "d_sem": {
+        "sandy desert-rocky desert": 0.4,
+        "sandy desert-salt flat desert": 0.5,
+        "rocky desert-salt flat desert": 0.5
+      }
+    },
+    "desk": {
+      "sub": [
+        "office desk",
+        "wooden desk",
+        "standing desk"
+      ],
+      "K": 3,
+      "d_sem": {
+        "office desk-wooden desk": 0.3,
+        "office desk-standing desk": 0.4,
+        "wooden desk-standing desk": 0.4
+      }
+    },
+    "diamond": {
+      "sub": [
+        "cut diamond",
+        "rough diamond",
+        "diamond ring"
+      ],
+      "K": 3,
+      "d_sem": {
+        "cut diamond-rough diamond": 0.5,
+        "cut diamond-diamond ring": 0.4,
+        "rough diamond-diamond ring": 0.6
+      }
+    },
+    "dirt": {
+      "sub": [
+        "dry dirt",
+        "wet mud dirt",
+        "sandy dirt"
+      ],
+      "K": 3,
+      "d_sem": {
+        "dry dirt-wet mud dirt": 0.4,
+        "dry dirt-sandy dirt": 0.3,
+        "wet mud dirt-sandy dirt": 0.4
+      }
+    },
+    "dog": {
+      "sub": [
+        "large dog",
+        "small dog",
+        "fluffy dog",
+        "short-haired dog"
+      ],
+      "K": 4,
+      "d_sem": {
+        "large dog-small dog": 0.5,
+        "large dog-fluffy dog": 0.3,
+        "large dog-short-haired dog": 0.3,
+        "small dog-fluffy dog": 0.3,
+        "small dog-short-haired dog": 0.3,
+        "fluffy dog-short-haired dog": 0.4
+      }
+    },
+    "door": {
+      "sub": [
+        "wooden door",
+        "glass door",
+        "metal door"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wooden door-glass door": 0.5,
+        "wooden door-metal door": 0.4,
+        "glass door-metal door": 0.5
+      }
+    },
+    "dress": {
+      "sub": [
+        "long dress",
+        "short dress",
+        "wedding dress"
+      ],
+      "K": 3,
+      "d_sem": {
+        "long dress-short dress": 0.3,
+        "long dress-wedding dress": 0.4,
+        "short dress-wedding dress": 0.5
+      }
+    },
+    "drum": {
+      "sub": [
+        "snare drum",
+        "bass drum",
+        "bongo drum"
+      ],
+      "K": 3,
+      "d_sem": {
+        "snare drum-bass drum": 0.4,
+        "snare drum-bongo drum": 0.5,
+        "bass drum-bongo drum": 0.6
+      }
+    },
+    "dust": {
+      "sub": [
+        "fine dust",
+        "thick dust layer",
+        "dust cloud"
+      ],
+      "K": 3,
+      "d_sem": {
+        "fine dust-thick dust layer": 0.3,
+        "fine dust-dust cloud": 0.5,
+        "thick dust layer-dust cloud": 0.4
+      }
+    },
+    "eggs": {
+      "sub": [
+        "whole eggs",
+        "fried eggs",
+        "cracked eggs"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole eggs-fried eggs": 0.5,
+        "whole eggs-cracked eggs": 0.3,
+        "fried eggs-cracked eggs": 0.4
+      }
+    },
+    "elephant": {
+      "sub": [
+        "African elephant",
+        "Asian elephant",
+        "baby elephant"
+      ],
+      "K": 3,
+      "d_sem": {
+        "African elephant-Asian elephant": 0.2,
+        "African elephant-baby elephant": 0.4,
+        "Asian elephant-baby elephant": 0.4
+      }
+    },
+    "envelope": {
+      "sub": [
+        "white envelope",
+        "manila envelope",
+        "padded envelope"
+      ],
+      "K": 3,
+      "d_sem": {
+        "white envelope-manila envelope": 0.3,
+        "white envelope-padded envelope": 0.4,
+        "manila envelope-padded envelope": 0.4
+      }
+    },
+    "fabric": {
+      "sub": [
+        "woven fabric",
+        "knitted fabric",
+        "silk fabric"
+      ],
+      "K": 3,
+      "d_sem": {
+        "woven fabric-knitted fabric": 0.4,
+        "woven fabric-silk fabric": 0.3,
+        "knitted fabric-silk fabric": 0.5
+      }
+    },
+    "fan": {
+      "sub": [
+        "ceiling fan",
+        "desk fan",
+        "hand fan"
+      ],
+      "K": 3,
+      "d_sem": {
+        "ceiling fan-desk fan": 0.4,
+        "ceiling fan-hand fan": 0.7,
+        "desk fan-hand fan": 0.6
+      }
+    },
+    "farm": {
+      "sub": [
+        "crop farm",
+        "livestock farm",
+        "vineyard farm"
+      ],
+      "K": 3,
+      "d_sem": {
+        "crop farm-livestock farm": 0.5,
+        "crop farm-vineyard farm": 0.3,
+        "livestock farm-vineyard farm": 0.5
+      }
+    },
+    "fence": {
+      "sub": [
+        "wooden fence",
+        "chain-link fence",
+        "iron fence"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wooden fence-chain-link fence": 0.6,
+        "wooden fence-iron fence": 0.4,
+        "chain-link fence-iron fence": 0.4
+      }
+    },
+    "field": {
+      "sub": [
+        "grass field",
+        "wheat field",
+        "flower field"
+      ],
+      "K": 3,
+      "d_sem": {
+        "grass field-wheat field": 0.3,
+        "grass field-flower field": 0.4,
+        "wheat field-flower field": 0.4
+      }
+    },
+    "fig": {
+      "sub": [
+        "whole fig",
+        "sliced fig",
+        "dried fig"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole fig-sliced fig": 0.4,
+        "whole fig-dried fig": 0.4,
+        "sliced fig-dried fig": 0.5
+      }
+    },
+    "fire": {
+      "sub": [
+        "campfire",
+        "fireplace fire",
+        "wildfire"
+      ],
+      "K": 3,
+      "d_sem": {
+        "campfire-fireplace fire": 0.3,
+        "campfire-wildfire": 0.5,
+        "fireplace fire-wildfire": 0.5
+      }
+    },
+    "fish": {
+      "sub": [
+        "whole fish",
+        "fish fillet",
+        "tropical fish"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole fish-fish fillet": 0.5,
+        "whole fish-tropical fish": 0.3,
+        "fish fillet-tropical fish": 0.6
+      }
+    },
+    "flame": {
+      "sub": [
+        "candle flame",
+        "torch flame",
+        "gas flame"
+      ],
+      "K": 3,
+      "d_sem": {
+        "candle flame-torch flame": 0.3,
+        "candle flame-gas flame": 0.4,
+        "torch flame-gas flame": 0.3
+      }
+    },
+    "floor": {
+      "sub": [
+        "hardwood floor",
+        "tile floor",
+        "concrete floor"
+      ],
+      "K": 3,
+      "d_sem": {
+        "hardwood floor-tile floor": 0.4,
+        "hardwood floor-concrete floor": 0.5,
+        "tile floor-concrete floor": 0.4
+      }
+    },
+    "flower": {
+      "sub": [
+        "rose",
+        "daisy",
+        "tulip",
+        "sunflower"
+      ],
+      "K": 4,
+      "d_sem": {
+        "rose-daisy": 0.5,
+        "rose-tulip": 0.4,
+        "rose-sunflower": 0.6,
+        "daisy-tulip": 0.4,
+        "daisy-sunflower": 0.5,
+        "tulip-sunflower": 0.5
+      }
+    },
+    "foam": {
+      "sub": [
+        "sea foam",
+        "soap foam",
+        "cushion foam"
+      ],
+      "K": 3,
+      "d_sem": {
+        "sea foam-soap foam": 0.3,
+        "sea foam-cushion foam": 0.7,
+        "soap foam-cushion foam": 0.6
+      }
+    },
+    "forest": {
+      "sub": [
+        "pine forest",
+        "tropical forest",
+        "deciduous forest"
+      ],
+      "K": 3,
+      "d_sem": {
+        "pine forest-tropical forest": 0.5,
+        "pine forest-deciduous forest": 0.3,
+        "tropical forest-deciduous forest": 0.4
+      }
+    },
+    "frame": {
+      "sub": [
+        "wooden frame",
+        "metal frame",
+        "ornate frame"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wooden frame-metal frame": 0.5,
+        "wooden frame-ornate frame": 0.3,
+        "metal frame-ornate frame": 0.4
+      }
+    },
+    "fruit": {
+      "sub": [
+        "citrus fruit",
+        "berry fruit",
+        "tropical fruit"
+      ],
+      "K": 3,
+      "d_sem": {
+        "citrus fruit-berry fruit": 0.5,
+        "citrus fruit-tropical fruit": 0.4,
+        "berry fruit-tropical fruit": 0.5
+      }
+    },
+    "furniture": {
+      "sub": [
+        "wooden furniture",
+        "upholstered furniture",
+        "metal furniture"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wooden furniture-upholstered furniture": 0.5,
+        "wooden furniture-metal furniture": 0.4,
+        "upholstered furniture-metal furniture": 0.5
+      }
+    },
+    "garage": {
+      "sub": [
+        "attached garage",
+        "detached garage",
+        "workshop garage"
+      ],
+      "K": 3,
+      "d_sem": {
+        "attached garage-detached garage": 0.3,
+        "attached garage-workshop garage": 0.4,
+        "detached garage-workshop garage": 0.3
+      }
+    },
+    "garden": {
+      "sub": [
+        "flower garden",
+        "vegetable garden",
+        "zen garden"
+      ],
+      "K": 3,
+      "d_sem": {
+        "flower garden-vegetable garden": 0.4,
+        "flower garden-zen garden": 0.6,
+        "vegetable garden-zen garden": 0.7
+      }
+    },
+    "garlic": {
+      "sub": [
+        "whole garlic bulb",
+        "garlic cloves",
+        "minced garlic"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole garlic bulb-garlic cloves": 0.3,
+        "whole garlic bulb-minced garlic": 0.5,
+        "garlic cloves-minced garlic": 0.4
+      }
+    },
+    "gate": {
+      "sub": [
+        "iron gate",
+        "wooden gate",
+        "garden gate"
+      ],
+      "K": 3,
+      "d_sem": {
+        "iron gate-wooden gate": 0.5,
+        "iron gate-garden gate": 0.3,
+        "wooden gate-garden gate": 0.3
+      }
+    },
+    "gear": {
+      "sub": [
+        "metal gear",
+        "plastic gear",
+        "large gear"
+      ],
+      "K": 3,
+      "d_sem": {
+        "metal gear-plastic gear": 0.3,
+        "metal gear-large gear": 0.2,
+        "plastic gear-large gear": 0.3
+      }
+    },
+    "gemstone": {
+      "sub": [
+        "ruby gemstone",
+        "emerald gemstone",
+        "sapphire gemstone"
+      ],
+      "K": 3,
+      "d_sem": {
+        "ruby gemstone-emerald gemstone": 0.4,
+        "ruby gemstone-sapphire gemstone": 0.3,
+        "emerald gemstone-sapphire gemstone": 0.3
+      }
+    },
+    "glass": {
+      "sub": [
+        "drinking glass",
+        "window glass",
+        "stained glass"
+      ],
+      "K": 3,
+      "d_sem": {
+        "drinking glass-window glass": 0.6,
+        "drinking glass-stained glass": 0.6,
+        "window glass-stained glass": 0.4
+      }
+    },
+    "glasses": {
+      "sub": [
+        "eyeglasses",
+        "sunglasses",
+        "reading glasses"
+      ],
+      "K": 3,
+      "d_sem": {
+        "eyeglasses-sunglasses": 0.4,
+        "eyeglasses-reading glasses": 0.2,
+        "sunglasses-reading glasses": 0.4
+      }
+    },
+    "granite": {
+      "sub": [
+        "polished granite",
+        "rough granite",
+        "granite slab"
+      ],
+      "K": 3,
+      "d_sem": {
+        "polished granite-rough granite": 0.4,
+        "polished granite-granite slab": 0.2,
+        "rough granite-granite slab": 0.3
+      }
+    },
+    "ground": {
+      "sub": [
+        "dirt ground",
+        "grassy ground",
+        "gravel ground"
+      ],
+      "K": 3,
+      "d_sem": {
+        "dirt ground-grassy ground": 0.4,
+        "dirt ground-gravel ground": 0.3,
+        "grassy ground-gravel ground": 0.5
+      }
+    },
+    "handle": {
+      "sub": [
+        "door handle",
+        "tool handle",
+        "pot handle"
+      ],
+      "K": 3,
+      "d_sem": {
+        "door handle-tool handle": 0.5,
+        "door handle-pot handle": 0.5,
+        "tool handle-pot handle": 0.4
+      }
+    },
+    "hat": {
+      "sub": [
+        "baseball cap",
+        "straw hat",
+        "beanie",
+        "top hat"
+      ],
+      "K": 4,
+      "d_sem": {
+        "baseball cap-straw hat": 0.5,
+        "baseball cap-beanie": 0.5,
+        "baseball cap-top hat": 0.7,
+        "straw hat-beanie": 0.6,
+        "straw hat-top hat": 0.5,
+        "beanie-top hat": 0.7
+      }
+    },
+    "highway": {
+      "sub": [
+        "multilane highway",
+        "rural highway",
+        "elevated highway"
+      ],
+      "K": 3,
+      "d_sem": {
+        "multilane highway-rural highway": 0.4,
+        "multilane highway-elevated highway": 0.4,
+        "rural highway-elevated highway": 0.5
+      }
+    },
+    "horse": {
+      "sub": [
+        "brown horse",
+        "white horse",
+        "black horse"
+      ],
+      "K": 3,
+      "d_sem": {
+        "brown horse-white horse": 0.3,
+        "brown horse-black horse": 0.3,
+        "white horse-black horse": 0.4
+      }
+    },
+    "hose": {
+      "sub": [
+        "garden hose",
+        "fire hose",
+        "rubber hose"
+      ],
+      "K": 3,
+      "d_sem": {
+        "garden hose-fire hose": 0.4,
+        "garden hose-rubber hose": 0.2,
+        "fire hose-rubber hose": 0.3
+      }
+    },
+    "house": {
+      "sub": [
+        "suburban house",
+        "cottage",
+        "modern house",
+        "cabin"
+      ],
+      "K": 4,
+      "d_sem": {
+        "suburban house-cottage": 0.4,
+        "suburban house-modern house": 0.4,
+        "suburban house-cabin": 0.5,
+        "cottage-modern house": 0.6,
+        "cottage-cabin": 0.3,
+        "modern house-cabin": 0.6
+      }
+    },
+    "ice": {
+      "sub": [
+        "ice cube",
+        "ice sheet",
+        "icicle"
+      ],
+      "K": 3,
+      "d_sem": {
+        "ice cube-ice sheet": 0.5,
+        "ice cube-icicle": 0.5,
+        "ice sheet-icicle": 0.5
+      }
+    },
+    "iguana": {
+      "sub": [
+        "green iguana",
+        "desert iguana",
+        "marine iguana"
+      ],
+      "K": 3,
+      "d_sem": {
+        "green iguana-desert iguana": 0.4,
+        "green iguana-marine iguana": 0.5,
+        "desert iguana-marine iguana": 0.4
+      }
+    },
+    "island": {
+      "sub": [
+        "tropical island",
+        "rocky island",
+        "volcanic island"
+      ],
+      "K": 3,
+      "d_sem": {
+        "tropical island-rocky island": 0.5,
+        "tropical island-volcanic island": 0.4,
+        "rocky island-volcanic island": 0.3
+      }
+    },
+    "jacket": {
+      "sub": [
+        "leather jacket",
+        "denim jacket",
+        "puffer jacket"
+      ],
+      "K": 3,
+      "d_sem": {
+        "leather jacket-denim jacket": 0.4,
+        "leather jacket-puffer jacket": 0.5,
+        "denim jacket-puffer jacket": 0.5
+      }
+    },
+    "jewelry": {
+      "sub": [
+        "gold jewelry",
+        "silver jewelry",
+        "beaded jewelry"
+      ],
+      "K": 3,
+      "d_sem": {
+        "gold jewelry-silver jewelry": 0.3,
+        "gold jewelry-beaded jewelry": 0.5,
+        "silver jewelry-beaded jewelry": 0.5
+      }
+    },
+    "jungle": {
+      "sub": [
+        "dense jungle",
+        "bamboo jungle",
+        "swamp jungle"
+      ],
+      "K": 3,
+      "d_sem": {
+        "dense jungle-bamboo jungle": 0.4,
+        "dense jungle-swamp jungle": 0.4,
+        "bamboo jungle-swamp jungle": 0.5
+      }
+    },
+    "key": {
+      "sub": [
+        "metal key",
+        "car key",
+        "skeleton key"
+      ],
+      "K": 3,
+      "d_sem": {
+        "metal key-car key": 0.4,
+        "metal key-skeleton key": 0.4,
+        "car key-skeleton key": 0.6
+      }
+    },
+    "keyboard": {
+      "sub": [
+        "computer keyboard",
+        "mechanical keyboard",
+        "piano keyboard"
+      ],
+      "K": 3,
+      "d_sem": {
+        "computer keyboard-mechanical keyboard": 0.2,
+        "computer keyboard-piano keyboard": 0.7,
+        "mechanical keyboard-piano keyboard": 0.7
+      }
+    },
+    "kitchen": {
+      "sub": [
+        "modern kitchen",
+        "rustic kitchen",
+        "commercial kitchen"
+      ],
+      "K": 3,
+      "d_sem": {
+        "modern kitchen-rustic kitchen": 0.5,
+        "modern kitchen-commercial kitchen": 0.4,
+        "rustic kitchen-commercial kitchen": 0.6
+      }
+    },
+    "knife": {
+      "sub": [
+        "kitchen knife",
+        "pocket knife",
+        "butter knife"
+      ],
+      "K": 3,
+      "d_sem": {
+        "kitchen knife-pocket knife": 0.4,
+        "kitchen knife-butter knife": 0.3,
+        "pocket knife-butter knife": 0.5
+      }
+    },
+    "lake": {
+      "sub": [
+        "mountain lake",
+        "forest lake",
+        "frozen lake"
+      ],
+      "K": 3,
+      "d_sem": {
+        "mountain lake-forest lake": 0.3,
+        "mountain lake-frozen lake": 0.5,
+        "forest lake-frozen lake": 0.5
+      }
+    },
+    "laptop": {
+      "sub": [
+        "open laptop",
+        "closed laptop",
+        "thin laptop"
+      ],
+      "K": 3,
+      "d_sem": {
+        "open laptop-closed laptop": 0.4,
+        "open laptop-thin laptop": 0.2,
+        "closed laptop-thin laptop": 0.3
+      }
+    },
+    "lead": {
+      "sub": [
+        "lead pipe",
+        "lead sheet",
+        "lead ingot"
+      ],
+      "K": 3,
+      "d_sem": {
+        "lead pipe-lead sheet": 0.5,
+        "lead pipe-lead ingot": 0.5,
+        "lead sheet-lead ingot": 0.4
+      }
+    },
+    "leaf": {
+      "sub": [
+        "green leaf",
+        "autumn leaf",
+        "dried leaf",
+        "palm leaf"
+      ],
+      "K": 4,
+      "d_sem": {
+        "green leaf-autumn leaf": 0.4,
+        "green leaf-dried leaf": 0.5,
+        "green leaf-palm leaf": 0.5,
+        "autumn leaf-dried leaf": 0.3,
+        "autumn leaf-palm leaf": 0.6,
+        "dried leaf-palm leaf": 0.6
+      }
+    },
+    "lemon": {
+      "sub": [
+        "whole lemon",
+        "sliced lemon",
+        "lemon wedge"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole lemon-sliced lemon": 0.4,
+        "whole lemon-lemon wedge": 0.3,
+        "sliced lemon-lemon wedge": 0.2
+      }
+    },
+    "library": {
+      "sub": [
+        "public library",
+        "home library",
+        "old library"
+      ],
+      "K": 3,
+      "d_sem": {
+        "public library-home library": 0.4,
+        "public library-old library": 0.3,
+        "home library-old library": 0.3
+      }
+    },
+    "lightbulb": {
+      "sub": [
+        "incandescent bulb",
+        "LED bulb",
+        "fluorescent bulb"
+      ],
+      "K": 3,
+      "d_sem": {
+        "incandescent bulb-LED bulb": 0.4,
+        "incandescent bulb-fluorescent bulb": 0.5,
+        "LED bulb-fluorescent bulb": 0.4
+      }
+    },
+    "lightning": {
+      "sub": [
+        "bolt lightning",
+        "sheet lightning",
+        "forked lightning"
+      ],
+      "K": 3,
+      "d_sem": {
+        "bolt lightning-sheet lightning": 0.5,
+        "bolt lightning-forked lightning": 0.2,
+        "sheet lightning-forked lightning": 0.5
+      }
+    },
+    "log": {
+      "sub": [
+        "whole log",
+        "split log",
+        "hollow log"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole log-split log": 0.3,
+        "whole log-hollow log": 0.3,
+        "split log-hollow log": 0.4
+      }
+    },
+    "mat": {
+      "sub": [
+        "yoga mat",
+        "floor mat",
+        "woven mat"
+      ],
+      "K": 3,
+      "d_sem": {
+        "yoga mat-floor mat": 0.3,
+        "yoga mat-woven mat": 0.4,
+        "floor mat-woven mat": 0.3
+      }
+    },
+    "meat": {
+      "sub": [
+        "raw meat",
+        "cooked meat",
+        "cured meat"
+      ],
+      "K": 3,
+      "d_sem": {
+        "raw meat-cooked meat": 0.5,
+        "raw meat-cured meat": 0.4,
+        "cooked meat-cured meat": 0.4
+      }
+    },
+    "metal": {
+      "sub": [
+        "shiny metal",
+        "rusted metal",
+        "brushed metal"
+      ],
+      "K": 3,
+      "d_sem": {
+        "shiny metal-rusted metal": 0.6,
+        "shiny metal-brushed metal": 0.3,
+        "rusted metal-brushed metal": 0.5
+      }
+    },
+    "milk": {
+      "sub": [
+        "glass of milk",
+        "milk carton",
+        "spilled milk"
+      ],
+      "K": 3,
+      "d_sem": {
+        "glass of milk-milk carton": 0.4,
+        "glass of milk-spilled milk": 0.4,
+        "milk carton-spilled milk": 0.5
+      }
+    },
+    "mirror": {
+      "sub": [
+        "wall mirror",
+        "hand mirror",
+        "bathroom mirror"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wall mirror-hand mirror": 0.5,
+        "wall mirror-bathroom mirror": 0.2,
+        "hand mirror-bathroom mirror": 0.5
+      }
+    },
+    "moss": {
+      "sub": [
+        "tree moss",
+        "rock moss",
+        "ground moss"
+      ],
+      "K": 3,
+      "d_sem": {
+        "tree moss-rock moss": 0.3,
+        "tree moss-ground moss": 0.3,
+        "rock moss-ground moss": 0.3
+      }
+    },
+    "mountain": {
+      "sub": [
+        "snow-capped mountain",
+        "rocky mountain",
+        "forested mountain"
+      ],
+      "K": 3,
+      "d_sem": {
+        "snow-capped mountain-rocky mountain": 0.4,
+        "snow-capped mountain-forested mountain": 0.5,
+        "rocky mountain-forested mountain": 0.4
+      }
+    },
+    "mud": {
+      "sub": [
+        "wet mud",
+        "dried mud",
+        "mud puddle"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wet mud-dried mud": 0.4,
+        "wet mud-mud puddle": 0.2,
+        "dried mud-mud puddle": 0.5
+      }
+    },
+    "necklace": {
+      "sub": [
+        "pearl necklace",
+        "chain necklace",
+        "pendant necklace"
+      ],
+      "K": 3,
+      "d_sem": {
+        "pearl necklace-chain necklace": 0.5,
+        "pearl necklace-pendant necklace": 0.4,
+        "chain necklace-pendant necklace": 0.3
+      }
+    },
+    "nest": {
+      "sub": [
+        "bird nest",
+        "wasp nest",
+        "ground nest"
+      ],
+      "K": 3,
+      "d_sem": {
+        "bird nest-wasp nest": 0.6,
+        "bird nest-ground nest": 0.4,
+        "wasp nest-ground nest": 0.6
+      }
+    },
+    "newspaper": {
+      "sub": [
+        "folded newspaper",
+        "open newspaper",
+        "stacked newspapers"
+      ],
+      "K": 3,
+      "d_sem": {
+        "folded newspaper-open newspaper": 0.3,
+        "folded newspaper-stacked newspapers": 0.3,
+        "open newspaper-stacked newspapers": 0.4
+      }
+    },
+    "nut": {
+      "sub": [
+        "walnut",
+        "almond",
+        "peanut"
+      ],
+      "K": 3,
+      "d_sem": {
+        "walnut-almond": 0.4,
+        "walnut-peanut": 0.4,
+        "almond-peanut": 0.4
+      }
+    },
+    "ocean": {
+      "sub": [
+        "calm ocean",
+        "stormy ocean",
+        "tropical ocean"
+      ],
+      "K": 3,
+      "d_sem": {
+        "calm ocean-stormy ocean": 0.5,
+        "calm ocean-tropical ocean": 0.2,
+        "stormy ocean-tropical ocean": 0.5
+      }
+    },
+    "oil": {
+      "sub": [
+        "cooking oil",
+        "motor oil",
+        "oil spill"
+      ],
+      "K": 3,
+      "d_sem": {
+        "cooking oil-motor oil": 0.4,
+        "cooking oil-oil spill": 0.5,
+        "motor oil-oil spill": 0.3
+      }
+    },
+    "orange": {
+      "sub": [
+        "whole orange",
+        "peeled orange",
+        "sliced orange"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole orange-peeled orange": 0.4,
+        "whole orange-sliced orange": 0.4,
+        "peeled orange-sliced orange": 0.3
+      }
+    },
+    "paint": {
+      "sub": [
+        "wet paint",
+        "dried paint",
+        "spray paint"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wet paint-dried paint": 0.3,
+        "wet paint-spray paint": 0.3,
+        "dried paint-spray paint": 0.4
+      }
+    },
+    "palm": {
+      "sub": [
+        "coconut palm",
+        "date palm",
+        "fan palm"
+      ],
+      "K": 3,
+      "d_sem": {
+        "coconut palm-date palm": 0.3,
+        "coconut palm-fan palm": 0.4,
+        "date palm-fan palm": 0.4
+      }
+    },
+    "pants": {
+      "sub": [
+        "jeans",
+        "dress pants",
+        "cargo pants"
+      ],
+      "K": 3,
+      "d_sem": {
+        "jeans-dress pants": 0.4,
+        "jeans-cargo pants": 0.3,
+        "dress pants-cargo pants": 0.5
+      }
+    },
+    "paper": {
+      "sub": [
+        "white paper",
+        "brown paper",
+        "crumpled paper"
+      ],
+      "K": 3,
+      "d_sem": {
+        "white paper-brown paper": 0.3,
+        "white paper-crumpled paper": 0.3,
+        "brown paper-crumpled paper": 0.3
+      }
+    },
+    "pasta": {
+      "sub": [
+        "spaghetti",
+        "penne",
+        "lasagna"
+      ],
+      "K": 3,
+      "d_sem": {
+        "spaghetti-penne": 0.4,
+        "spaghetti-lasagna": 0.6,
+        "penne-lasagna": 0.5
+      }
+    },
+    "paste": {
+      "sub": [
+        "toothpaste",
+        "food paste",
+        "adhesive paste"
+      ],
+      "K": 3,
+      "d_sem": {
+        "toothpaste-food paste": 0.5,
+        "toothpaste-adhesive paste": 0.4,
+        "food paste-adhesive paste": 0.4
+      }
+    },
+    "pear": {
+      "sub": [
+        "green pear",
+        "red pear",
+        "sliced pear"
+      ],
+      "K": 3,
+      "d_sem": {
+        "green pear-red pear": 0.3,
+        "green pear-sliced pear": 0.4,
+        "red pear-sliced pear": 0.4
+      }
+    },
+    "penny": {
+      "sub": [
+        "shiny penny",
+        "tarnished penny",
+        "old penny"
+      ],
+      "K": 3,
+      "d_sem": {
+        "shiny penny-tarnished penny": 0.4,
+        "shiny penny-old penny": 0.4,
+        "tarnished penny-old penny": 0.2
+      }
+    },
+    "persimmon": {
+      "sub": [
+        "whole persimmon",
+        "sliced persimmon",
+        "dried persimmon"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole persimmon-sliced persimmon": 0.4,
+        "whole persimmon-dried persimmon": 0.5,
+        "sliced persimmon-dried persimmon": 0.4
+      }
+    },
+    "phone": {
+      "sub": [
+        "smartphone",
+        "flip phone",
+        "landline phone"
+      ],
+      "K": 3,
+      "d_sem": {
+        "smartphone-flip phone": 0.5,
+        "smartphone-landline phone": 0.7,
+        "flip phone-landline phone": 0.5
+      }
+    },
+    "pie": {
+      "sub": [
+        "fruit pie",
+        "cream pie",
+        "savory pie"
+      ],
+      "K": 3,
+      "d_sem": {
+        "fruit pie-cream pie": 0.4,
+        "fruit pie-savory pie": 0.3,
+        "cream pie-savory pie": 0.4
+      }
+    },
+    "pizza": {
+      "sub": [
+        "whole pizza",
+        "pizza slice",
+        "deep dish pizza"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole pizza-pizza slice": 0.3,
+        "whole pizza-deep dish pizza": 0.3,
+        "pizza slice-deep dish pizza": 0.4
+      }
+    },
+    "plant": {
+      "sub": [
+        "potted plant",
+        "succulent",
+        "fern",
+        "vine plant"
+      ],
+      "K": 4,
+      "d_sem": {
+        "potted plant-succulent": 0.4,
+        "potted plant-fern": 0.3,
+        "potted plant-vine plant": 0.4,
+        "succulent-fern": 0.5,
+        "succulent-vine plant": 0.6,
+        "fern-vine plant": 0.4
+      }
+    },
+    "plastic": {
+      "sub": [
+        "hard plastic",
+        "soft plastic",
+        "plastic wrap"
+      ],
+      "K": 3,
+      "d_sem": {
+        "hard plastic-soft plastic": 0.3,
+        "hard plastic-plastic wrap": 0.5,
+        "soft plastic-plastic wrap": 0.3
+      }
+    },
+    "plate": {
+      "sub": [
+        "ceramic plate",
+        "paper plate",
+        "metal plate"
+      ],
+      "K": 3,
+      "d_sem": {
+        "ceramic plate-paper plate": 0.4,
+        "ceramic plate-metal plate": 0.4,
+        "paper plate-metal plate": 0.5
+      }
+    },
+    "pond": {
+      "sub": [
+        "garden pond",
+        "natural pond",
+        "frozen pond"
+      ],
+      "K": 3,
+      "d_sem": {
+        "garden pond-natural pond": 0.3,
+        "garden pond-frozen pond": 0.5,
+        "natural pond-frozen pond": 0.5
+      }
+    },
+    "pool": {
+      "sub": [
+        "swimming pool",
+        "natural pool",
+        "kiddie pool"
+      ],
+      "K": 3,
+      "d_sem": {
+        "swimming pool-natural pool": 0.5,
+        "swimming pool-kiddie pool": 0.4,
+        "natural pool-kiddie pool": 0.6
+      }
+    },
+    "pot": {
+      "sub": [
+        "cooking pot",
+        "flower pot",
+        "clay pot"
+      ],
+      "K": 3,
+      "d_sem": {
+        "cooking pot-flower pot": 0.5,
+        "cooking pot-clay pot": 0.4,
+        "flower pot-clay pot": 0.3
+      }
+    },
+    "potato": {
+      "sub": [
+        "whole potato",
+        "sliced potato",
+        "baked potato"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole potato-sliced potato": 0.3,
+        "whole potato-baked potato": 0.4,
+        "sliced potato-baked potato": 0.4
+      }
+    },
+    "redwood": {
+      "sub": [
+        "standing redwood",
+        "fallen redwood",
+        "redwood stump"
+      ],
+      "K": 3,
+      "d_sem": {
+        "standing redwood-fallen redwood": 0.4,
+        "standing redwood-redwood stump": 0.5,
+        "fallen redwood-redwood stump": 0.4
+      }
+    },
+    "ribbon": {
+      "sub": [
+        "satin ribbon",
+        "curling ribbon",
+        "grosgrain ribbon"
+      ],
+      "K": 3,
+      "d_sem": {
+        "satin ribbon-curling ribbon": 0.4,
+        "satin ribbon-grosgrain ribbon": 0.3,
+        "curling ribbon-grosgrain ribbon": 0.4
+      }
+    },
+    "ring": {
+      "sub": [
+        "gold ring",
+        "silver ring",
+        "gemstone ring"
+      ],
+      "K": 3,
+      "d_sem": {
+        "gold ring-silver ring": 0.3,
+        "gold ring-gemstone ring": 0.3,
+        "silver ring-gemstone ring": 0.3
+      }
+    },
+    "river": {
+      "sub": [
+        "wide river",
+        "mountain river",
+        "frozen river"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wide river-mountain river": 0.4,
+        "wide river-frozen river": 0.5,
+        "mountain river-frozen river": 0.5
+      }
+    },
+    "road": {
+      "sub": [
+        "paved road",
+        "dirt road",
+        "highway road"
+      ],
+      "K": 3,
+      "d_sem": {
+        "paved road-dirt road": 0.5,
+        "paved road-highway road": 0.2,
+        "dirt road-highway road": 0.5
+      }
+    },
+    "rock": {
+      "sub": [
+        "smooth rock",
+        "jagged rock",
+        "layered rock"
+      ],
+      "K": 3,
+      "d_sem": {
+        "smooth rock-jagged rock": 0.4,
+        "smooth rock-layered rock": 0.3,
+        "jagged rock-layered rock": 0.4
+      }
+    },
+    "roof": {
+      "sub": [
+        "shingled roof",
+        "flat roof",
+        "thatched roof"
+      ],
+      "K": 3,
+      "d_sem": {
+        "shingled roof-flat roof": 0.5,
+        "shingled roof-thatched roof": 0.5,
+        "flat roof-thatched roof": 0.6
+      }
+    },
+    "room": {
+      "sub": [
+        "living room",
+        "bedroom",
+        "empty room"
+      ],
+      "K": 3,
+      "d_sem": {
+        "living room-bedroom": 0.4,
+        "living room-empty room": 0.4,
+        "bedroom-empty room": 0.4
+      }
+    },
+    "roots": {
+      "sub": [
+        "tree roots",
+        "exposed roots",
+        "tangled roots"
+      ],
+      "K": 3,
+      "d_sem": {
+        "tree roots-exposed roots": 0.2,
+        "tree roots-tangled roots": 0.2,
+        "exposed roots-tangled roots": 0.2
+      }
+    },
+    "rope": {
+      "sub": [
+        "thick rope",
+        "thin rope",
+        "braided rope"
+      ],
+      "K": 3,
+      "d_sem": {
+        "thick rope-thin rope": 0.3,
+        "thick rope-braided rope": 0.2,
+        "thin rope-braided rope": 0.3
+      }
+    },
+    "rubber": {
+      "sub": [
+        "rubber sheet",
+        "rubber band",
+        "rubber tire"
+      ],
+      "K": 3,
+      "d_sem": {
+        "rubber sheet-rubber band": 0.5,
+        "rubber sheet-rubber tire": 0.5,
+        "rubber band-rubber tire": 0.5
+      }
+    },
+    "salad": {
+      "sub": [
+        "green salad",
+        "fruit salad",
+        "pasta salad"
+      ],
+      "K": 3,
+      "d_sem": {
+        "green salad-fruit salad": 0.5,
+        "green salad-pasta salad": 0.4,
+        "fruit salad-pasta salad": 0.5
+      }
+    },
+    "salmon": {
+      "sub": [
+        "whole salmon",
+        "salmon fillet",
+        "smoked salmon"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole salmon-salmon fillet": 0.4,
+        "whole salmon-smoked salmon": 0.5,
+        "salmon fillet-smoked salmon": 0.3
+      }
+    },
+    "sand": {
+      "sub": [
+        "beach sand",
+        "desert sand",
+        "wet sand"
+      ],
+      "K": 3,
+      "d_sem": {
+        "beach sand-desert sand": 0.3,
+        "beach sand-wet sand": 0.2,
+        "desert sand-wet sand": 0.4
+      }
+    },
+    "sandwich": {
+      "sub": [
+        "club sandwich",
+        "wrap sandwich",
+        "open-faced sandwich"
+      ],
+      "K": 3,
+      "d_sem": {
+        "club sandwich-wrap sandwich": 0.5,
+        "club sandwich-open-faced sandwich": 0.4,
+        "wrap sandwich-open-faced sandwich": 0.5
+      }
+    },
+    "sauce": {
+      "sub": [
+        "tomato sauce",
+        "cream sauce",
+        "soy sauce"
+      ],
+      "K": 3,
+      "d_sem": {
+        "tomato sauce-cream sauce": 0.4,
+        "tomato sauce-soy sauce": 0.5,
+        "cream sauce-soy sauce": 0.5
+      }
+    },
+    "screw": {
+      "sub": [
+        "wood screw",
+        "machine screw",
+        "lag screw"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wood screw-machine screw": 0.3,
+        "wood screw-lag screw": 0.3,
+        "machine screw-lag screw": 0.3
+      }
+    },
+    "sea": {
+      "sub": [
+        "calm sea",
+        "rough sea",
+        "shallow sea"
+      ],
+      "K": 3,
+      "d_sem": {
+        "calm sea-rough sea": 0.5,
+        "calm sea-shallow sea": 0.3,
+        "rough sea-shallow sea": 0.4
+      }
+    },
+    "seafood": {
+      "sub": [
+        "shrimp",
+        "crab",
+        "oyster"
+      ],
+      "K": 3,
+      "d_sem": {
+        "shrimp-crab": 0.4,
+        "shrimp-oyster": 0.6,
+        "crab-oyster": 0.5
+      }
+    },
+    "shell": {
+      "sub": [
+        "conch shell",
+        "clam shell",
+        "snail shell"
+      ],
+      "K": 3,
+      "d_sem": {
+        "conch shell-clam shell": 0.4,
+        "conch shell-snail shell": 0.4,
+        "clam shell-snail shell": 0.4
+      }
+    },
+    "shirt": {
+      "sub": [
+        "dress shirt",
+        "t-shirt",
+        "flannel shirt"
+      ],
+      "K": 3,
+      "d_sem": {
+        "dress shirt-t-shirt": 0.5,
+        "dress shirt-flannel shirt": 0.4,
+        "t-shirt-flannel shirt": 0.4
+      }
+    },
+    "shoes": {
+      "sub": [
+        "sneakers",
+        "boots",
+        "sandals",
+        "heels"
+      ],
+      "K": 4,
+      "d_sem": {
+        "sneakers-boots": 0.5,
+        "sneakers-sandals": 0.6,
+        "sneakers-heels": 0.6,
+        "boots-sandals": 0.7,
+        "boots-heels": 0.5,
+        "sandals-heels": 0.5
+      }
+    },
+    "shore": {
+      "sub": [
+        "sandy shore",
+        "rocky shore",
+        "cliff shore"
+      ],
+      "K": 3,
+      "d_sem": {
+        "sandy shore-rocky shore": 0.5,
+        "sandy shore-cliff shore": 0.5,
+        "rocky shore-cliff shore": 0.3
+      }
+    },
+    "shorts": {
+      "sub": [
+        "denim shorts",
+        "athletic shorts",
+        "cargo shorts"
+      ],
+      "K": 3,
+      "d_sem": {
+        "denim shorts-athletic shorts": 0.4,
+        "denim shorts-cargo shorts": 0.3,
+        "athletic shorts-cargo shorts": 0.4
+      }
+    },
+    "shower": {
+      "sub": [
+        "walk-in shower",
+        "bathtub shower",
+        "rain shower"
+      ],
+      "K": 3,
+      "d_sem": {
+        "walk-in shower-bathtub shower": 0.4,
+        "walk-in shower-rain shower": 0.3,
+        "bathtub shower-rain shower": 0.3
+      }
+    },
+    "silk": {
+      "sub": [
+        "silk fabric",
+        "silk scarf",
+        "raw silk"
+      ],
+      "K": 3,
+      "d_sem": {
+        "silk fabric-silk scarf": 0.3,
+        "silk fabric-raw silk": 0.4,
+        "silk scarf-raw silk": 0.5
+      }
+    },
+    "sky": {
+      "sub": [
+        "clear sky",
+        "cloudy sky",
+        "sunset sky"
+      ],
+      "K": 3,
+      "d_sem": {
+        "clear sky-cloudy sky": 0.4,
+        "clear sky-sunset sky": 0.4,
+        "cloudy sky-sunset sky": 0.4
+      }
+    },
+    "smoke": {
+      "sub": [
+        "thin smoke",
+        "thick smoke",
+        "colored smoke"
+      ],
+      "K": 3,
+      "d_sem": {
+        "thin smoke-thick smoke": 0.3,
+        "thin smoke-colored smoke": 0.4,
+        "thick smoke-colored smoke": 0.4
+      }
+    },
+    "snake": {
+      "sub": [
+        "coiled snake",
+        "stretched snake",
+        "patterned snake"
+      ],
+      "K": 3,
+      "d_sem": {
+        "coiled snake-stretched snake": 0.3,
+        "coiled snake-patterned snake": 0.2,
+        "stretched snake-patterned snake": 0.2
+      }
+    },
+    "snow": {
+      "sub": [
+        "fresh snow",
+        "packed snow",
+        "melting snow"
+      ],
+      "K": 3,
+      "d_sem": {
+        "fresh snow-packed snow": 0.3,
+        "fresh snow-melting snow": 0.4,
+        "packed snow-melting snow": 0.3
+      }
+    },
+    "soup": {
+      "sub": [
+        "clear soup",
+        "creamy soup",
+        "chunky soup"
+      ],
+      "K": 3,
+      "d_sem": {
+        "clear soup-creamy soup": 0.5,
+        "clear soup-chunky soup": 0.4,
+        "creamy soup-chunky soup": 0.4
+      }
+    },
+    "steel": {
+      "sub": [
+        "stainless steel",
+        "rusted steel",
+        "steel beam"
+      ],
+      "K": 3,
+      "d_sem": {
+        "stainless steel-rusted steel": 0.5,
+        "stainless steel-steel beam": 0.3,
+        "rusted steel-steel beam": 0.4
+      }
+    },
+    "steps": {
+      "sub": [
+        "stone steps",
+        "wooden steps",
+        "concrete steps"
+      ],
+      "K": 3,
+      "d_sem": {
+        "stone steps-wooden steps": 0.4,
+        "stone steps-concrete steps": 0.3,
+        "wooden steps-concrete steps": 0.4
+      }
+    },
+    "stone": {
+      "sub": [
+        "pebble",
+        "boulder stone",
+        "flat stone"
+      ],
+      "K": 3,
+      "d_sem": {
+        "pebble-boulder stone": 0.6,
+        "pebble-flat stone": 0.3,
+        "boulder stone-flat stone": 0.5
+      }
+    },
+    "stream": {
+      "sub": [
+        "forest stream",
+        "mountain stream",
+        "rocky stream"
+      ],
+      "K": 3,
+      "d_sem": {
+        "forest stream-mountain stream": 0.3,
+        "forest stream-rocky stream": 0.3,
+        "mountain stream-rocky stream": 0.2
+      }
+    },
+    "street": {
+      "sub": [
+        "city street",
+        "residential street",
+        "cobblestone street"
+      ],
+      "K": 3,
+      "d_sem": {
+        "city street-residential street": 0.4,
+        "city street-cobblestone street": 0.4,
+        "residential street-cobblestone street": 0.4
+      }
+    },
+    "sugar": {
+      "sub": [
+        "granulated sugar",
+        "powdered sugar",
+        "brown sugar"
+      ],
+      "K": 3,
+      "d_sem": {
+        "granulated sugar-powdered sugar": 0.3,
+        "granulated sugar-brown sugar": 0.3,
+        "powdered sugar-brown sugar": 0.4
+      }
+    },
+    "sword": {
+      "sub": [
+        "longsword",
+        "katana",
+        "short sword"
+      ],
+      "K": 3,
+      "d_sem": {
+        "longsword-katana": 0.4,
+        "longsword-short sword": 0.3,
+        "katana-short sword": 0.4
+      }
+    },
+    "table": {
+      "sub": [
+        "dining table",
+        "coffee table",
+        "folding table"
+      ],
+      "K": 3,
+      "d_sem": {
+        "dining table-coffee table": 0.4,
+        "dining table-folding table": 0.4,
+        "coffee table-folding table": 0.5
+      }
+    },
+    "tea": {
+      "sub": [
+        "tea cup",
+        "tea pot",
+        "tea leaves"
+      ],
+      "K": 3,
+      "d_sem": {
+        "tea cup-tea pot": 0.4,
+        "tea cup-tea leaves": 0.6,
+        "tea pot-tea leaves": 0.6
+      }
+    },
+    "thread": {
+      "sub": [
+        "cotton thread",
+        "silk thread",
+        "thread spool"
+      ],
+      "K": 3,
+      "d_sem": {
+        "cotton thread-silk thread": 0.2,
+        "cotton thread-thread spool": 0.3,
+        "silk thread-thread spool": 0.3
+      }
+    },
+    "tie": {
+      "sub": [
+        "necktie",
+        "bow tie",
+        "bolo tie"
+      ],
+      "K": 3,
+      "d_sem": {
+        "necktie-bow tie": 0.5,
+        "necktie-bolo tie": 0.5,
+        "bow tie-bolo tie": 0.5
+      }
+    },
+    "tiger": {
+      "sub": [
+        "Bengal tiger",
+        "white tiger",
+        "Siberian tiger"
+      ],
+      "K": 3,
+      "d_sem": {
+        "Bengal tiger-white tiger": 0.4,
+        "Bengal tiger-Siberian tiger": 0.2,
+        "white tiger-Siberian tiger": 0.4
+      }
+    },
+    "tile": {
+      "sub": [
+        "ceramic tile",
+        "mosaic tile",
+        "stone tile"
+      ],
+      "K": 3,
+      "d_sem": {
+        "ceramic tile-mosaic tile": 0.4,
+        "ceramic tile-stone tile": 0.3,
+        "mosaic tile-stone tile": 0.4
+      }
+    },
+    "tire": {
+      "sub": [
+        "car tire",
+        "bike tire",
+        "truck tire"
+      ],
+      "K": 3,
+      "d_sem": {
+        "car tire-bike tire": 0.5,
+        "car tire-truck tire": 0.2,
+        "bike tire-truck tire": 0.5
+      }
+    },
+    "tomato": {
+      "sub": [
+        "whole tomato",
+        "sliced tomato",
+        "cherry tomato"
+      ],
+      "K": 3,
+      "d_sem": {
+        "whole tomato-sliced tomato": 0.4,
+        "whole tomato-cherry tomato": 0.3,
+        "sliced tomato-cherry tomato": 0.4
+      }
+    },
+    "tower": {
+      "sub": [
+        "clock tower",
+        "bell tower",
+        "modern tower"
+      ],
+      "K": 3,
+      "d_sem": {
+        "clock tower-bell tower": 0.3,
+        "clock tower-modern tower": 0.5,
+        "bell tower-modern tower": 0.5
+      }
+    },
+    "town": {
+      "sub": [
+        "coastal town",
+        "mountain town",
+        "old town"
+      ],
+      "K": 3,
+      "d_sem": {
+        "coastal town-mountain town": 0.4,
+        "coastal town-old town": 0.3,
+        "mountain town-old town": 0.3
+      }
+    },
+    "toy": {
+      "sub": [
+        "stuffed toy",
+        "plastic toy",
+        "wooden toy"
+      ],
+      "K": 3,
+      "d_sem": {
+        "stuffed toy-plastic toy": 0.5,
+        "stuffed toy-wooden toy": 0.5,
+        "plastic toy-wooden toy": 0.4
+      }
+    },
+    "trail": {
+      "sub": [
+        "forest trail",
+        "mountain trail",
+        "desert trail"
+      ],
+      "K": 3,
+      "d_sem": {
+        "forest trail-mountain trail": 0.3,
+        "forest trail-desert trail": 0.5,
+        "mountain trail-desert trail": 0.4
+      }
+    },
+    "tree": {
+      "sub": [
+        "oak tree",
+        "pine tree",
+        "palm tree",
+        "birch tree"
+      ],
+      "K": 4,
+      "d_sem": {
+        "oak tree-pine tree": 0.4,
+        "oak tree-palm tree": 0.6,
+        "oak tree-birch tree": 0.3,
+        "pine tree-palm tree": 0.6,
+        "pine tree-birch tree": 0.4,
+        "palm tree-birch tree": 0.6
+      }
+    },
+    "truck": {
+      "sub": [
+        "pickup truck",
+        "semi truck",
+        "dump truck"
+      ],
+      "K": 3,
+      "d_sem": {
+        "pickup truck-semi truck": 0.5,
+        "pickup truck-dump truck": 0.4,
+        "semi truck-dump truck": 0.4
+      }
+    },
+    "tube": {
+      "sub": [
+        "metal tube",
+        "plastic tube",
+        "rubber tube"
+      ],
+      "K": 3,
+      "d_sem": {
+        "metal tube-plastic tube": 0.3,
+        "metal tube-rubber tube": 0.4,
+        "plastic tube-rubber tube": 0.3
+      }
+    },
+    "tulip": {
+      "sub": [
+        "red tulip",
+        "yellow tulip",
+        "purple tulip"
+      ],
+      "K": 3,
+      "d_sem": {
+        "red tulip-yellow tulip": 0.3,
+        "red tulip-purple tulip": 0.3,
+        "yellow tulip-purple tulip": 0.3
+      }
+    },
+    "vacuum": {
+      "sub": [
+        "upright vacuum",
+        "canister vacuum",
+        "robot vacuum"
+      ],
+      "K": 3,
+      "d_sem": {
+        "upright vacuum-canister vacuum": 0.4,
+        "upright vacuum-robot vacuum": 0.6,
+        "canister vacuum-robot vacuum": 0.6
+      }
+    },
+    "valley": {
+      "sub": [
+        "green valley",
+        "desert valley",
+        "mountain valley"
+      ],
+      "K": 3,
+      "d_sem": {
+        "green valley-desert valley": 0.6,
+        "green valley-mountain valley": 0.3,
+        "desert valley-mountain valley": 0.5
+      }
+    },
+    "vegetable": {
+      "sub": [
+        "leafy vegetable",
+        "root vegetable",
+        "fruit vegetable"
+      ],
+      "K": 3,
+      "d_sem": {
+        "leafy vegetable-root vegetable": 0.5,
+        "leafy vegetable-fruit vegetable": 0.4,
+        "root vegetable-fruit vegetable": 0.5
+      }
+    },
+    "velvet": {
+      "sub": [
+        "crushed velvet",
+        "smooth velvet",
+        "velvet ribbon"
+      ],
+      "K": 3,
+      "d_sem": {
+        "crushed velvet-smooth velvet": 0.3,
+        "crushed velvet-velvet ribbon": 0.4,
+        "smooth velvet-velvet ribbon": 0.3
+      }
+    },
+    "wall": {
+      "sub": [
+        "brick wall",
+        "concrete wall",
+        "wooden wall"
+      ],
+      "K": 3,
+      "d_sem": {
+        "brick wall-concrete wall": 0.4,
+        "brick wall-wooden wall": 0.5,
+        "concrete wall-wooden wall": 0.4
+      }
+    },
+    "water": {
+      "sub": [
+        "still water",
+        "flowing water",
+        "splashing water"
+      ],
+      "K": 3,
+      "d_sem": {
+        "still water-flowing water": 0.4,
+        "still water-splashing water": 0.5,
+        "flowing water-splashing water": 0.3
+      }
+    },
+    "wave": {
+      "sub": [
+        "ocean wave",
+        "small wave",
+        "breaking wave"
+      ],
+      "K": 3,
+      "d_sem": {
+        "ocean wave-small wave": 0.3,
+        "ocean wave-breaking wave": 0.2,
+        "small wave-breaking wave": 0.3
+      }
+    },
+    "wax": {
+      "sub": [
+        "candle wax",
+        "sealing wax",
+        "wax block"
+      ],
+      "K": 3,
+      "d_sem": {
+        "candle wax-sealing wax": 0.4,
+        "candle wax-wax block": 0.3,
+        "sealing wax-wax block": 0.4
+      }
+    },
+    "well": {
+      "sub": [
+        "stone well",
+        "wooden well",
+        "modern well"
+      ],
+      "K": 3,
+      "d_sem": {
+        "stone well-wooden well": 0.4,
+        "stone well-modern well": 0.5,
+        "wooden well-modern well": 0.5
+      }
+    },
+    "wheel": {
+      "sub": [
+        "car wheel",
+        "wagon wheel",
+        "bicycle wheel"
+      ],
+      "K": 3,
+      "d_sem": {
+        "car wheel-wagon wheel": 0.5,
+        "car wheel-bicycle wheel": 0.4,
+        "wagon wheel-bicycle wheel": 0.5
+      }
+    },
+    "window": {
+      "sub": [
+        "glass window",
+        "stained glass window",
+        "bay window"
+      ],
+      "K": 3,
+      "d_sem": {
+        "glass window-stained glass window": 0.4,
+        "glass window-bay window": 0.3,
+        "stained glass window-bay window": 0.5
+      }
+    },
+    "wire": {
+      "sub": [
+        "copper wire",
+        "barbed wire",
+        "electrical wire"
+      ],
+      "K": 3,
+      "d_sem": {
+        "copper wire-barbed wire": 0.5,
+        "copper wire-electrical wire": 0.3,
+        "barbed wire-electrical wire": 0.5
+      }
+    },
+    "wood": {
+      "sub": [
+        "plank wood",
+        "log wood",
+        "driftwood"
+      ],
+      "K": 3,
+      "d_sem": {
+        "plank wood-log wood": 0.4,
+        "plank wood-driftwood": 0.5,
+        "log wood-driftwood": 0.4
+      }
+    },
+    "wool": {
+      "sub": [
+        "raw wool",
+        "yarn wool",
+        "knitted wool"
+      ],
+      "K": 3,
+      "d_sem": {
+        "raw wool-yarn wool": 0.4,
+        "raw wool-knitted wool": 0.5,
+        "yarn wool-knitted wool": 0.3
+      }
+    }
+  }
+}

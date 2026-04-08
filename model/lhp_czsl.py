@@ -92,8 +92,14 @@ class LHPCZSL(nn.Module):
         # ---- Load LLM sub-meanings ----
         sub_meanings_path = getattr(config, 'sub_meanings_path', None)
         self.k_max = getattr(config, 'cluster_num', 5)
-        self.attr_k, self.obj_k, self.attr_dsem, self.obj_dsem = \
+        self.k_min = getattr(config, 'cluster_min', 1)
+        self.attr_k, self.obj_k, attr_sem_target, attr_sem_mask, obj_sem_target, obj_sem_mask = \
             self._load_sub_meanings(sub_meanings_path, output_dim)
+        # Register as buffers so they move with model.cuda()
+        self.register_buffer('attr_sem_target', attr_sem_target)
+        self.register_buffer('attr_sem_mask', attr_sem_mask)
+        self.register_buffer('obj_sem_target', obj_sem_target)
+        self.register_buffer('obj_sem_mask', obj_sem_mask)
 
         # ---- Visual Adapters ----
         num_blocks = self.clip.visual.transformer.layers
@@ -152,12 +158,16 @@ class LHPCZSL(nn.Module):
         """Load sub_meanings.json and build per-primitive K values and d_sem matrices."""
         attr_k = [self.k_max] * len(self.attributes)
         obj_k = [self.k_max] * len(self.classes)
-        attr_dsem = {}
-        obj_dsem = {}
+
+        # Pre-build batched d_sem target tensor: (num_prims, k_max, k_max)
+        # and mask for valid pairs
+        attr_sem_target = torch.zeros(len(self.attributes), self.k_max, self.k_max)
+        attr_sem_mask = torch.zeros(len(self.attributes), self.k_max, self.k_max, dtype=torch.bool)
+        obj_sem_target = torch.zeros(len(self.classes), self.k_max, self.k_max)
+        obj_sem_mask = torch.zeros(len(self.classes), self.k_max, self.k_max, dtype=torch.bool)
 
         if path is None:
-            # Fallback: uniform K=k_max, no d_sem (L_sem will be 0)
-            return attr_k, obj_k, attr_dsem, obj_dsem
+            return attr_k, obj_k, attr_sem_target, attr_sem_mask, obj_sem_target, obj_sem_mask
 
         with open(path, 'r') as f:
             data = json.load(f)
@@ -168,38 +178,39 @@ class LHPCZSL(nn.Module):
         for i, attr_name in enumerate(self.attributes):
             if attr_name in attrs_data:
                 info = attrs_data[attr_name]
-                k = min(info['K'], self.k_max)
+                k = max(min(info['K'], self.k_max), self.k_min)
                 attr_k[i] = k
                 if k >= 2 and 'd_sem' in info:
-                    dsem_matrix = torch.zeros(k, k)
                     sub_names = info['sub'][:k]
                     for pair_key, dist in info['d_sem'].items():
                         parts = pair_key.split('-', 1)
                         if len(parts) == 2 and parts[0] in sub_names and parts[1] in sub_names:
                             idx_a = sub_names.index(parts[0])
                             idx_b = sub_names.index(parts[1])
-                            dsem_matrix[idx_a, idx_b] = dist
-                            dsem_matrix[idx_b, idx_a] = dist
-                    attr_dsem[i] = dsem_matrix
+                            # Store as similarity target (1 - distance)
+                            attr_sem_target[i, idx_a, idx_b] = 1.0 - dist
+                            attr_sem_target[i, idx_b, idx_a] = 1.0 - dist
+                            attr_sem_mask[i, idx_a, idx_b] = True
+                            attr_sem_mask[i, idx_b, idx_a] = True
 
         for i, obj_name in enumerate(self.classes):
             if obj_name in objs_data:
                 info = objs_data[obj_name]
-                k = min(info['K'], self.k_max)
+                k = max(min(info['K'], self.k_max), self.k_min)
                 obj_k[i] = k
                 if k >= 2 and 'd_sem' in info:
-                    dsem_matrix = torch.zeros(k, k)
                     sub_names = info['sub'][:k]
                     for pair_key, dist in info['d_sem'].items():
                         parts = pair_key.split('-', 1)
                         if len(parts) == 2 and parts[0] in sub_names and parts[1] in sub_names:
                             idx_a = sub_names.index(parts[0])
                             idx_b = sub_names.index(parts[1])
-                            dsem_matrix[idx_a, idx_b] = dist
-                            dsem_matrix[idx_b, idx_a] = dist
-                    obj_dsem[i] = dsem_matrix
+                            obj_sem_target[i, idx_a, idx_b] = 1.0 - dist
+                            obj_sem_target[i, idx_b, idx_a] = 1.0 - dist
+                            obj_sem_mask[i, idx_a, idx_b] = True
+                            obj_sem_mask[i, idx_b, idx_a] = True
 
-        return attr_k, obj_k, attr_dsem, obj_dsem
+        return attr_k, obj_k, attr_sem_target, attr_sem_mask, obj_sem_target, obj_sem_mask
 
     # ==================================================================
     # Image Encoding (identical to ClusPro baseline)
@@ -372,36 +383,27 @@ class LHPCZSL(nn.Module):
     def compute_l_sem(self):
         """
         L_sem = Σ_p Σ_{i,j ∈ sub(p)} |sim(p_i, p_j) - (1 - d_sem(s_i, s_j))|²
-        Only applies to primitives with K >= 2 and available d_sem.
+        Batched computation: no Python loops over primitives.
         """
-        loss = 0.0
+        loss = torch.tensor(0.0, device=self.attr_sem_target.device)
         count = 0
 
-        # Attr prototypes
-        for p_idx, dsem_matrix in self.attr_dsem.items():
-            K_k = self.attr_k[p_idx]
-            if K_k < 2:
+        for prim_type, sem_target, sem_mask in [
+            ("attr", self.attr_sem_target, self.attr_sem_mask),
+            ("obj", self.obj_sem_target, self.obj_sem_mask),
+        ]:
+            if not sem_mask.any():
                 continue
-            protos = getattr(self, f"attr_queue{p_idx}")[:K_k]
-            protos_norm = l2_normalize(protos.float())
-            vis_sim = protos_norm @ protos_norm.t()
-            sem_sim = (1.0 - dsem_matrix.to(vis_sim.device))
-            triu_mask = torch.triu(torch.ones(K_k, K_k, dtype=torch.bool, device=vis_sim.device), diagonal=1)
-            loss += ((vis_sim[triu_mask] - sem_sim[triu_mask]) ** 2).sum()
-            count += triu_mask.sum().item()
-
-        # Obj prototypes
-        for p_idx, dsem_matrix in self.obj_dsem.items():
-            K_k = self.obj_k[p_idx]
-            if K_k < 2:
-                continue
-            protos = getattr(self, f"obj_queue{p_idx}")[:K_k]
-            protos_norm = l2_normalize(protos.float())
-            vis_sim = protos_norm @ protos_norm.t()
-            sem_sim = (1.0 - dsem_matrix.to(vis_sim.device))
-            triu_mask = torch.triu(torch.ones(K_k, K_k, dtype=torch.bool, device=vis_sim.device), diagonal=1)
-            loss += ((vis_sim[triu_mask] - sem_sim[triu_mask]) ** 2).sum()
-            count += triu_mask.sum().item()
+            primitives = self.attributes if prim_type == "attr" else self.classes
+            # Gather all prototypes: (N, k_max, d)
+            all_protos = self._gather_all_prototypes(prim_type, primitives)
+            all_protos_norm = l2_normalize(all_protos.float())
+            # Batched pairwise sim: (N, k_max, k_max)
+            vis_sim = torch.bmm(all_protos_norm, all_protos_norm.transpose(1, 2))
+            # Masked MSE
+            diff = (vis_sim - sem_target) ** 2
+            loss = loss + diff[sem_mask].sum()
+            count += sem_mask.sum().item()
 
         return loss / max(count, 1)
 
