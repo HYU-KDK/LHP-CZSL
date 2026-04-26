@@ -1,0 +1,37 @@
+model:
+  model_name: ade
+  emb_dim: 300
+  fc_emb: "768,1024"
+  nlayers: 2
+  cosine_scale: 50
+  aow: 1.0
+  emb_init: glove
+  dropout: true
+  norm: true
+  relu: false
+  static_inp: false
+
+train:
+  dataset: mit-states
+  dataset_path: ./data/mit-states
+  same_prim_sample: true
+  optimizer: Adam
+  lr: 0.000005
+  weight_decay: 0.00005
+  train_batch_size: 32
+  gradient_accumulation_steps: 4
+  epochs: 300
+  scheduler: StepLR
+  step_size: 300
+  gamma: 0.1
+  save_path: checkpoint/ade_mit
+  save_every_n: 100
+  val_metric: best_hm
+  seed: 0
+  num_workers: 8
+
+test:
+  eval_batch_size: 64
+  open_world: false
+  topk: 1
+  bias: 1000.0

@@ -165,6 +165,8 @@ if __name__ == "__main__":
     offset = len(attributes)
 
     model = get_model(config, attributes=attributes, classes=classes, offset=offset).cuda()
+    if hasattr(model, 'setup_dset_proxy'):
+        model.setup_dset_proxy(train_dataset)
     optimizer = get_optimizer(model, config)
 
     os.makedirs(config.save_path, exist_ok=True)

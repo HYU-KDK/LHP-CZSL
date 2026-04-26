@@ -624,6 +624,8 @@ if __name__ == "__main__":
     offset = len(attributes)
 
     model = get_model(config, attributes=attributes, classes=classes, offset=offset).cuda()
+    if hasattr(model, 'setup_dset_proxy'):
+        model.setup_dset_proxy(val_dataset)
     if config.load_model:
         model.load_state_dict(torch.load(config.load_model))
     predict_logits_func = predict_logits
