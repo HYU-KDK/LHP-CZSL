@@ -11,12 +11,28 @@ import json
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import torch.distributed as dist
 import math
 
 from clip_modules.clip_model import load_clip
 from clip_modules.tokenization_clip import SimpleTokenizer
 from model.common import CustomTextEncoder
 from model.nce_loss import ContrastiveLoss
+
+
+def _is_dist():
+    return dist.is_available() and dist.is_initialized() and dist.get_world_size() > 1
+
+
+def _all_gather_concat(t):
+    """All-gather a tensor from every rank along dim=0. Returns a single concatenated tensor."""
+    if not _is_dist():
+        return t
+    t = t.contiguous()
+    world = dist.get_world_size()
+    gathered = [torch.empty_like(t) for _ in range(world)]
+    dist.all_gather(gathered, t)
+    return torch.cat(gathered, dim=0)
 
 
 def l2_normalize(x):
@@ -421,7 +437,19 @@ class LHPCZSL(nn.Module):
         f_attr = self.attr_disentangler(f_global)
         f_obj = self.obj_disentangler(f_global)
 
-        self._update_prototypes(f_attr, f_obj, attr_idx, obj_idx)
+        # Prototype update: gather features across DDP ranks so every rank
+        # sees the full effective batch (matches single-GPU prototype dynamics).
+        if _is_dist():
+            with torch.no_grad():
+                attr_idx_dev = attr_idx.cuda(non_blocking=True)
+                obj_idx_dev = obj_idx.cuda(non_blocking=True)
+                f_attr_g = _all_gather_concat(f_attr.detach())
+                f_obj_g = _all_gather_concat(f_obj.detach())
+                attr_idx_g = _all_gather_concat(attr_idx_dev)
+                obj_idx_g = _all_gather_concat(obj_idx_dev)
+            self._update_prototypes(f_attr_g, f_obj_g, attr_idx_g, obj_idx_g)
+        else:
+            self._update_prototypes(f_attr, f_obj, attr_idx, obj_idx)
 
         attr_labels = self._get_cluster_labels(f_attr, attr_idx, self.attributes, "attr")
         obj_labels = self._get_cluster_labels(f_obj, obj_idx, self.classes, "obj")
