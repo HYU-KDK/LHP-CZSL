@@ -60,11 +60,20 @@ def train_model(model, optimizer, config, train_dataset, val_dataset, test_datas
                 # normalize loss to account for batch accumulation
                 loss = loss / config.gradient_accumulation_steps
 
+            if not torch.isfinite(loss):
+                optimizer.zero_grad()
+                scheduler = step_scheduler(scheduler, config, bid, len(train_dataloader))
+                progress_bar.set_postfix({"train loss": np.mean(epoch_train_losses[-50:]) if epoch_train_losses else float('nan'), "skipped": "nan"})
+                progress_bar.update()
+                continue
+
             # backward pass
             scaler.scale(loss).backward()
 
             # weights update
             if ((bid + 1) % config.gradient_accumulation_steps == 0) or (bid + 1 == len(train_dataloader)):
+                scaler.unscale_(optimizer)
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
                 scaler.step(optimizer)
                 scaler.update()
                 optimizer.zero_grad()

@@ -5,6 +5,9 @@ ClusPro Baseline 대비 변경사항:
 1. Variable K: primitive별 prototype 수를 LLM이 결정 (sub_meanings.json)
 2. L_sem: 같은 primitive 내 prototype 간 의미 거리 정렬 손실
 3. Cosine Decorrelation: HSIC 대체 (소배치 안정성)
+4. (v3_text, optional) Text-side sub-meaning ensemble: text_ensemble=True 일 때
+   primitive당 K_p sub-meaning 학습 임베딩을 두고, attr/obj head는 text feature
+   레벨에서 mean-pool, comp head는 임베딩 레벨에서 mean-pool 후 prompt에 주입.
 """
 
 import json
@@ -93,13 +96,31 @@ class LHPCZSL(nn.Module):
         sub_meanings_path = getattr(config, 'sub_meanings_path', None)
         self.k_max = getattr(config, 'cluster_num', 5)
         self.k_min = getattr(config, 'cluster_min', 1)
-        self.attr_k, self.obj_k, attr_sem_target, attr_sem_mask, obj_sem_target, obj_sem_mask = \
+        self.text_ensemble = getattr(config, 'text_ensemble', False)
+        if self.text_ensemble and sub_meanings_path is None:
+            raise ValueError("text_ensemble=True requires sub_meanings_path")
+        (self.attr_k, self.obj_k,
+         attr_sem_target, attr_sem_mask, obj_sem_target, obj_sem_mask,
+         self.attr_sub_names_list, self.obj_sub_names_list) = \
             self._load_sub_meanings(sub_meanings_path, output_dim)
         # Register as buffers so they move with model.cuda()
         self.register_buffer('attr_sem_target', attr_sem_target)
         self.register_buffer('attr_sem_mask', attr_sem_mask)
         self.register_buffer('obj_sem_target', obj_sem_target)
         self.register_buffer('obj_sem_mask', obj_sem_mask)
+
+        # ---- Sub-meaning indexing for text-ensemble ----
+        # Always built (cheap); used only when text_ensemble=True.
+        attr_sub_to_attr = []
+        for i, subs in enumerate(self.attr_sub_names_list):
+            attr_sub_to_attr.extend([i] * len(subs))
+        obj_sub_to_obj = []
+        for i, subs in enumerate(self.obj_sub_names_list):
+            obj_sub_to_obj.extend([i] * len(subs))
+        self.register_buffer('attr_sub_to_attr_idx', torch.tensor(attr_sub_to_attr, dtype=torch.long))
+        self.register_buffer('obj_sub_to_obj_idx', torch.tensor(obj_sub_to_obj, dtype=torch.long))
+        self.sum_Ka = len(attr_sub_to_attr)
+        self.sum_Ko = len(obj_sub_to_obj)
 
         # ---- Visual Adapters ----
         num_blocks = self.clip.visual.transformer.layers
@@ -155,7 +176,12 @@ class LHPCZSL(nn.Module):
     # ==================================================================
 
     def _load_sub_meanings(self, path, output_dim):
-        """Load sub_meanings.json and build per-primitive K values and d_sem matrices."""
+        """Load sub_meanings.json and build per-primitive K values, d_sem matrices,
+        and per-primitive sub-meaning name lists.
+
+        Sub-name lists are always populated. With no path or no entry for a primitive,
+        defaults to K=1 with sub=[primitive_name] so the structure is uniform.
+        """
         attr_k = [self.k_max] * len(self.attributes)
         obj_k = [self.k_max] * len(self.classes)
 
@@ -166,8 +192,14 @@ class LHPCZSL(nn.Module):
         obj_sem_target = torch.zeros(len(self.classes), self.k_max, self.k_max)
         obj_sem_mask = torch.zeros(len(self.classes), self.k_max, self.k_max, dtype=torch.bool)
 
+        # Per-primitive sub-name lists (degenerate to [name] when no info available)
+        attr_sub_names = [[name] for name in self.attributes]
+        obj_sub_names = [[name] for name in self.classes]
+
         if path is None:
-            return attr_k, obj_k, attr_sem_target, attr_sem_mask, obj_sem_target, obj_sem_mask
+            return (attr_k, obj_k,
+                    attr_sem_target, attr_sem_mask, obj_sem_target, obj_sem_mask,
+                    attr_sub_names, obj_sub_names)
 
         with open(path, 'r') as f:
             data = json.load(f)
@@ -175,13 +207,25 @@ class LHPCZSL(nn.Module):
         attrs_data = data.get('attrs', {})
         objs_data = data.get('objs', {})
 
+        # train.py normalizes primitive names (`.replace('.', ' ').lower()`)
+        # before passing to the model, but JSON keys are typically the raw
+        # dotted/cased dataset names (e.g. 'Faux.Fur'). Build a normalized
+        # lookup so matching works regardless.
+        def _norm(s):
+            return s.replace('.', ' ').lower()
+        attrs_data = {_norm(k): v for k, v in attrs_data.items()}
+        objs_data = {_norm(k): v for k, v in objs_data.items()}
+
         for i, attr_name in enumerate(self.attributes):
             if attr_name in attrs_data:
                 info = attrs_data[attr_name]
                 k = max(min(info['K'], self.k_max), self.k_min)
                 attr_k[i] = k
+                sub_names = info.get('sub', [attr_name])[:k]
+                if len(sub_names) < k:
+                    sub_names = sub_names + [attr_name] * (k - len(sub_names))
+                attr_sub_names[i] = sub_names
                 if k >= 2 and 'd_sem' in info:
-                    sub_names = info['sub'][:k]
                     for pair_key, dist in info['d_sem'].items():
                         parts = pair_key.split('-', 1)
                         if len(parts) == 2 and parts[0] in sub_names and parts[1] in sub_names:
@@ -198,8 +242,11 @@ class LHPCZSL(nn.Module):
                 info = objs_data[obj_name]
                 k = max(min(info['K'], self.k_max), self.k_min)
                 obj_k[i] = k
+                sub_names = info.get('sub', [obj_name])[:k]
+                if len(sub_names) < k:
+                    sub_names = sub_names + [obj_name] * (k - len(sub_names))
+                obj_sub_names[i] = sub_names
                 if k >= 2 and 'd_sem' in info:
-                    sub_names = info['sub'][:k]
                     for pair_key, dist in info['d_sem'].items():
                         parts = pair_key.split('-', 1)
                         if len(parts) == 2 and parts[0] in sub_names and parts[1] in sub_names:
@@ -210,7 +257,32 @@ class LHPCZSL(nn.Module):
                             obj_sem_mask[i, idx_a, idx_b] = True
                             obj_sem_mask[i, idx_b, idx_a] = True
 
-        return attr_k, obj_k, attr_sem_target, attr_sem_mask, obj_sem_target, obj_sem_mask
+        sum_ka = sum(len(s) for s in attr_sub_names)
+        sum_ko = sum(len(s) for s in obj_sub_names)
+        n_attr_kgt1 = sum(1 for s in attr_sub_names if len(s) > 1)
+        n_obj_kgt1 = sum(1 for s in obj_sub_names if len(s) > 1)
+        print(f"[_load_sub_meanings] sub_meanings_path={path} | "
+              f"attrs: total={len(self.attributes)}, K>1={n_attr_kgt1}, sum_K={sum_ka} | "
+              f"objs: total={len(self.classes)}, K>1={n_obj_kgt1}, sum_K={sum_ko}")
+        if self.text_ensemble and (n_attr_kgt1 + n_obj_kgt1) == 0:
+            raise RuntimeError(
+                "text_ensemble=True but no primitive matched a K>1 entry in "
+                f"{path}. Check key normalization (train.py lowercases and "
+                "replaces '.' with ' ' before passing names to the model)."
+            )
+
+        return (attr_k, obj_k,
+                attr_sem_target, attr_sem_mask, obj_sem_target, obj_sem_mask,
+                attr_sub_names, obj_sub_names)
+
+    @staticmethod
+    def _format_sub_name(sub_name, primitive_name):
+        """Clean LLM-derived sub names (e.g. 'smooth_leather' -> 'smooth leather').
+        Leave names that match the primitive name untouched to preserve baseline-equivalent
+        tokenization for K=1 primitives (e.g. 'Hair.Calf' stays 'Hair.Calf')."""
+        if sub_name == primitive_name:
+            return sub_name
+        return sub_name.replace('_', ' ').replace('.', ' ').strip()
 
     # ==================================================================
     # Image Encoding (identical to ClusPro baseline)
@@ -258,14 +330,29 @@ class LHPCZSL(nn.Module):
             prompt_template, context_length=self.config.context_length
         ).cuda()
 
+        if self.text_ensemble:
+            # Sub-level: one learnable embedding per (primitive, sub-meaning), in order.
+            # Init = mean of CLIP token embeddings of the sub-meaning name (cleaned).
+            attr_sub_strings = [
+                self._format_sub_name(s, prim)
+                for prim, subs in zip(self.attributes, self.attr_sub_names_list)
+                for s in subs
+            ]
+            obj_sub_strings = [
+                self._format_sub_name(s, prim)
+                for prim, subs in zip(self.classes, self.obj_sub_names_list)
+                for s in subs
+            ]
+            tokens_to_init = attr_sub_strings + obj_sub_strings
+        else:
+            tokens_to_init = self.attributes + self.classes
+
         tokenized = torch.cat([
             self.tokenizer(tok, context_length=self.config.context_length)
-            for tok in self.attributes + self.classes
+            for tok in tokens_to_init
         ])
         orig_emb = self.clip.token_embedding(tokenized.cuda())
-        soft_emb = torch.zeros(
-            len(self.attributes) + len(self.classes), orig_emb.size(-1)
-        )
+        soft_emb = torch.zeros(len(tokens_to_init), orig_emb.size(-1))
         for idx, rep in enumerate(orig_emb):
             eos_idx = tokenized[idx].argmax()
             soft_emb[idx, :] = torch.mean(rep[1:eos_idx, :], axis=0)
@@ -281,9 +368,28 @@ class LHPCZSL(nn.Module):
 
         return token_ids, soft_emb, comp_ctx, attr_ctx, obj_ctx
 
+    def _pool_sub_features(self, features, sub_to_prim, num_prims):
+        """Mean-pool sub-meaning features back to per-primitive features.
+
+        features: (S, D), sub_to_prim: (S,) long, num_prims: int.
+        Returns: (num_prims, D) with mean over each primitive's sub-features.
+        """
+        D = features.shape[-1]
+        idx = sub_to_prim.unsqueeze(-1).expand(-1, D)
+        out = torch.zeros(num_prims, D, device=features.device, dtype=features.dtype)
+        out.scatter_add_(0, idx, features)
+        ones = torch.ones(features.shape[0], device=features.device, dtype=features.dtype)
+        counts = torch.zeros(num_prims, device=features.device, dtype=features.dtype)
+        counts.scatter_add_(0, sub_to_prim, ones)
+        return out / counts.unsqueeze(-1).clamp(min=1.0)
+
     def _construct_token_tensors(self, pair_idx):
         attr_idx, obj_idx = pair_idx[:, 0], pair_idx[:, 1]
-        num_elements = [len(pair_idx), self.offset, len(self.classes)]
+
+        if self.text_ensemble:
+            num_elements = [len(pair_idx), self.sum_Ka, self.sum_Ko]
+        else:
+            num_elements = [len(pair_idx), self.offset, len(self.classes)]
         token_tensor = []
 
         for i in range(self.token_ids.shape[0]):
@@ -295,15 +401,35 @@ class LHPCZSL(nn.Module):
         eos_idx = [int(self.token_ids[i].argmax()) for i in range(self.token_ids.shape[0])]
         embs = self.attr_dropout(self.soft_att_obj)
 
-        token_tensor[0][:, eos_idx[0]-2, :] = embs[attr_idx].type(self.clip.dtype)
-        token_tensor[0][:, eos_idx[0]-1, :] = embs[obj_idx + self.offset].type(self.clip.dtype)
-        token_tensor[0][:, 1:len(self.comp_ctx)+1, :] = self.comp_ctx.type(self.clip.dtype)
+        if self.text_ensemble:
+            attr_subs = embs[:self.sum_Ka]
+            obj_subs = embs[self.sum_Ka:]
+            # comp prompt: pool sub-emb to per-primitive then index
+            attr_pooled = self._pool_sub_features(
+                attr_subs, self.attr_sub_to_attr_idx, len(self.attributes)
+            )
+            obj_pooled = self._pool_sub_features(
+                obj_subs, self.obj_sub_to_obj_idx, len(self.classes)
+            )
+            token_tensor[0][:, eos_idx[0]-2, :] = attr_pooled[attr_idx].type(self.clip.dtype)
+            token_tensor[0][:, eos_idx[0]-1, :] = obj_pooled[obj_idx].type(self.clip.dtype)
+            token_tensor[0][:, 1:len(self.comp_ctx)+1, :] = self.comp_ctx.type(self.clip.dtype)
 
-        token_tensor[1][:, eos_idx[1]-1, :] = embs[:self.offset].type(self.clip.dtype)
-        token_tensor[1][:, 1:len(self.attr_ctx)+1, :] = self.attr_ctx.type(self.clip.dtype)
+            # attr-only / obj-only: sub-level prompts (one per sub-meaning)
+            token_tensor[1][:, eos_idx[1]-1, :] = attr_subs.type(self.clip.dtype)
+            token_tensor[1][:, 1:len(self.attr_ctx)+1, :] = self.attr_ctx.type(self.clip.dtype)
+            token_tensor[2][:, eos_idx[2]-1, :] = obj_subs.type(self.clip.dtype)
+            token_tensor[2][:, 1:len(self.obj_ctx)+1, :] = self.obj_ctx.type(self.clip.dtype)
+        else:
+            token_tensor[0][:, eos_idx[0]-2, :] = embs[attr_idx].type(self.clip.dtype)
+            token_tensor[0][:, eos_idx[0]-1, :] = embs[obj_idx + self.offset].type(self.clip.dtype)
+            token_tensor[0][:, 1:len(self.comp_ctx)+1, :] = self.comp_ctx.type(self.clip.dtype)
 
-        token_tensor[2][:, eos_idx[2]-1, :] = embs[self.offset:].type(self.clip.dtype)
-        token_tensor[2][:, 1:len(self.obj_ctx)+1, :] = self.obj_ctx.type(self.clip.dtype)
+            token_tensor[1][:, eos_idx[1]-1, :] = embs[:self.offset].type(self.clip.dtype)
+            token_tensor[1][:, 1:len(self.attr_ctx)+1, :] = self.attr_ctx.type(self.clip.dtype)
+
+            token_tensor[2][:, eos_idx[2]-1, :] = embs[self.offset:].type(self.clip.dtype)
+            token_tensor[2][:, 1:len(self.obj_ctx)+1, :] = self.obj_ctx.type(self.clip.dtype)
 
         return token_tensor
 
@@ -316,6 +442,9 @@ class LHPCZSL(nn.Module):
     def _update_prototypes(self, batch_attr, batch_obj, attr_idx, obj_idx):
         batch_attr_f = batch_attr.float()
         batch_obj_f = batch_obj.float()
+
+        if not (torch.isfinite(batch_attr_f).all() and torch.isfinite(batch_obj_f).all()):
+            return
 
         for k in range(len(self.attributes)):
             mask = (attr_idx == k)
@@ -462,6 +591,14 @@ class LHPCZSL(nn.Module):
             feat, _ = self.text_encoder(
                 self.token_ids[i], token_tensors[i], enable_pos_emb=self.enable_pos_emb
             )
+            if self.text_ensemble and i == 1:
+                feat = self._pool_sub_features(
+                    feat, self.attr_sub_to_attr_idx, len(self.attributes)
+                )
+            elif self.text_ensemble and i == 2:
+                feat = self._pool_sub_features(
+                    feat, self.obj_sub_to_obj_idx, len(self.classes)
+                )
             feat = feat / feat.norm(dim=-1, keepdim=True)
             logits.append(logit_scale * norm_img[i] @ feat.t())
 
@@ -488,6 +625,14 @@ class LHPCZSL(nn.Module):
             feat, _ = self.text_encoder(
                 self.token_ids[i], token_tensors[i], enable_pos_emb=self.enable_pos_emb
             )
+            if self.text_ensemble and i == 1:
+                feat = self._pool_sub_features(
+                    feat, self.attr_sub_to_attr_idx, len(self.attributes)
+                )
+            elif self.text_ensemble and i == 2:
+                feat = self._pool_sub_features(
+                    feat, self.obj_sub_to_obj_idx, len(self.classes)
+                )
             feat = feat / feat.norm(dim=-1, keepdim=True)
             logits.append(logit_scale * norm_img[i] @ feat.t())
 

@@ -1,0 +1,160 @@
+{
+  "attrs": {
+    "Canvas": {
+      "sub": ["Canvas"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Cotton": {
+      "sub": ["Cotton"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Faux.Fur": {
+      "sub": ["short_pile_fur", "long_pile_fur"],
+      "K": 2,
+      "d_sem": {
+        "short_pile_fur-long_pile_fur": 0.4
+      }
+    },
+    "Faux.Leather": {
+      "sub": ["Faux.Leather"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Full.grain.leather": {
+      "sub": ["Full.grain.leather"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Hair.Calf": {
+      "sub": ["Hair.Calf"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Leather": {
+      "sub": ["smooth_leather", "grained_leather"],
+      "K": 2,
+      "d_sem": {
+        "smooth_leather-grained_leather": 0.35
+      }
+    },
+    "Nubuck": {
+      "sub": ["Nubuck"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Nylon": {
+      "sub": ["Nylon"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Patent.Leather": {
+      "sub": ["Patent.Leather"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Rubber": {
+      "sub": ["Rubber"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Satin": {
+      "sub": ["Satin"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Sheepskin": {
+      "sub": ["shearling_woolside", "sheepskin_smoothside"],
+      "K": 2,
+      "d_sem": {
+        "shearling_woolside-sheepskin_smoothside": 0.5
+      }
+    },
+    "Suede": {
+      "sub": ["Suede"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Synthetic": {
+      "sub": ["Synthetic"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Wool": {
+      "sub": ["Wool"],
+      "K": 1,
+      "d_sem": {}
+    }
+  },
+  "objs": {
+    "Boots.Ankle": {
+      "sub": ["Boots.Ankle"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Boots.Knee.High": {
+      "sub": ["Boots.Knee.High"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Boots.Mid-Calf": {
+      "sub": ["Boots.Mid-Calf"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Sandals": {
+      "sub": ["flat_strappy_sandal", "sport_sandal"],
+      "K": 2,
+      "d_sem": {
+        "flat_strappy_sandal-sport_sandal": 0.55
+      }
+    },
+    "Shoes.Boat.Shoes": {
+      "sub": ["Shoes.Boat.Shoes"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Shoes.Clogs.and.Mules": {
+      "sub": ["clog", "mule"],
+      "K": 2,
+      "d_sem": {
+        "clog-mule": 0.5
+      }
+    },
+    "Shoes.Flats": {
+      "sub": ["Shoes.Flats"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Shoes.Heels": {
+      "sub": ["stiletto_heel", "block_heel"],
+      "K": 2,
+      "d_sem": {
+        "stiletto_heel-block_heel": 0.4
+      }
+    },
+    "Shoes.Loafers": {
+      "sub": ["Shoes.Loafers"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Shoes.Oxfords": {
+      "sub": ["Shoes.Oxfords"],
+      "K": 1,
+      "d_sem": {}
+    },
+    "Shoes.Sneakers.and.Athletic.Shoes": {
+      "sub": ["lifestyle_sneaker", "athletic_runner"],
+      "K": 2,
+      "d_sem": {
+        "lifestyle_sneaker-athletic_runner": 0.45
+      }
+    },
+    "Slippers": {
+      "sub": ["Slippers"],
+      "K": 1,
+      "d_sem": {}
+    }
+  }
+}

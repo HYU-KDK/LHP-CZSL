@@ -628,7 +628,8 @@ if __name__ == "__main__":
         model.load_state_dict(torch.load(config.load_model))
     predict_logits_func = predict_logits
     # ? can be deleted if not needed
-    if (hasattr(config, 'text_first') and config.text_first):
+    if (hasattr(config, 'text_first') and config.text_first
+            and hasattr(model, 'encode_text_for_open')):
         print('text first')
         predict_logits_func = predict_logits_text_first
 
@@ -675,11 +676,13 @@ if __name__ == "__main__":
     else:
         best_th = config.threshold
         evaluator = Evaluator(val_dataset, model=None)
-        feasibility_path = os.path.join(
-            DIR_PATH, f'data/feasibility_{config.dataset}.pt')
-        unseen_scores = torch.load(
-            feasibility_path,
-            map_location='cpu')['feasibility']
+        unseen_scores = None
+        if config.open_world:
+            feasibility_path = os.path.join(
+                DIR_PATH, f'data/feasibility_{config.dataset}.pt')
+            unseen_scores = torch.load(
+                feasibility_path,
+                map_location='cpu')['feasibility']
         with torch.no_grad():
             all_logits, all_attr_gt, all_obj_gt, all_pair_gt, loss_avg = predict_logits_func(
                 model, val_dataset, config)

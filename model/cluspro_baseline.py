@@ -237,6 +237,9 @@ class ClusProBaseline(nn.Module):
         batch_attr_f = batch_attr.float()
         batch_obj_f = batch_obj.float()
 
+        if not (torch.isfinite(batch_attr_f).all() and torch.isfinite(batch_obj_f).all()):
+            return
+
         for k in range(len(self.attributes)):
             mask = (attr_idx == k)
             if mask.sum() == 0:
