@@ -82,8 +82,9 @@ def run(dataset_path, sub_meanings_path, output_dir, max_per_prim, device):
     transform = transform_image("test")
 
     print("[k_validation] loading CLIP ViT-L/14")
-    clip_model, _ = load_clip("ViT-L/14", device=device, jit=False)
+    clip_model = load_clip("ViT-L/14", device=device, jit=False)
     clip_model.eval()
+    clip_model = clip_model.float()  # avoid fp16 mismatch with cpu transforms
     for p in clip_model.parameters():
         p.requires_grad_(False)
 

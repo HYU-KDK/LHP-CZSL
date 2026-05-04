@@ -235,3 +235,118 @@ mit-states/ViT-L/14 결과들도 같은 NaN 오염을 겪었을 가능성이 있
 ### 정리해 둘 미해결 의문
 - fp16 GradScaler가 NaN gradient를 어떻게 skip하길래 prototype EMA가 결국 회복했는지 정확한 메커니즘은 unclear. (이전 fp16+scaler 환경에서도 step 1356~2790 동안 NaN 표시 후 회복 패턴이 있었음.) 진짜로 회복된 것인지, 아니면 EMA queue가 부분적으로만 오염됐다가 fresh batch들로 mix-out 된 것인지 미상. 새 가드 들어왔으니 실용적으로는 무관.
 - 본질적 NaN 원인은 끝까지 안 잡았음 — HSIC도 contrastive도 단독 범인 아니었고, AMP fp16 + 어떤 batch의 특정 input combination이 numeric overflow 일으키는 패턴. 가드로 우회한 상태. 향후 같은 문제가 다른 데이터셋에서 더 심하게 나오면 그때 재조사.
+
+---
+
+## 5. 5-4 진단 라운드 — k_validation + prototype collapse (advisor 미팅 5/6 자료)
+
+5/4 v3_text seed2 재실행이 16:13 KST에 끝나면서 baseline_v2 / v1_init_only / v3_text 모두 3-seed 정상 비교 가능. 동시에 thesis 자체에 대한 두 가지 진단을 수행.
+
+### 5.1 v3_text seed2 재실행 결과
+
+3-seed 최종 (test_pairs):
+| seed | seen | unseen | HM | AUC |
+|---|---|---|---|---|
+| 0 | 0.6823 | 0.7536 | 0.5509 | 0.4326 |
+| 1 | 0.6823 | 0.7488 | 0.5402 | 0.4194 |
+| 2 (재실행) | 0.7128 | 0.7411 | 0.5299 | 0.4102 |
+| **mean** | 0.6925 | 0.7478 | **0.5403** | **0.4207** |
+
+baseline_v2 mean (HM 0.5481 / AUC 0.4279) 대비 **HM −0.008, AUC −0.007** — 시드 std 안. **v3_text도 baseline tie 확정**.
+
+### 5.2 K-validation: LLM K vs CLIP visual K (UT-Zap, n=28 primitives)
+
+스크립트: [`tools/k_validation.py`](tools/k_validation.py). primitive별로 학습 이미지를 CLIP ViT-L/14로 인코딩 → silhouette 기반 k_visual ∈ [1,5] 결정 → `sub_meanings_*.json`의 K_LLM과 비교. mit-states (v1 + v2)는 18:08~ 진행 중, 결과 나오면 추가.
+
+| | n | Spearman ρ | exact agreement | mean k_vis | mean k_llm | k_vis 분포 | k_llm 분포 |
+|---|---|---|---|---|---|---|---|
+| UT-Zap **attrs** | 16 | **−0.450** (p=0.08) | 3/16 (19%) | 3.00 | 1.19 | K=2:8, K=3:2, K=4:4, K=5:2 | K=1:13, K=2:3 |
+| UT-Zap **objs**  | 12 | −0.316 (p=0.32) | 4/12 (33%) | 2.50 | 1.33 | K=2:10, K=5:2 | K=1:8, K=2:4 |
+
+**해석**:
+1. **음의 상관** — LLM이 K 크다고 한 primitive에서 visual K는 오히려 작음. ρ=0이면 "다른 차원" 변명 가능, ρ<0이면 LLM K가 visual diversity와 **체계적으로 어긋남**.
+2. **Visual K는 모두 ≥2** — 전 primitive가 시각적으로 ≥2 cluster. LLM은 attrs 81%, objs 66%를 K=1 처리.
+3. **Mean 크게 어긋남** (visual ~3 vs LLM ~1.2) — LLM이 시각적 다양성을 **체계적으로 과소평가**.
+
+UT-Zap 한 데이터셋만으로 단정은 무리지만, "LLM zero-shot K가 visual diversity proxy로 작동한다"는 가설은 UT-Zap에선 **명확히 기각**. mit-states 결과도 비슷하면 K determination 메커니즘 자체 재설계 근거 확보. (caveat: silhouette는 instance-level variation도 포함하므로 LLM이 측정하는 "semantic sub-type"과 정확히 같진 않음. 그러나 anti-correlation은 그 caveat를 넘는 신호.)
+
+### 5.3 Prototype collapse 진단 — 모든 학습 ckpt에서 effective K 측정
+
+스크립트: [`tools/prototype_diagnostic.py`](tools/prototype_diagnostic.py). 각 `val_best.pt`에서 모든 `attr_queue{i}` / `obj_queue{i}` (각 [K=5, D=768])를 꺼내 per-primitive로:
+- mean off-diagonal cosine — prototype 간 유사도 (1 = collapse, 0 = orthogonal)
+- effective K = (Σs)² / Σs² (singular values) ∈ [1, K] — 실제로 사용되는 prototype 차원 수
+
+전 16개 체크포인트 결과:
+
+| checkpoint | attr off-cos | attr eff_K | obj off-cos | obj eff_K |
+|---|---:|---:|---:|---:|
+| **cluspro_baseline_l14_mit** | **0.994** | **1.08/5** | **0.986** | **1.12/5** |
+| cluspro_baseline_l14_mit_k3 | 0.989 | 1.08/3 | 0.981 | 1.10/3 |
+| cluspro_baseline_l14_utzap (lr=1e-4) | 0.800 | 2.21/5 | 0.939 | 1.36/5 |
+| cluspro_baseline_l14_utzap_lr5e5 | 0.914 | 1.67/5 | 0.975 | 1.21/5 |
+| **cluspro_baseline_l14_utzap_v2_seed0** | **0.967** | **1.37/5** | **0.992** | **1.11/5** |
+| cluspro_baseline_l14_utzap_v2_seed1 | 0.999 | 1.06/5 | 1.000 | 1.02/5 |
+| cluspro_baseline_l14_utzap_v2_seed2 | 0.993 | 1.15/5 | 0.999 | 1.04/5 |
+| **lhp_czsl_v1_init_only_l14_mit** | **0.024** | **3.88/5** | **0.052** | **3.65/5** |
+| lhp_czsl_v1_init_only_l14_utzap_seed0 | 0.967 | 1.37/5 | 0.992 | 1.11/5 |
+| lhp_czsl_v1_init_only_l14_utzap_seed1 | 0.988 | 1.20/5 | 0.998 | 1.06/5 |
+| lhp_czsl_v1_init_only_l14_utzap_seed2 | 0.981 | 1.27/5 | 0.996 | 1.08/5 |
+| lhp_czsl_v1_l14_mit | 0.023 | 3.88/5 | 0.051 | 3.65/5 |
+| lhp_czsl_v2_l14_mit | 0.317 | 2.07/5 | 0.318 | 2.05/5 |
+| **lhp_czsl_v3_text_l14_utzap_seed0** | **0.016** | **3.89/5** | **0.029** | **3.74/5** |
+| lhp_czsl_v3_text_l14_utzap_seed1 | 0.025 | 3.88/5 | 0.033 | 3.74/5 |
+| lhp_czsl_v3_text_l14_utzap_seed2 | 0.015 | 3.88/5 | 0.046 | 3.74/5 |
+
+**핵심 관찰**:
+
+1. **ClusPro baseline은 K=5를 사실상 안 씀**. mit에서 eff_K ≈ 1.08, off-cos ≈ 0.99 — 5개 prototype이 거의 동일 vector. utzap_v2도 평균 eff_K ~1.2.
+2. **LHP-CZSL는 데이터셋·variant에 따라 분리도 차이 큼**:
+   - mit + sub-meaning init (v1, v1_init_only) → eff_K ≈ 3.88 (분리 잘 됨)
+   - mit + 강제 K≥3 (v2) → eff_K ≈ 2.07 (중간)
+   - **utzap + v1_init_only → 거의 collapse (eff_K ~1.2)** — utzap에선 init 효과 없음
+   - **utzap + v3_text (text ensemble) → eff_K ≈ 3.88** (text-side ensemble이 분리 강제)
+3. 모든 LHP variant도 buffer는 K=5 할당 (variable K는 loss/매스킹으로만 표현; tensor shape 동일).
+
+### 5.4 Thesis 자체의 재정의 필요 — 5-3 (advisor 미팅 핵심 포인트)
+
+진단 결과를 종합하면 thesis의 전제 자체가 흔들림:
+
+**기존 thesis** (5/3 시점): "Variable K가 fixed K=5보다 효율적 — 단순 primitive에 K=5는 낭비"
+
+**현 진단으로 드러난 사실**:
+1. ClusPro baseline의 fixed K=5는 **이미 collapse해서 effective K=1**로 동작 중 (특히 mit, utzap_v2_seed1/2)
+2. LHP variant의 eff_K가 baseline보다 훨씬 큰 경우(mit v1/v1_init/v3_text utzap eff_K~3.88)에도 **test 성능 tie**
+3. LLM K는 visual diversity의 proxy 역할 못 함 (UT-Zap ρ=−0.45)
+
+→ **재정의된 질문**: "Variable K vs fixed K=5"가 아니라 **"prototype 수가 1이든 4든 효과 없는데, 그럼 prototype 메커니즘 자체가 CZSL 성능에 의미 있는 lever인가?"**
+
+이건 thesis를 **확대**하는 게 아니라 **축소**시키는 발견. advisor에게 솔직히 던질 질문:
+- (Q1) ClusPro의 "5개 cluster prototype"이 collapse하는 게 정상 동작인지, 학습 dynamics 결함인지? (decorrelation loss 부재가 원인일 가능성)
+- (Q2) Prototype memory가 효과 없는 게 검증되면, LHP-CZSL 전체 framing(prototype 중심)을 재고할지? text-side / loss-side로 axis 이동?
+
+### 5.5 Falsifiable next experiment — 1~2일
+
+**"올바른 K (visual K)로 학습 → 이기면 thesis salvageable, tie면 thesis 폐기"**
+
+1. `tools/k_validation.py` 결과로 visual-K 기반 sub_meanings JSON 생성 (LLM 우회)
+2. 동일 학습 (`v1_init_only` 구조) on UT-Zap, 3-seed
+3. 결과:
+   - baseline tie → variable K thesis 폐기. prototype 메커니즘 부분 자체를 재고. text-side / open-world / 다른 axis로 pivot
+   - baseline 이김 → "LLM K가 문제였다" 증명. Path A(multimodal LLM) 또는 Path C(LLM+visual hybrid) 진행
+
+이 실험 한 번이면 thesis salvage 가능성에 대한 binary 결론 확보. **advisor 미팅에서 이 실험을 제안하면 "다음 1주 로드맵"이 명확**.
+
+### 5.6 미팅 자료 정리 (5/6 수요일용)
+
+들고 갈 것:
+- 이 §5 섹션 전체 (한 번에 나열) + §1.1 부록 테이블
+- `logs/k_validation/k_validation_*.json` summary (UT-Zap + mit_v1 + mit_v2)
+- `logs/k_validation/prototype_diagnostic.json`
+
+핵심 talking points (3분 내):
+1. **부정적 결과 정직 보고**: variable K로 baseline 못 이김 (3 variants × 2 dataset × 3 seeds 모두)
+2. **두 가지 진단으로 원인 좁힘**:
+   - (a) LLM K 자체가 visual diversity와 anti-correlated (UT-Zap ρ=−0.45)
+   - (b) ClusPro baseline은 K=5를 사실상 안 씀 (eff_K ≈ 1.08)
+3. **Thesis 재정의 제안**: "어떤 K가 좋은가"가 아니라 "prototype 수 자체가 lever인가"
+4. **Falsifiable next step 제안**: visual K로 학습해서 thesis 운명 결정 (1~2일)
