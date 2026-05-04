@@ -93,12 +93,10 @@ def call_anthropic_batch(pairs, model="claude-sonnet-4-5"):
     return out
 
 
-def call_gemini_batch(pairs, model="gemini-2.0-flash"):
-    """Call Gemini API. Free tier: 15 RPM, 1500/day for Flash models.
-
-    The script paces calls at ~15 RPM (4 s gap between calls) to stay
-    inside the free quota; raise the rate by editing the sleep below if
-    you have a paid key.
+def call_gemini_batch(pairs, model="gemini-2.5-flash-lite"):
+    """Call Gemini API. Free tier varies by model -- Flash-Lite is most
+    generous. The script paces calls at ~15 RPM (4 s gap) to stay inside
+    Flash free quotas. Transient 503/429 errors retried up to 3 times.
     """
     from google import genai
     api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
@@ -107,23 +105,35 @@ def call_gemini_batch(pairs, model="gemini-2.0-flash"):
     client = genai.Client(api_key=api_key)
     out = []
     for attr, obj in pairs:
-        try:
-            resp = client.models.generate_content(
-                model=model,
-                contents=SYSTEM_PROMPT + "\n\n" + USER_PROMPT_TEMPLATE.format(attr=attr, obj=obj),
-            )
-            text = resp.text or ""
-            m = re.search(r"\{.*\}", text, re.DOTALL)
-            if not m:
-                raise ValueError(f"no JSON in response: {text[:200]}")
-            data = json.loads(m.group(0))
-            score = int(data.get("score", 0))
-            reason = data.get("reason", "")
-            out.append({"attr": attr, "obj": obj, "score": max(0, min(10, score)),
-                        "reason": reason})
-        except Exception as e:
-            print(f"  [WARN] failed for ({attr}, {obj}): {e}")
-            out.append({"attr": attr, "obj": obj, "score": None, "reason": str(e)})
+        last_err = None
+        result = None
+        for attempt in range(3):
+            try:
+                resp = client.models.generate_content(
+                    model=model,
+                    contents=SYSTEM_PROMPT + "\n\n" + USER_PROMPT_TEMPLATE.format(attr=attr, obj=obj),
+                )
+                text = resp.text or ""
+                m = re.search(r"\{.*\}", text, re.DOTALL)
+                if not m:
+                    raise ValueError(f"no JSON in response: {text[:200]}")
+                data = json.loads(m.group(0))
+                score = int(data.get("score", 0))
+                reason = data.get("reason", "")
+                result = {"attr": attr, "obj": obj, "score": max(0, min(10, score)),
+                          "reason": reason}
+                break
+            except Exception as e:
+                last_err = e
+                msg = str(e)
+                if "503" in msg or "429" in msg or "UNAVAILABLE" in msg.upper():
+                    time.sleep(5 * (attempt + 1))  # backoff: 5,10,15s
+                    continue
+                break  # non-retryable
+        if result is None:
+            print(f"  [WARN] failed for ({attr}, {obj}): {last_err}")
+            result = {"attr": attr, "obj": obj, "score": None, "reason": str(last_err)}
+        out.append(result)
         time.sleep(4.1)  # 15 RPM cap on free tier
     return out
 
