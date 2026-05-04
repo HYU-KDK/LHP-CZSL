@@ -446,6 +446,9 @@ class LHPCZSL(nn.Module):
         if not (torch.isfinite(batch_attr_f).all() and torch.isfinite(batch_obj_f).all()):
             return
 
+        # Hard one-hot cluster assignment (matches official ClusPro train_forward, ICLR 2025).
+        # Soft softmax assignment (previous version) collapses prototypes since every sample
+        # contributes to every cluster — see RESEARCH_LOG §5.3.
         for k in range(len(self.attributes)):
             mask = (attr_idx == k)
             if mask.sum() == 0:
@@ -456,7 +459,11 @@ class LHPCZSL(nn.Module):
             queue_f = queue_k.float()
             # Only use first K_k prototypes
             sim = l2_normalize(feats_k) @ l2_normalize(queue_f[:K_k]).t()
-            assign = F.softmax(sim / 0.5, dim=-1)
+            couplings = F.softmax(sim / 0.5, dim=-1)
+            if K_k > 1:
+                assign = F.gumbel_softmax(couplings, tau=0.5, hard=True, dim=-1)
+            else:
+                assign = couplings  # K=1: hard assignment is trivial (always cluster 0)
             new_proto = assign.t() @ feats_k
             counts = assign.sum(dim=0)
             valid = counts > 0
@@ -474,7 +481,11 @@ class LHPCZSL(nn.Module):
             queue_k = getattr(self, f"obj_queue{k}")
             queue_f = queue_k.float()
             sim = l2_normalize(feats_k) @ l2_normalize(queue_f[:K_k]).t()
-            assign = F.softmax(sim / 0.5, dim=-1)
+            couplings = F.softmax(sim / 0.5, dim=-1)
+            if K_k > 1:
+                assign = F.gumbel_softmax(couplings, tau=0.5, hard=True, dim=-1)
+            else:
+                assign = couplings
             new_proto = assign.t() @ feats_k
             counts = assign.sum(dim=0)
             valid = counts > 0
