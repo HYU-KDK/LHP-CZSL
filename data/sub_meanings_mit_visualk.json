@@ -1,0 +1,3461 @@
+{
+  "attrs": {
+    "ancient": {
+      "sub": [
+        "ancient",
+        "ancient"
+      ],
+      "K": 2,
+      "d_sem": {
+        "ancient_ruined-ancient_weathered": 0.35
+      }
+    },
+    "barren": {
+      "sub": [
+        "barren",
+        "barren"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "bent": {
+      "sub": [
+        "bent",
+        "bent",
+        "bent",
+        "bent",
+        "bent"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "blunt": {
+      "sub": [
+        "blunt",
+        "blunt",
+        "blunt",
+        "blunt"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "bright": {
+      "sub": [
+        "bright",
+        "bright",
+        "bright"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "broken": {
+      "sub": [
+        "broken",
+        "broken",
+        "broken"
+      ],
+      "K": 3,
+      "d_sem": {
+        "cracked-shattered": 0.5,
+        "cracked-snapped": 0.4,
+        "shattered-snapped": 0.6
+      }
+    },
+    "browned": {
+      "sub": [
+        "browned",
+        "browned",
+        "browned"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "brushed": {
+      "sub": [
+        "brushed",
+        "brushed",
+        "brushed",
+        "brushed",
+        "brushed"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "burnt": {
+      "sub": [
+        "burnt",
+        "burnt",
+        "burnt",
+        "burnt"
+      ],
+      "K": 4,
+      "d_sem": {
+        "charred-scorched": 0.45
+      }
+    },
+    "caramelized": {
+      "sub": [
+        "caramelized",
+        "caramelized"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "chipped": {
+      "sub": [
+        "chipped",
+        "chipped"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "clean": {
+      "sub": [
+        "clean",
+        "clean",
+        "clean",
+        "clean",
+        "clean"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "clear": {
+      "sub": [
+        "clear",
+        "clear"
+      ],
+      "K": 2,
+      "d_sem": {
+        "clear_transparent-clear_sky": 0.6
+      }
+    },
+    "closed": {
+      "sub": [
+        "closed",
+        "closed"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "cloudy": {
+      "sub": [
+        "cloudy",
+        "cloudy",
+        "cloudy",
+        "cloudy",
+        "cloudy"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "cluttered": {
+      "sub": [
+        "cluttered",
+        "cluttered",
+        "cluttered",
+        "cluttered",
+        "cluttered"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "coiled": {
+      "sub": [
+        "coiled",
+        "coiled",
+        "coiled"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "cooked": {
+      "sub": [
+        "cooked",
+        "cooked",
+        "cooked"
+      ],
+      "K": 3,
+      "d_sem": {
+        "boiled-fried": 0.55,
+        "boiled-grilled": 0.5,
+        "fried-grilled": 0.4
+      }
+    },
+    "cored": {
+      "sub": [
+        "cored",
+        "cored",
+        "cored"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "cracked": {
+      "sub": [
+        "cracked",
+        "cracked",
+        "cracked",
+        "cracked"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "creased": {
+      "sub": [
+        "creased",
+        "creased"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "crinkled": {
+      "sub": [
+        "crinkled",
+        "crinkled",
+        "crinkled",
+        "crinkled",
+        "crinkled"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "crumpled": {
+      "sub": [
+        "crumpled",
+        "crumpled"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "crushed": {
+      "sub": [
+        "crushed",
+        "crushed",
+        "crushed"
+      ],
+      "K": 3,
+      "d_sem": {
+        "flattened-fragmented": 0.5
+      }
+    },
+    "curved": {
+      "sub": [
+        "curved",
+        "curved",
+        "curved",
+        "curved",
+        "curved"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "cut": {
+      "sub": [
+        "cut",
+        "cut"
+      ],
+      "K": 2,
+      "d_sem": {
+        "sliced_clean-chopped_rough": 0.4
+      }
+    },
+    "damp": {
+      "sub": [
+        "damp",
+        "damp"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "dark": {
+      "sub": [
+        "dark",
+        "dark"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "deflated": {
+      "sub": [
+        "deflated",
+        "deflated"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "dented": {
+      "sub": [
+        "dented",
+        "dented",
+        "dented"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "diced": {
+      "sub": [
+        "diced",
+        "diced"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "dirty": {
+      "sub": [
+        "dirty",
+        "dirty",
+        "dirty",
+        "dirty",
+        "dirty"
+      ],
+      "K": 5,
+      "d_sem": {
+        "stained-dusty": 0.45,
+        "stained-muddy_dirty": 0.4,
+        "dusty-muddy_dirty": 0.5
+      }
+    },
+    "draped": {
+      "sub": [
+        "draped",
+        "draped"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "dry": {
+      "sub": [
+        "dry",
+        "dry",
+        "dry",
+        "dry"
+      ],
+      "K": 4,
+      "d_sem": {
+        "dry_parched-dry_dehydrated": 0.3
+      }
+    },
+    "dull": {
+      "sub": [
+        "dull",
+        "dull",
+        "dull",
+        "dull",
+        "dull"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "empty": {
+      "sub": [
+        "empty",
+        "empty",
+        "empty",
+        "empty"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "engraved": {
+      "sub": [
+        "engraved",
+        "engraved"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "eroded": {
+      "sub": [
+        "eroded",
+        "eroded"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "fallen": {
+      "sub": [
+        "fallen",
+        "fallen"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "filled": {
+      "sub": [
+        "filled",
+        "filled",
+        "filled"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "foggy": {
+      "sub": [
+        "foggy",
+        "foggy",
+        "foggy"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "folded": {
+      "sub": [
+        "folded",
+        "folded",
+        "folded",
+        "folded"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "frayed": {
+      "sub": [
+        "frayed",
+        "frayed",
+        "frayed",
+        "frayed"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "fresh": {
+      "sub": [
+        "fresh",
+        "fresh"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "frozen": {
+      "sub": [
+        "frozen",
+        "frozen",
+        "frozen",
+        "frozen"
+      ],
+      "K": 4,
+      "d_sem": {
+        "frozen_icy-frozen_frosty": 0.35
+      }
+    },
+    "full": {
+      "sub": [
+        "full",
+        "full"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "grimy": {
+      "sub": [
+        "grimy",
+        "grimy"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "heavy": {
+      "sub": [
+        "heavy",
+        "heavy"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "huge": {
+      "sub": [
+        "huge",
+        "huge",
+        "huge",
+        "huge",
+        "huge"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "inflated": {
+      "sub": [
+        "inflated",
+        "inflated",
+        "inflated",
+        "inflated",
+        "inflated"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "large": {
+      "sub": [
+        "large",
+        "large",
+        "large",
+        "large",
+        "large"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "lightweight": {
+      "sub": [
+        "lightweight",
+        "lightweight"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "loose": {
+      "sub": [
+        "loose",
+        "loose"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "mashed": {
+      "sub": [
+        "mashed",
+        "mashed"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "melted": {
+      "sub": [
+        "melted",
+        "melted",
+        "melted"
+      ],
+      "K": 3,
+      "d_sem": {
+        "melted_pooled-melted_dripping": 0.4
+      }
+    },
+    "modern": {
+      "sub": [
+        "modern",
+        "modern"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "moldy": {
+      "sub": [
+        "moldy",
+        "moldy"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "molten": {
+      "sub": [
+        "molten",
+        "molten"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "mossy": {
+      "sub": [
+        "mossy",
+        "mossy"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "muddy": {
+      "sub": [
+        "muddy",
+        "muddy",
+        "muddy"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "murky": {
+      "sub": [
+        "murky",
+        "murky"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "narrow": {
+      "sub": [
+        "narrow",
+        "narrow",
+        "narrow",
+        "narrow"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "new": {
+      "sub": [
+        "new",
+        "new"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "old": {
+      "sub": [
+        "old",
+        "old"
+      ],
+      "K": 2,
+      "d_sem": {
+        "old_worn-old_faded": 0.35
+      }
+    },
+    "open": {
+      "sub": [
+        "open",
+        "open",
+        "open"
+      ],
+      "K": 3,
+      "d_sem": {
+        "open_ajar-open_wide": 0.4
+      }
+    },
+    "painted": {
+      "sub": [
+        "painted",
+        "painted"
+      ],
+      "K": 2,
+      "d_sem": {
+        "painted_solid-painted_patterned": 0.45
+      }
+    },
+    "peeled": {
+      "sub": [
+        "peeled",
+        "peeled"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "pierced": {
+      "sub": [
+        "pierced",
+        "pierced"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "pressed": {
+      "sub": [
+        "pressed",
+        "pressed",
+        "pressed"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "pureed": {
+      "sub": [
+        "pureed",
+        "pureed"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "raw": {
+      "sub": [
+        "raw",
+        "raw"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "ripe": {
+      "sub": [
+        "ripe",
+        "ripe",
+        "ripe",
+        "ripe"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "ripped": {
+      "sub": [
+        "ripped",
+        "ripped"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "rough": {
+      "sub": [
+        "rough",
+        "rough",
+        "rough",
+        "rough"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "ruffled": {
+      "sub": [
+        "ruffled",
+        "ruffled"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "runny": {
+      "sub": [
+        "runny",
+        "runny",
+        "runny",
+        "runny"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "rusty": {
+      "sub": [
+        "rusty",
+        "rusty"
+      ],
+      "K": 2,
+      "d_sem": {
+        "rusty_patchy-rusty_corroded": 0.4
+      }
+    },
+    "scratched": {
+      "sub": [
+        "scratched",
+        "scratched",
+        "scratched",
+        "scratched",
+        "scratched"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "sharp": {
+      "sub": [
+        "sharp",
+        "sharp",
+        "sharp",
+        "sharp",
+        "sharp"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "shattered": {
+      "sub": [
+        "shattered",
+        "shattered",
+        "shattered",
+        "shattered",
+        "shattered"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "shiny": {
+      "sub": [
+        "shiny",
+        "shiny"
+      ],
+      "K": 2,
+      "d_sem": {
+        "shiny_reflective-shiny_glossy": 0.3
+      }
+    },
+    "short": {
+      "sub": [
+        "short",
+        "short"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "sliced": {
+      "sub": [
+        "sliced",
+        "sliced",
+        "sliced",
+        "sliced",
+        "sliced"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "small": {
+      "sub": [
+        "small",
+        "small",
+        "small",
+        "small",
+        "small"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "smooth": {
+      "sub": [
+        "smooth",
+        "smooth"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "spilled": {
+      "sub": [
+        "spilled",
+        "spilled"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "splintered": {
+      "sub": [
+        "splintered",
+        "splintered"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "squished": {
+      "sub": [
+        "squished",
+        "squished"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "standing": {
+      "sub": [
+        "standing",
+        "standing",
+        "standing",
+        "standing"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "steaming": {
+      "sub": [
+        "steaming",
+        "steaming"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "straight": {
+      "sub": [
+        "straight",
+        "straight"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "sunny": {
+      "sub": [
+        "sunny",
+        "sunny",
+        "sunny"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "tall": {
+      "sub": [
+        "tall",
+        "tall"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "thawed": {
+      "sub": [
+        "thawed",
+        "thawed"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "thick": {
+      "sub": [
+        "thick",
+        "thick",
+        "thick",
+        "thick"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "thin": {
+      "sub": [
+        "thin",
+        "thin",
+        "thin",
+        "thin"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "tight": {
+      "sub": [
+        "tight",
+        "tight",
+        "tight"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "tiny": {
+      "sub": [
+        "tiny",
+        "tiny",
+        "tiny",
+        "tiny",
+        "tiny"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "toppled": {
+      "sub": [
+        "toppled",
+        "toppled"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "torn": {
+      "sub": [
+        "torn",
+        "torn",
+        "torn",
+        "torn",
+        "torn"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "unpainted": {
+      "sub": [
+        "unpainted",
+        "unpainted",
+        "unpainted",
+        "unpainted"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "unripe": {
+      "sub": [
+        "unripe",
+        "unripe"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "upright": {
+      "sub": [
+        "upright",
+        "upright"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "verdant": {
+      "sub": [
+        "verdant",
+        "verdant"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "viscous": {
+      "sub": [
+        "viscous",
+        "viscous",
+        "viscous"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "weathered": {
+      "sub": [
+        "weathered",
+        "weathered"
+      ],
+      "K": 2,
+      "d_sem": {
+        "weathered_bleached-weathered_crumbling": 0.45
+      }
+    },
+    "wet": {
+      "sub": [
+        "wet",
+        "wet",
+        "wet"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wet_dripping-wet_soaked": 0.35
+      }
+    },
+    "whipped": {
+      "sub": [
+        "whipped",
+        "whipped",
+        "whipped"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "wide": {
+      "sub": [
+        "wide",
+        "wide"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "wilted": {
+      "sub": [
+        "wilted",
+        "wilted"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "windblown": {
+      "sub": [
+        "windblown",
+        "windblown"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "winding": {
+      "sub": [
+        "winding",
+        "winding"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "worn": {
+      "sub": [
+        "worn",
+        "worn",
+        "worn"
+      ],
+      "K": 3,
+      "d_sem": {
+        "worn_threadbare-worn_scratched": 0.4
+      }
+    },
+    "wrinkled": {
+      "sub": [
+        "wrinkled",
+        "wrinkled",
+        "wrinkled",
+        "wrinkled",
+        "wrinkled"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "young": {
+      "sub": [
+        "young",
+        "young",
+        "young",
+        "young",
+        "young"
+      ],
+      "K": 5,
+      "d_sem": {}
+    }
+  },
+  "objs": {
+    "aluminum": {
+      "sub": [
+        "aluminum",
+        "aluminum",
+        "aluminum"
+      ],
+      "K": 3,
+      "d_sem": {
+        "aluminum_sheet-aluminum_foil": 0.4
+      }
+    },
+    "animal": {
+      "sub": [
+        "animal",
+        "animal"
+      ],
+      "K": 2,
+      "d_sem": {
+        "mammal-bird": 0.7,
+        "mammal-reptile": 0.6,
+        "mammal-insect": 0.9,
+        "bird-reptile": 0.6,
+        "bird-insect": 0.8,
+        "reptile-insect": 0.7
+      }
+    },
+    "apple": {
+      "sub": [
+        "apple",
+        "apple",
+        "apple",
+        "apple",
+        "apple"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "armor": {
+      "sub": [
+        "armor",
+        "armor",
+        "armor",
+        "armor"
+      ],
+      "K": 4,
+      "d_sem": {
+        "plate_armor-chainmail": 0.6
+      }
+    },
+    "bag": {
+      "sub": [
+        "bag",
+        "bag",
+        "bag",
+        "bag",
+        "bag"
+      ],
+      "K": 5,
+      "d_sem": {
+        "backpack-handbag": 0.5,
+        "backpack-plastic_bag": 0.7,
+        "backpack-paper_bag": 0.6,
+        "handbag-plastic_bag": 0.7,
+        "handbag-paper_bag": 0.6,
+        "plastic_bag-paper_bag": 0.3
+      }
+    },
+    "ball": {
+      "sub": [
+        "ball",
+        "ball",
+        "ball"
+      ],
+      "K": 3,
+      "d_sem": {
+        "sports_ball-rubber_ball": 0.3
+      }
+    },
+    "balloon": {
+      "sub": [
+        "balloon",
+        "balloon",
+        "balloon"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "banana": {
+      "sub": [
+        "banana",
+        "banana"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "basement": {
+      "sub": [
+        "basement",
+        "basement"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "basket": {
+      "sub": [
+        "basket",
+        "basket"
+      ],
+      "K": 2,
+      "d_sem": {
+        "wicker_basket-wire_basket": 0.5
+      }
+    },
+    "bathroom": {
+      "sub": [
+        "bathroom",
+        "bathroom"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "bay": {
+      "sub": [
+        "bay",
+        "bay"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "beach": {
+      "sub": [
+        "beach",
+        "beach"
+      ],
+      "K": 2,
+      "d_sem": {
+        "sandy_beach-rocky_beach": 0.5
+      }
+    },
+    "bean": {
+      "sub": [
+        "bean",
+        "bean"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "bear": {
+      "sub": [
+        "bear",
+        "bear",
+        "bear",
+        "bear"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "bed": {
+      "sub": [
+        "bed",
+        "bed"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "beef": {
+      "sub": [
+        "beef",
+        "beef",
+        "beef"
+      ],
+      "K": 3,
+      "d_sem": {
+        "raw_beef-cooked_beef": 0.5
+      }
+    },
+    "belt": {
+      "sub": [
+        "belt",
+        "belt",
+        "belt"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "berry": {
+      "sub": [
+        "berry",
+        "berry"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "bike": {
+      "sub": [
+        "bike",
+        "bike"
+      ],
+      "K": 2,
+      "d_sem": {
+        "bicycle-motorcycle": 0.6
+      }
+    },
+    "blade": {
+      "sub": [
+        "blade",
+        "blade",
+        "blade"
+      ],
+      "K": 3,
+      "d_sem": {
+        "knife_blade-saw_blade": 0.6
+      }
+    },
+    "boat": {
+      "sub": [
+        "boat",
+        "boat",
+        "boat"
+      ],
+      "K": 3,
+      "d_sem": {
+        "rowboat-sailboat": 0.5,
+        "rowboat-motorboat": 0.5,
+        "sailboat-motorboat": 0.4
+      }
+    },
+    "book": {
+      "sub": [
+        "book",
+        "book",
+        "book"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "bottle": {
+      "sub": [
+        "bottle",
+        "bottle",
+        "bottle",
+        "bottle",
+        "bottle"
+      ],
+      "K": 5,
+      "d_sem": {
+        "glass_bottle-plastic_bottle": 0.4
+      }
+    },
+    "boulder": {
+      "sub": [
+        "boulder",
+        "boulder",
+        "boulder"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "bowl": {
+      "sub": [
+        "bowl",
+        "bowl"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "box": {
+      "sub": [
+        "box",
+        "box"
+      ],
+      "K": 2,
+      "d_sem": {
+        "cardboard_box-wooden_box": 0.4
+      }
+    },
+    "bracelet": {
+      "sub": [
+        "bracelet",
+        "bracelet"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "branch": {
+      "sub": [
+        "branch",
+        "branch",
+        "branch"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "brass": {
+      "sub": [
+        "brass",
+        "brass",
+        "brass",
+        "brass"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "bread": {
+      "sub": [
+        "bread",
+        "bread"
+      ],
+      "K": 2,
+      "d_sem": {
+        "loaf_bread-sliced_bread": 0.4
+      }
+    },
+    "bridge": {
+      "sub": [
+        "bridge",
+        "bridge",
+        "bridge",
+        "bridge"
+      ],
+      "K": 4,
+      "d_sem": {
+        "suspension_bridge-arch_bridge": 0.5,
+        "suspension_bridge-wooden_bridge": 0.6,
+        "arch_bridge-wooden_bridge": 0.5
+      }
+    },
+    "bronze": {
+      "sub": [
+        "bronze",
+        "bronze",
+        "bronze",
+        "bronze"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "bubble": {
+      "sub": [
+        "bubble",
+        "bubble",
+        "bubble"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "bucket": {
+      "sub": [
+        "bucket",
+        "bucket"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "building": {
+      "sub": [
+        "building",
+        "building",
+        "building",
+        "building"
+      ],
+      "K": 4,
+      "d_sem": {
+        "house_building-skyscraper": 0.7,
+        "house_building-industrial_building": 0.5,
+        "skyscraper-industrial_building": 0.5
+      }
+    },
+    "bus": {
+      "sub": [
+        "bus",
+        "bus"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "bush": {
+      "sub": [
+        "bush",
+        "bush"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "butter": {
+      "sub": [
+        "butter",
+        "butter"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "cabinet": {
+      "sub": [
+        "cabinet",
+        "cabinet"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "cable": {
+      "sub": [
+        "cable",
+        "cable"
+      ],
+      "K": 2,
+      "d_sem": {
+        "electrical_cable-steel_cable": 0.5
+      }
+    },
+    "cake": {
+      "sub": [
+        "cake",
+        "cake"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "camera": {
+      "sub": [
+        "camera",
+        "camera",
+        "camera",
+        "camera"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "candle": {
+      "sub": [
+        "candle",
+        "candle"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "candy": {
+      "sub": [
+        "candy",
+        "candy",
+        "candy"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "canyon": {
+      "sub": [
+        "canyon",
+        "canyon",
+        "canyon",
+        "canyon",
+        "canyon"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "car": {
+      "sub": [
+        "car",
+        "car"
+      ],
+      "K": 2,
+      "d_sem": {
+        "sedan-suv": 0.4,
+        "sedan-sports_car": 0.4,
+        "suv-sports_car": 0.5
+      }
+    },
+    "card": {
+      "sub": [
+        "card",
+        "card",
+        "card",
+        "card",
+        "card"
+      ],
+      "K": 5,
+      "d_sem": {
+        "playing_card-greeting_card": 0.4
+      }
+    },
+    "carpet": {
+      "sub": [
+        "carpet",
+        "carpet"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "castle": {
+      "sub": [
+        "castle",
+        "castle"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "cat": {
+      "sub": [
+        "cat",
+        "cat",
+        "cat",
+        "cat"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "cave": {
+      "sub": [
+        "cave",
+        "cave"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "ceiling": {
+      "sub": [
+        "ceiling",
+        "ceiling",
+        "ceiling",
+        "ceiling",
+        "ceiling"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "ceramic": {
+      "sub": [
+        "ceramic",
+        "ceramic",
+        "ceramic",
+        "ceramic"
+      ],
+      "K": 4,
+      "d_sem": {
+        "ceramic_tile-ceramic_pottery": 0.5
+      }
+    },
+    "chains": {
+      "sub": [
+        "chains",
+        "chains"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "chair": {
+      "sub": [
+        "chair",
+        "chair",
+        "chair"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wooden_chair-office_chair": 0.5,
+        "wooden_chair-armchair": 0.4,
+        "office_chair-armchair": 0.4
+      }
+    },
+    "cheese": {
+      "sub": [
+        "cheese",
+        "cheese"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "chicken": {
+      "sub": [
+        "chicken",
+        "chicken"
+      ],
+      "K": 2,
+      "d_sem": {
+        "live_chicken-cooked_chicken": 0.8
+      }
+    },
+    "chocolate": {
+      "sub": [
+        "chocolate",
+        "chocolate",
+        "chocolate",
+        "chocolate"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "church": {
+      "sub": [
+        "church",
+        "church",
+        "church",
+        "church"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "city": {
+      "sub": [
+        "city",
+        "city"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "clay": {
+      "sub": [
+        "clay",
+        "clay"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "cliff": {
+      "sub": [
+        "cliff",
+        "cliff",
+        "cliff",
+        "cliff",
+        "cliff"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "clock": {
+      "sub": [
+        "clock",
+        "clock",
+        "clock"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wall_clock-alarm_clock": 0.4
+      }
+    },
+    "clothes": {
+      "sub": [
+        "clothes",
+        "clothes"
+      ],
+      "K": 2,
+      "d_sem": {
+        "upper_garment-lower_garment": 0.5,
+        "upper_garment-full_outfit": 0.3,
+        "lower_garment-full_outfit": 0.3
+      }
+    },
+    "cloud": {
+      "sub": [
+        "cloud",
+        "cloud"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "coal": {
+      "sub": [
+        "coal",
+        "coal"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "coast": {
+      "sub": [
+        "coast",
+        "coast",
+        "coast",
+        "coast"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "coat": {
+      "sub": [
+        "coat",
+        "coat"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "coffee": {
+      "sub": [
+        "coffee",
+        "coffee",
+        "coffee",
+        "coffee"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "coin": {
+      "sub": [
+        "coin",
+        "coin",
+        "coin",
+        "coin"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "column": {
+      "sub": [
+        "column",
+        "column",
+        "column",
+        "column"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "computer": {
+      "sub": [
+        "computer",
+        "computer",
+        "computer",
+        "computer"
+      ],
+      "K": 4,
+      "d_sem": {
+        "desktop_computer-laptop_computer": 0.5
+      }
+    },
+    "concrete": {
+      "sub": [
+        "concrete",
+        "concrete"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "cookie": {
+      "sub": [
+        "cookie",
+        "cookie"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "copper": {
+      "sub": [
+        "copper",
+        "copper",
+        "copper",
+        "copper"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "cord": {
+      "sub": [
+        "cord",
+        "cord",
+        "cord"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "cotton": {
+      "sub": [
+        "cotton",
+        "cotton",
+        "cotton"
+      ],
+      "K": 3,
+      "d_sem": {
+        "raw_cotton-cotton_fabric": 0.6
+      }
+    },
+    "creek": {
+      "sub": [
+        "creek",
+        "creek",
+        "creek",
+        "creek",
+        "creek"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "deck": {
+      "sub": [
+        "deck",
+        "deck"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "desert": {
+      "sub": [
+        "desert",
+        "desert",
+        "desert",
+        "desert",
+        "desert"
+      ],
+      "K": 5,
+      "d_sem": {
+        "sandy_desert-rocky_desert": 0.4
+      }
+    },
+    "desk": {
+      "sub": [
+        "desk",
+        "desk"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "diamond": {
+      "sub": [
+        "diamond",
+        "diamond",
+        "diamond"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "dirt": {
+      "sub": [
+        "dirt",
+        "dirt",
+        "dirt",
+        "dirt",
+        "dirt"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "dog": {
+      "sub": [
+        "dog",
+        "dog",
+        "dog"
+      ],
+      "K": 3,
+      "d_sem": {
+        "small_dog-large_dog": 0.4
+      }
+    },
+    "door": {
+      "sub": [
+        "door",
+        "door",
+        "door"
+      ],
+      "K": 3,
+      "d_sem": {
+        "wooden_door-glass_door": 0.5
+      }
+    },
+    "dress": {
+      "sub": [
+        "dress",
+        "dress"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "drum": {
+      "sub": [
+        "drum",
+        "drum"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "dust": {
+      "sub": [
+        "dust",
+        "dust",
+        "dust"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "eggs": {
+      "sub": [
+        "eggs",
+        "eggs"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "elephant": {
+      "sub": [
+        "elephant",
+        "elephant",
+        "elephant",
+        "elephant",
+        "elephant"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "envelope": {
+      "sub": [
+        "envelope",
+        "envelope"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "fabric": {
+      "sub": [
+        "fabric",
+        "fabric"
+      ],
+      "K": 2,
+      "d_sem": {
+        "woven_fabric-knit_fabric": 0.4
+      }
+    },
+    "fan": {
+      "sub": [
+        "fan",
+        "fan"
+      ],
+      "K": 2,
+      "d_sem": {
+        "ceiling_fan-handheld_fan": 0.7
+      }
+    },
+    "farm": {
+      "sub": [
+        "farm",
+        "farm",
+        "farm"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "fence": {
+      "sub": [
+        "fence",
+        "fence",
+        "fence",
+        "fence"
+      ],
+      "K": 4,
+      "d_sem": {
+        "wooden_fence-metal_fence": 0.5
+      }
+    },
+    "field": {
+      "sub": [
+        "field",
+        "field"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "fig": {
+      "sub": [
+        "fig",
+        "fig",
+        "fig"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "fire": {
+      "sub": [
+        "fire",
+        "fire",
+        "fire"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "fish": {
+      "sub": [
+        "fish",
+        "fish"
+      ],
+      "K": 2,
+      "d_sem": {
+        "whole_fish-fish_fillet": 0.6
+      }
+    },
+    "flame": {
+      "sub": [
+        "flame",
+        "flame"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "floor": {
+      "sub": [
+        "floor",
+        "floor"
+      ],
+      "K": 2,
+      "d_sem": {
+        "wood_floor-tile_floor": 0.4
+      }
+    },
+    "flower": {
+      "sub": [
+        "flower",
+        "flower"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "foam": {
+      "sub": [
+        "foam",
+        "foam",
+        "foam",
+        "foam",
+        "foam"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "forest": {
+      "sub": [
+        "forest",
+        "forest",
+        "forest"
+      ],
+      "K": 3,
+      "d_sem": {
+        "deciduous_forest-coniferous_forest": 0.4
+      }
+    },
+    "frame": {
+      "sub": [
+        "frame",
+        "frame"
+      ],
+      "K": 2,
+      "d_sem": {
+        "picture_frame-structural_frame": 0.6
+      }
+    },
+    "fruit": {
+      "sub": [
+        "fruit",
+        "fruit"
+      ],
+      "K": 2,
+      "d_sem": {
+        "round_fruit-elongated_fruit": 0.4,
+        "round_fruit-small_berry_fruit": 0.5,
+        "elongated_fruit-small_berry_fruit": 0.5
+      }
+    },
+    "furniture": {
+      "sub": [
+        "furniture",
+        "furniture"
+      ],
+      "K": 2,
+      "d_sem": {
+        "seating_furniture-table_furniture": 0.5,
+        "seating_furniture-storage_furniture": 0.6,
+        "table_furniture-storage_furniture": 0.5
+      }
+    },
+    "garage": {
+      "sub": [
+        "garage",
+        "garage",
+        "garage",
+        "garage"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "garden": {
+      "sub": [
+        "garden",
+        "garden"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "garlic": {
+      "sub": [
+        "garlic",
+        "garlic",
+        "garlic"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "gate": {
+      "sub": [
+        "gate",
+        "gate"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "gear": {
+      "sub": [
+        "gear",
+        "gear",
+        "gear",
+        "gear"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "gemstone": {
+      "sub": [
+        "gemstone",
+        "gemstone",
+        "gemstone",
+        "gemstone",
+        "gemstone"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "glass": {
+      "sub": [
+        "glass",
+        "glass"
+      ],
+      "K": 2,
+      "d_sem": {
+        "drinking_glass-window_glass": 0.6
+      }
+    },
+    "glasses": {
+      "sub": [
+        "glasses",
+        "glasses"
+      ],
+      "K": 2,
+      "d_sem": {
+        "eyeglasses-sunglasses": 0.3
+      }
+    },
+    "granite": {
+      "sub": [
+        "granite",
+        "granite"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "ground": {
+      "sub": [
+        "ground",
+        "ground"
+      ],
+      "K": 2,
+      "d_sem": {
+        "grass_ground-dirt_ground": 0.4,
+        "grass_ground-paved_ground": 0.6,
+        "dirt_ground-paved_ground": 0.5
+      }
+    },
+    "handle": {
+      "sub": [
+        "handle",
+        "handle",
+        "handle",
+        "handle",
+        "handle"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "hat": {
+      "sub": [
+        "hat",
+        "hat"
+      ],
+      "K": 2,
+      "d_sem": {
+        "brimmed_hat-beanie": 0.6,
+        "brimmed_hat-cap": 0.3,
+        "beanie-cap": 0.5
+      }
+    },
+    "highway": {
+      "sub": [
+        "highway",
+        "highway"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "horse": {
+      "sub": [
+        "horse",
+        "horse"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "hose": {
+      "sub": [
+        "hose",
+        "hose",
+        "hose"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "house": {
+      "sub": [
+        "house",
+        "house",
+        "house",
+        "house"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "ice": {
+      "sub": [
+        "ice",
+        "ice"
+      ],
+      "K": 2,
+      "d_sem": {
+        "ice_cube-ice_sheet": 0.4
+      }
+    },
+    "iguana": {
+      "sub": [
+        "iguana",
+        "iguana"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "island": {
+      "sub": [
+        "island",
+        "island"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "jacket": {
+      "sub": [
+        "jacket",
+        "jacket"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "jewelry": {
+      "sub": [
+        "jewelry",
+        "jewelry"
+      ],
+      "K": 2,
+      "d_sem": {
+        "ring_jewelry-necklace_jewelry": 0.5,
+        "ring_jewelry-earring_jewelry": 0.4,
+        "necklace_jewelry-earring_jewelry": 0.4
+      }
+    },
+    "jungle": {
+      "sub": [
+        "jungle",
+        "jungle"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "key": {
+      "sub": [
+        "key",
+        "key",
+        "key"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "keyboard": {
+      "sub": [
+        "keyboard",
+        "keyboard",
+        "keyboard"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "kitchen": {
+      "sub": [
+        "kitchen",
+        "kitchen",
+        "kitchen"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "knife": {
+      "sub": [
+        "knife",
+        "knife"
+      ],
+      "K": 2,
+      "d_sem": {
+        "kitchen_knife-pocket_knife": 0.5
+      }
+    },
+    "lake": {
+      "sub": [
+        "lake",
+        "lake",
+        "lake",
+        "lake",
+        "lake"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "laptop": {
+      "sub": [
+        "laptop",
+        "laptop"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "lead": {
+      "sub": [
+        "lead",
+        "lead",
+        "lead",
+        "lead",
+        "lead"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "leaf": {
+      "sub": [
+        "leaf",
+        "leaf",
+        "leaf",
+        "leaf",
+        "leaf"
+      ],
+      "K": 5,
+      "d_sem": {
+        "broad_leaf-needle_leaf": 0.6
+      }
+    },
+    "lemon": {
+      "sub": [
+        "lemon",
+        "lemon"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "library": {
+      "sub": [
+        "library",
+        "library",
+        "library",
+        "library"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "lightbulb": {
+      "sub": [
+        "lightbulb",
+        "lightbulb",
+        "lightbulb"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "lightning": {
+      "sub": [
+        "lightning",
+        "lightning",
+        "lightning"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "log": {
+      "sub": [
+        "log",
+        "log"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "mat": {
+      "sub": [
+        "mat",
+        "mat",
+        "mat",
+        "mat",
+        "mat"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "meat": {
+      "sub": [
+        "meat",
+        "meat"
+      ],
+      "K": 2,
+      "d_sem": {
+        "raw_meat-cooked_meat": 0.5
+      }
+    },
+    "metal": {
+      "sub": [
+        "metal",
+        "metal"
+      ],
+      "K": 2,
+      "d_sem": {
+        "sheet_metal-metal_bar": 0.4
+      }
+    },
+    "milk": {
+      "sub": [
+        "milk",
+        "milk"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "mirror": {
+      "sub": [
+        "mirror",
+        "mirror"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "moss": {
+      "sub": [
+        "moss",
+        "moss",
+        "moss"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "mountain": {
+      "sub": [
+        "mountain",
+        "mountain",
+        "mountain",
+        "mountain",
+        "mountain"
+      ],
+      "K": 5,
+      "d_sem": {
+        "snow_mountain-green_mountain": 0.5,
+        "snow_mountain-rocky_mountain": 0.3,
+        "green_mountain-rocky_mountain": 0.4
+      }
+    },
+    "mud": {
+      "sub": [
+        "mud",
+        "mud",
+        "mud"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "necklace": {
+      "sub": [
+        "necklace",
+        "necklace"
+      ],
+      "K": 2,
+      "d_sem": {
+        "chain_necklace-beaded_necklace": 0.4
+      }
+    },
+    "nest": {
+      "sub": [
+        "nest",
+        "nest"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "newspaper": {
+      "sub": [
+        "newspaper",
+        "newspaper"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "nut": {
+      "sub": [
+        "nut",
+        "nut",
+        "nut"
+      ],
+      "K": 3,
+      "d_sem": {
+        "food_nut-hardware_nut": 0.8
+      }
+    },
+    "ocean": {
+      "sub": [
+        "ocean",
+        "ocean"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "oil": {
+      "sub": [
+        "oil",
+        "oil"
+      ],
+      "K": 2,
+      "d_sem": {
+        "cooking_oil-motor_oil": 0.4
+      }
+    },
+    "orange": {
+      "sub": [
+        "orange",
+        "orange",
+        "orange"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "paint": {
+      "sub": [
+        "paint",
+        "paint"
+      ],
+      "K": 2,
+      "d_sem": {
+        "wet_paint-dried_paint": 0.4
+      }
+    },
+    "palm": {
+      "sub": [
+        "palm",
+        "palm",
+        "palm",
+        "palm"
+      ],
+      "K": 4,
+      "d_sem": {
+        "palm_tree-palm_hand": 0.9
+      }
+    },
+    "pants": {
+      "sub": [
+        "pants",
+        "pants",
+        "pants"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "paper": {
+      "sub": [
+        "paper",
+        "paper"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "pasta": {
+      "sub": [
+        "pasta",
+        "pasta"
+      ],
+      "K": 2,
+      "d_sem": {
+        "long_pasta-short_pasta": 0.4
+      }
+    },
+    "paste": {
+      "sub": [
+        "paste",
+        "paste"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "pear": {
+      "sub": [
+        "pear",
+        "pear"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "penny": {
+      "sub": [
+        "penny",
+        "penny"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "persimmon": {
+      "sub": [
+        "persimmon",
+        "persimmon"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "phone": {
+      "sub": [
+        "phone",
+        "phone",
+        "phone"
+      ],
+      "K": 3,
+      "d_sem": {
+        "smartphone-landline_phone": 0.6
+      }
+    },
+    "pie": {
+      "sub": [
+        "pie",
+        "pie",
+        "pie",
+        "pie"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "pizza": {
+      "sub": [
+        "pizza",
+        "pizza"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "plant": {
+      "sub": [
+        "plant",
+        "plant",
+        "plant",
+        "plant",
+        "plant"
+      ],
+      "K": 5,
+      "d_sem": {
+        "flowering_plant-leafy_plant": 0.4,
+        "flowering_plant-succulent_plant": 0.5,
+        "leafy_plant-succulent_plant": 0.5
+      }
+    },
+    "plastic": {
+      "sub": [
+        "plastic",
+        "plastic",
+        "plastic",
+        "plastic"
+      ],
+      "K": 4,
+      "d_sem": {
+        "hard_plastic-soft_plastic": 0.3
+      }
+    },
+    "plate": {
+      "sub": [
+        "plate",
+        "plate",
+        "plate"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "pond": {
+      "sub": [
+        "pond",
+        "pond",
+        "pond"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "pool": {
+      "sub": [
+        "pool",
+        "pool"
+      ],
+      "K": 2,
+      "d_sem": {
+        "swimming_pool-natural_pool": 0.5
+      }
+    },
+    "pot": {
+      "sub": [
+        "pot",
+        "pot"
+      ],
+      "K": 2,
+      "d_sem": {
+        "cooking_pot-flower_pot": 0.6
+      }
+    },
+    "potato": {
+      "sub": [
+        "potato",
+        "potato"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "redwood": {
+      "sub": [
+        "redwood",
+        "redwood"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "ribbon": {
+      "sub": [
+        "ribbon",
+        "ribbon",
+        "ribbon"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "ring": {
+      "sub": [
+        "ring",
+        "ring"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "river": {
+      "sub": [
+        "river",
+        "river",
+        "river",
+        "river",
+        "river"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "road": {
+      "sub": [
+        "road",
+        "road"
+      ],
+      "K": 2,
+      "d_sem": {
+        "paved_road-dirt_road": 0.5
+      }
+    },
+    "rock": {
+      "sub": [
+        "rock",
+        "rock",
+        "rock",
+        "rock"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "roof": {
+      "sub": [
+        "roof",
+        "roof"
+      ],
+      "K": 2,
+      "d_sem": {
+        "shingled_roof-flat_roof": 0.4
+      }
+    },
+    "room": {
+      "sub": [
+        "room",
+        "room",
+        "room",
+        "room"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "roots": {
+      "sub": [
+        "roots",
+        "roots",
+        "roots",
+        "roots"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "rope": {
+      "sub": [
+        "rope",
+        "rope"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "rubber": {
+      "sub": [
+        "rubber",
+        "rubber",
+        "rubber",
+        "rubber",
+        "rubber"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "salad": {
+      "sub": [
+        "salad",
+        "salad"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "salmon": {
+      "sub": [
+        "salmon",
+        "salmon"
+      ],
+      "K": 2,
+      "d_sem": {
+        "whole_salmon-salmon_fillet": 0.5
+      }
+    },
+    "sand": {
+      "sub": [
+        "sand",
+        "sand"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "sandwich": {
+      "sub": [
+        "sandwich",
+        "sandwich",
+        "sandwich"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "sauce": {
+      "sub": [
+        "sauce",
+        "sauce"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "screw": {
+      "sub": [
+        "screw",
+        "screw",
+        "screw",
+        "screw",
+        "screw"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "sea": {
+      "sub": [
+        "sea",
+        "sea"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "seafood": {
+      "sub": [
+        "seafood",
+        "seafood",
+        "seafood"
+      ],
+      "K": 3,
+      "d_sem": {
+        "shellfish-fish_seafood": 0.5
+      }
+    },
+    "shell": {
+      "sub": [
+        "shell",
+        "shell",
+        "shell",
+        "shell",
+        "shell"
+      ],
+      "K": 5,
+      "d_sem": {
+        "seashell-eggshell": 0.6
+      }
+    },
+    "shirt": {
+      "sub": [
+        "shirt",
+        "shirt"
+      ],
+      "K": 2,
+      "d_sem": {
+        "dress_shirt-t_shirt": 0.3
+      }
+    },
+    "shoes": {
+      "sub": [
+        "shoes",
+        "shoes",
+        "shoes",
+        "shoes"
+      ],
+      "K": 4,
+      "d_sem": {
+        "sneakers-boots": 0.5,
+        "sneakers-dress_shoes": 0.4,
+        "boots-dress_shoes": 0.5
+      }
+    },
+    "shore": {
+      "sub": [
+        "shore",
+        "shore"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "shorts": {
+      "sub": [
+        "shorts",
+        "shorts",
+        "shorts"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "shower": {
+      "sub": [
+        "shower",
+        "shower"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "silk": {
+      "sub": [
+        "silk",
+        "silk",
+        "silk",
+        "silk"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "sky": {
+      "sub": [
+        "sky",
+        "sky"
+      ],
+      "K": 2,
+      "d_sem": {
+        "clear_sky-cloudy_sky": 0.4
+      }
+    },
+    "smoke": {
+      "sub": [
+        "smoke",
+        "smoke"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "snake": {
+      "sub": [
+        "snake",
+        "snake"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "snow": {
+      "sub": [
+        "snow",
+        "snow"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "soup": {
+      "sub": [
+        "soup",
+        "soup"
+      ],
+      "K": 2,
+      "d_sem": {
+        "clear_soup-thick_soup": 0.4
+      }
+    },
+    "steel": {
+      "sub": [
+        "steel",
+        "steel",
+        "steel",
+        "steel",
+        "steel"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "steps": {
+      "sub": [
+        "steps",
+        "steps"
+      ],
+      "K": 2,
+      "d_sem": {
+        "stone_steps-wooden_steps": 0.4
+      }
+    },
+    "stone": {
+      "sub": [
+        "stone",
+        "stone",
+        "stone",
+        "stone",
+        "stone"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "stream": {
+      "sub": [
+        "stream",
+        "stream",
+        "stream",
+        "stream"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "street": {
+      "sub": [
+        "street",
+        "street",
+        "street",
+        "street"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "sugar": {
+      "sub": [
+        "sugar",
+        "sugar"
+      ],
+      "K": 2,
+      "d_sem": {
+        "granulated_sugar-powdered_sugar": 0.3
+      }
+    },
+    "sword": {
+      "sub": [
+        "sword",
+        "sword"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "table": {
+      "sub": [
+        "table",
+        "table"
+      ],
+      "K": 2,
+      "d_sem": {
+        "dining_table-desk_table": 0.3
+      }
+    },
+    "tea": {
+      "sub": [
+        "tea",
+        "tea",
+        "tea",
+        "tea",
+        "tea"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "thread": {
+      "sub": [
+        "thread",
+        "thread",
+        "thread",
+        "thread"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "tie": {
+      "sub": [
+        "tie",
+        "tie",
+        "tie"
+      ],
+      "K": 3,
+      "d_sem": {
+        "necktie-bow_tie": 0.5
+      }
+    },
+    "tiger": {
+      "sub": [
+        "tiger",
+        "tiger"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "tile": {
+      "sub": [
+        "tile",
+        "tile",
+        "tile",
+        "tile"
+      ],
+      "K": 4,
+      "d_sem": {
+        "ceramic_tile-roof_tile": 0.5
+      }
+    },
+    "tire": {
+      "sub": [
+        "tire",
+        "tire"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "tomato": {
+      "sub": [
+        "tomato",
+        "tomato"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "tower": {
+      "sub": [
+        "tower",
+        "tower"
+      ],
+      "K": 2,
+      "d_sem": {
+        "clock_tower-radio_tower": 0.6
+      }
+    },
+    "town": {
+      "sub": [
+        "town",
+        "town",
+        "town"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "toy": {
+      "sub": [
+        "toy",
+        "toy"
+      ],
+      "K": 2,
+      "d_sem": {
+        "stuffed_toy-plastic_toy": 0.5,
+        "stuffed_toy-wooden_toy": 0.5,
+        "plastic_toy-wooden_toy": 0.4
+      }
+    },
+    "trail": {
+      "sub": [
+        "trail",
+        "trail"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "tree": {
+      "sub": [
+        "tree",
+        "tree"
+      ],
+      "K": 2,
+      "d_sem": {
+        "deciduous_tree-coniferous_tree": 0.4,
+        "deciduous_tree-palm_tree": 0.6,
+        "coniferous_tree-palm_tree": 0.6
+      }
+    },
+    "truck": {
+      "sub": [
+        "truck",
+        "truck"
+      ],
+      "K": 2,
+      "d_sem": {
+        "pickup_truck-semi_truck": 0.5
+      }
+    },
+    "tube": {
+      "sub": [
+        "tube",
+        "tube",
+        "tube",
+        "tube"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "tulip": {
+      "sub": [
+        "tulip",
+        "tulip"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "vacuum": {
+      "sub": [
+        "vacuum",
+        "vacuum",
+        "vacuum",
+        "vacuum"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "valley": {
+      "sub": [
+        "valley",
+        "valley",
+        "valley",
+        "valley",
+        "valley"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "vegetable": {
+      "sub": [
+        "vegetable",
+        "vegetable"
+      ],
+      "K": 2,
+      "d_sem": {
+        "leafy_vegetable-root_vegetable": 0.6,
+        "leafy_vegetable-fruiting_vegetable": 0.5,
+        "root_vegetable-fruiting_vegetable": 0.5
+      }
+    },
+    "velvet": {
+      "sub": [
+        "velvet",
+        "velvet",
+        "velvet",
+        "velvet"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "wall": {
+      "sub": [
+        "wall",
+        "wall"
+      ],
+      "K": 2,
+      "d_sem": {
+        "brick_wall-plaster_wall": 0.5
+      }
+    },
+    "water": {
+      "sub": [
+        "water",
+        "water"
+      ],
+      "K": 2,
+      "d_sem": {
+        "still_water-flowing_water": 0.3
+      }
+    },
+    "wave": {
+      "sub": [
+        "wave",
+        "wave"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "wax": {
+      "sub": [
+        "wax",
+        "wax",
+        "wax",
+        "wax"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "well": {
+      "sub": [
+        "well",
+        "well"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "wheel": {
+      "sub": [
+        "wheel",
+        "wheel"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "window": {
+      "sub": [
+        "window",
+        "window"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "wire": {
+      "sub": [
+        "wire",
+        "wire",
+        "wire"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "wood": {
+      "sub": [
+        "wood",
+        "wood"
+      ],
+      "K": 2,
+      "d_sem": {
+        "lumber-firewood": 0.4
+      }
+    },
+    "wool": {
+      "sub": [
+        "wool",
+        "wool"
+      ],
+      "K": 2,
+      "d_sem": {
+        "raw_wool-wool_yarn": 0.5
+      }
+    }
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "attrs": {
+    "Canvas": {
+      "sub": [
+        "Canvas",
+        "Canvas",
+        "Canvas",
+        "Canvas",
+        "Canvas"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "Cotton": {
+      "sub": [
+        "Cotton",
+        "Cotton",
+        "Cotton",
+        "Cotton"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "Faux.Fur": {
+      "sub": [
+        "Faux.Fur",
+        "Faux.Fur"
+      ],
+      "K": 2,
+      "d_sem": {
+        "short_pile_fur-long_pile_fur": 0.4
+      }
+    },
+    "Faux.Leather": {
+      "sub": [
+        "Faux.Leather",
+        "Faux.Leather",
+        "Faux.Leather",
+        "Faux.Leather",
+        "Faux.Leather"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "Full.grain.leather": {
+      "sub": [
+        "Full.grain.leather",
+        "Full.grain.leather",
+        "Full.grain.leather",
+        "Full.grain.leather"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "Hair.Calf": {
+      "sub": [
+        "Hair.Calf",
+        "Hair.Calf"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "Leather": {
+      "sub": [
+        "Leather",
+        "Leather"
+      ],
+      "K": 2,
+      "d_sem": {
+        "smooth_leather-grained_leather": 0.35
+      }
+    },
+    "Nubuck": {
+      "sub": [
+        "Nubuck",
+        "Nubuck",
+        "Nubuck",
+        "Nubuck"
+      ],
+      "K": 4,
+      "d_sem": {}
+    },
+    "Nylon": {
+      "sub": [
+        "Nylon",
+        "Nylon",
+        "Nylon"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "Patent.Leather": {
+      "sub": [
+        "Patent.Leather",
+        "Patent.Leather",
+        "Patent.Leather"
+      ],
+      "K": 3,
+      "d_sem": {}
+    },
+    "Rubber": {
+      "sub": [
+        "Rubber",
+        "Rubber"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "Satin": {
+      "sub": [
+        "Satin",
+        "Satin"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "Sheepskin": {
+      "sub": [
+        "Sheepskin",
+        "Sheepskin"
+      ],
+      "K": 2,
+      "d_sem": {
+        "shearling_woolside-sheepskin_smoothside": 0.5
+      }
+    },
+    "Suede": {
+      "sub": [
+        "Suede",
+        "Suede"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "Synthetic": {
+      "sub": [
+        "Synthetic",
+        "Synthetic"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "Wool": {
+      "sub": [
+        "Wool",
+        "Wool",
+        "Wool",
+        "Wool"
+      ],
+      "K": 4,
+      "d_sem": {}
+    }
+  },
+  "objs": {
+    "Boots.Ankle": {
+      "sub": [
+        "Boots.Ankle",
+        "Boots.Ankle"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "Boots.Knee.High": {
+      "sub": [
+        "Boots.Knee.High",
+        "Boots.Knee.High",
+        "Boots.Knee.High",
+        "Boots.Knee.High",
+        "Boots.Knee.High"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "Boots.Mid-Calf": {
+      "sub": [
+        "Boots.Mid-Calf",
+        "Boots.Mid-Calf",
+        "Boots.Mid-Calf",
+        "Boots.Mid-Calf",
+        "Boots.Mid-Calf"
+      ],
+      "K": 5,
+      "d_sem": {}
+    },
+    "Sandals": {
+      "sub": [
+        "Sandals",
+        "Sandals"
+      ],
+      "K": 2,
+      "d_sem": {
+        "flat_strappy_sandal-sport_sandal": 0.55
+      }
+    },
+    "Shoes.Boat.Shoes": {
+      "sub": [
+        "Shoes.Boat.Shoes",
+        "Shoes.Boat.Shoes"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "Shoes.Clogs.and.Mules": {
+      "sub": [
+        "Shoes.Clogs.and.Mules",
+        "Shoes.Clogs.and.Mules"
+      ],
+      "K": 2,
+      "d_sem": {
+        "clog-mule": 0.5
+      }
+    },
+    "Shoes.Flats": {
+      "sub": [
+        "Shoes.Flats",
+        "Shoes.Flats"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "Shoes.Heels": {
+      "sub": [
+        "Shoes.Heels",
+        "Shoes.Heels"
+      ],
+      "K": 2,
+      "d_sem": {
+        "stiletto_heel-block_heel": 0.4
+      }
+    },
+    "Shoes.Loafers": {
+      "sub": [
+        "Shoes.Loafers",
+        "Shoes.Loafers"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "Shoes.Oxfords": {
+      "sub": [
+        "Shoes.Oxfords",
+        "Shoes.Oxfords"
+      ],
+      "K": 2,
+      "d_sem": {}
+    },
+    "Shoes.Sneakers.and.Athletic.Shoes": {
+      "sub": [
+        "Shoes.Sneakers.and.Athletic.Shoes",
+        "Shoes.Sneakers.and.Athletic.Shoes"
+      ],
+      "K": 2,
+      "d_sem": {
+        "lifestyle_sneaker-athletic_runner": 0.45
+      }
+    },
+    "Slippers": {
+      "sub": [
+        "Slippers",
+        "Slippers"
+      ],
+      "K": 2,
+      "d_sem": {}
+    }
+  }
+}
