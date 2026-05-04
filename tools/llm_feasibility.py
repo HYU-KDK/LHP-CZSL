@@ -9,11 +9,17 @@ like ('fluffy', 'steel') or ('ripe', 'cement') without affecting
 well-formed pairs like ('green', 'apple').
 
 Usage:
+    # Free Gemini Flash (15 RPM, 1500/day on free tier)
+    GEMINI_API_KEY=... python tools/llm_feasibility.py \
+        --dataset_path /home/student/dongki/DPAS/data/ut-zap50k \
+        --output data/feasibility_utzap.json \
+        --provider gemini
+
+    # Or paid Anthropic / OpenAI
     ANTHROPIC_API_KEY=sk-... python tools/llm_feasibility.py \
         --dataset_path /home/student/dongki/DPAS/data/ut-zap50k \
         --output data/feasibility_utzap.json \
-        --provider anthropic \
-        --batch_size 16
+        --provider anthropic
 
 The script is incremental: existing entries in the output file are skipped
 on re-runs, so it's safe to interrupt and resume.
@@ -87,6 +93,41 @@ def call_anthropic_batch(pairs, model="claude-sonnet-4-5"):
     return out
 
 
+def call_gemini_batch(pairs, model="gemini-2.0-flash"):
+    """Call Gemini API. Free tier: 15 RPM, 1500/day for Flash models.
+
+    The script paces calls at ~15 RPM (4 s gap between calls) to stay
+    inside the free quota; raise the rate by editing the sleep below if
+    you have a paid key.
+    """
+    from google import genai
+    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    if not api_key:
+        raise RuntimeError("set GEMINI_API_KEY (or GOOGLE_API_KEY)")
+    client = genai.Client(api_key=api_key)
+    out = []
+    for attr, obj in pairs:
+        try:
+            resp = client.models.generate_content(
+                model=model,
+                contents=SYSTEM_PROMPT + "\n\n" + USER_PROMPT_TEMPLATE.format(attr=attr, obj=obj),
+            )
+            text = resp.text or ""
+            m = re.search(r"\{.*\}", text, re.DOTALL)
+            if not m:
+                raise ValueError(f"no JSON in response: {text[:200]}")
+            data = json.loads(m.group(0))
+            score = int(data.get("score", 0))
+            reason = data.get("reason", "")
+            out.append({"attr": attr, "obj": obj, "score": max(0, min(10, score)),
+                        "reason": reason})
+        except Exception as e:
+            print(f"  [WARN] failed for ({attr}, {obj}): {e}")
+            out.append({"attr": attr, "obj": obj, "score": None, "reason": str(e)})
+        time.sleep(4.1)  # 15 RPM cap on free tier
+    return out
+
+
 def call_openai_batch(pairs, model="gpt-4o-mini"):
     import openai
     client = openai.OpenAI()
@@ -121,9 +162,10 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--dataset_path", required=True)
     p.add_argument("--output", required=True)
-    p.add_argument("--provider", choices=["anthropic", "openai"], default="anthropic")
+    p.add_argument("--provider", choices=["gemini", "anthropic", "openai"], default="gemini")
     p.add_argument("--model", default=None,
-                   help="override default model (anthropic: claude-sonnet-4-5, openai: gpt-4o-mini)")
+                   help="override default (gemini: gemini-2.0-flash, "
+                        "anthropic: claude-sonnet-4-5, openai: gpt-4o-mini)")
     p.add_argument("--save_every", type=int, default=20)
     p.add_argument("--max_pairs", type=int, default=None,
                    help="cap number of pairs (for quick smoke test)")
@@ -150,7 +192,11 @@ def main():
         todo = todo[:args.max_pairs]
     print(f"[feasibility] pairs remaining: {len(todo)}")
 
-    call_fn = call_anthropic_batch if args.provider == "anthropic" else call_openai_batch
+    call_fn = {
+        "gemini": call_gemini_batch,
+        "anthropic": call_anthropic_batch,
+        "openai": call_openai_batch,
+    }[args.provider]
 
     # Process in chunks, save incrementally
     CHUNK = args.save_every
