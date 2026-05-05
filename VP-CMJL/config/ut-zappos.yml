@@ -13,7 +13,7 @@ model:
 
 train:
   dataset: ut-zappos
-  # dataset_path: 
+  dataset_path: /data1/workspaces/jgshin22/LHP-CZSL/data/ut-zappos
   optimizer: Adam
   scheduler: StepLR
   step_size: 5
@@ -24,14 +24,13 @@ train:
   context_length: 8
   train_batch_size: 16 # 64
   gradient_accumulation_steps: 1
-  # seed: 
+  # seed:
   epochs: 20
   epoch_start: 0
-  save_path: 
+  # save_path overridden via CLI
   val_metric: AUC
   save_final_model: True
-  load_model: 
-  dataset_path:  
+  # load_model:
 
 
 

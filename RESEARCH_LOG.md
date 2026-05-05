@@ -350,3 +350,97 @@ UT-Zap 한 데이터셋만으로 단정은 무리지만, "LLM zero-shot K가 vis
    - (b) ClusPro baseline은 K=5를 사실상 안 씀 (eff_K ≈ 1.08)
 3. **Thesis 재정의 제안**: "어떤 K가 좋은가"가 아니라 "prototype 수 자체가 lever인가"
 4. **Falsifiable next step 제안**: visual K로 학습해서 thesis 운명 결정 (1~2일)
+
+---
+
+## 6. 5-5 외부 baseline 비교: VP-CMJL (ICCV 2025) — UT-Zappos
+
+목적: ClusPro / LHP-CZSL이 모두 UT-Zap에서 baseline tie로 수렴하는 가운데, prototype 메커니즘을 **포기**하기 전에 동일 환경에서 다른 SOTA(visual-proxy 방향)인 [VP-CMJL](https://arxiv.org/pdf/2501.13859)을 같은 데이터셋으로 돌려서 (1) 우리 환경의 비교 ceiling을 확인하고, (2) "prototype 메커니즘 자체가 lever인가" Q에 대한 외부 데이터 포인트를 확보한다. VP-CMJL은 prototype memory 대신 **visual proxy** + **cross-modal joint learning**으로 갈라지는 방향이라 ClusPro/LHP와 직교한 비교가 됨.
+
+### 6.1 환경 / 코드 변경 inventory
+
+- 코드 위치: `VP-CMJL/` (upstream 그대로, 아래 두 가지 minimal patch만 적용)
+  - `VP-CMJL/train_multi_proxy.py:142` — `predict_logits` unpack 6→5으로 수정 (upstream bug; `out_dict` 미사용 변수가 함수 반환에 없었음).
+  - `VP-CMJL/train_multi_proxy.py:22` — `import wandb` 주석 처리 (모든 `wandb.*` 호출이 이미 commented; conda env에 wandb 미설치).
+  - `VP-CMJL/config/ut-zappos.yml`, `VP-CMJL/config/mit-states.yml` — `dataset_path`를 LHP-CZSL data 디렉터리로 채우고, `save_path:`/`load_model:`은 빈 값(=None) 이 CLI 인자를 덮어쓰지 않도록 주석 처리.
+- conda env: 신규 `vpcmjl` 만들지 않고 기존 `llm_cluspro` 재사용 (Python 3.10.20 / torch 2.10.0+cu128 / transformers 4.57 / clip 1.0; `pip install --quiet omegaconf`만 추가).
+- 새 스크립트: `scripts/run_vpcmjl_utzap_3seeds.sh` — seed 0/1/2 sequential, GPU=1 기본, save_path은 `checkpoint/vpcmjl_l14_utzap_seed{0,1,2}/`, 로그는 `logs/train_vpcmjl_utzap_seed{0,1,2}_<TS>.log`.
+- 데이터 호환성 확인:
+  - VP-CMJL `dataset.py`는 `<root>/images/`, `<root>/metadata_compositional-split-natural.t7`, `<root>/compositional-split-natural/{train,val,test}_pairs.txt` 구조를 기대 — LHP-CZSL의 `data/ut-zappos/` 레이아웃과 비트 일치.
+  - 첫 5 step probe (BS=16, ViT-L/14): per-step 0.66s, peak GPU mem 8.4 GB / 9.8 GB → 단일 RTX 3080 (10 GB)에서 OK.
+
+### 6.2 Protocol (upstream config)
+
+| 항목 | UT-Zap (vpcmjl) | 비교: LHP-CZSL UT-Zap (§1) |
+|---|---|---|
+| Backbone | ViT-L/14 (CLIP) | ViT-L/14 (CLIP) |
+| Optimizer | Adam, wd=1e-5 | Adam, wd=5e-5 |
+| LR | 5e-4 | 1e-4 |
+| Scheduler | StepLR(step=3, γ=0.5) — 코드 hardcoded | warmup + cosine |
+| Batch / Grad accum | 16 / 1 (effective 16) | 8 / 8 (effective 64) |
+| Epochs | 20 | 15 |
+| AMP | (없음, fp32) | fp16 + GradScaler + NaN guard |
+| 학습 가능 파라미터 | CLIP frozen + adapters(36개) + 3 prompt context + soft_att_obj + Cross-attn × 3 + Disentangler × 2 + Linear + attr/obj proxy | CLIP frozen + adapters + ClusPro prototype EMA + soft prompts |
+| Best model 선정 | val `best_loss` (default config) | val `best_hm` |
+| Final test eval | 마지막 epoch 끝에 best checkpoint 로드 후 1회 | 학습 도중 best_hm 갱신 시 매 epoch test 출력 |
+
+upstream protocol을 그대로 둠 — VP-CMJL을 그들의 paper recipe에서 평가하는 게 비교의 fairness 기준.
+
+### 6.3 실행 상태 (2026-05-05 14:11 KST 재시작 — 3-GPU 병렬)
+
+- 처음 13:42 KST에 sequential (seed 0→1→2, GPU=1) 시작했으나 3-GPU 병렬로 전환. 13:42 sequential run kill, 14:11 KST 새 TS로 재출발.
+- 3개 tmux 세션:
+  - `vpcmjl-utzap-s0` (GPU=1)
+  - `vpcmjl-utzap-s1` (GPU=2)
+  - `vpcmjl-utzap-s2` (GPU=3)
+- 시작 시각: 2026-05-05 14:11:56 KST (3 seed 동시).
+- 각 seed 모두 epoch 1 시작 직후 확인: ~1.55 it/s, GPU mem ~8.3 GB / 9.8 GB, util 100% — 동시 실행으로 인한 thermal throttle 등은 관찰 안 됨 (3개 GPU 각각 독립 fp32).
+- 추정: 모든 seed ~5 h 동시 진행 → 완료 ETA **~2026-05-05 19:30 KST** (sequential 15 h → 병렬 5 h, ~10 h 단축).
+- 새 single-seed 런처 스크립트: `scripts/run_vpcmjl_utzap_one_seed.sh` (env: SEED, GPU, TS).
+- seed별 로그: `logs/train_vpcmjl_utzap_seed{0,1,2}_20260505_141156.log` (tqdm 포함 100 KB+).
+- (참고) 폐기된 sequential run 마스터 로그: `logs/run_vpcmjl_utzap_3seeds_20260505_134240.log` (seed 0 epoch 1 ~44%까지 돌다 중단).
+
+### 6.4 결과 추출 방법 (run 끝나면)
+
+train script가 마지막 epoch (epoch 20) 종료 시 best checkpoint를 다시 로드해서 test_dataset에 대해 평가하고 마지막에 한 줄로 요약을 찍음. 핵심 라인 패턴:
+
+```
+Evaluating test dataset on Closed World
+best_seen  X.XXXX| best_unseen  X.XXXX| AUC  X.XXXX| best_hm  X.XXXX| attr_acc  X.XXXX| obj_acc  X.XXXX|
+```
+
+extraction one-liner:
+
+```bash
+for s in 0 1 2; do
+  echo "=== seed $s ===";
+  grep -B1 -E "^best_seen" logs/train_vpcmjl_utzap_seed${s}_20260505_134240.log | tail -3
+done
+```
+
+**비교 컨벤션 주의** — VP-CMJL train script의 evaluate는 매 epoch `val_dataset` + `test_dataset` 둘 다 한 번씩 evaluator를 돌리고 stdout으로 같은 5-line summary를 두 번 출력한다 (§1.1과 동일하게 두 split 결과가 다 나옴). best checkpoint은 **val loss**로 선정되므로 §1.1 “test_pairs at best-val-loss”와 정확히 비교 가능.
+
+### 6.5 (placeholder — 결과 들어오면 채울 표)
+
+| seed | seen | unseen | HM | AUC | attr | obj |
+|---|---|---|---|---|---|---|
+| 0 | TBD | TBD | TBD | TBD | TBD | TBD |
+| 1 | TBD | TBD | TBD | TBD | TBD | TBD |
+| 2 | TBD | TBD | TBD | TBD | TBD | TBD |
+| **mean** | — | — | **TBD** | **TBD** | — | — |
+
+비교 대상 (§5.1, test_pairs):
+- baseline_v2 (ClusPro fp16 fix) HM 0.5481 / AUC 0.4279
+- v1_init_only           HM 0.5553 / AUC 0.4330
+- v3_text                HM 0.5403 / AUC 0.4207
+
+해석 분기 (§5.4 "prototype 메커니즘이 lever인가"에 대한 외부 reference point):
+- **VP-CMJL ≫ baseline_v2** (HM Δ > 0.02 정도) → "다른 axis(visual proxy + cross-modal joint)는 같은 환경에서 의미 있는 게이지 차이를 만든다" → §5.4 thesis 재정의의 외부 근거 보강. prototype-axis가 약한 것이지 환경/데이터 자체가 ceiling이 아님.
+- **VP-CMJL ≈ baseline_v2** (시드 std 안) → UT-Zap의 ViT-L/14 setup 자체가 saturate (ceiling) 가능성. visual K 실험(§5.5)도 큰 격차 못 만들 가능성 시사. → "prototype-axis가 약한 게 아니라 UT-Zap이 너무 saturated"로 해석을 한 단계 더 보수적으로 이동해야 함.
+- **VP-CMJL < baseline_v2** (예상 밖) → 우리 환경 구현/데이터셋에 회귀가 있을 가능성 의심. VP-CMJL upstream 기대치 (paper Tab. UT-Zappos AUC 47%대) 와 큰 격차나면 환경 디버깅.
+
+### 6.6 미해결 / 후속
+
+- VP-CMJL의 train script는 upstream 그대로라 **data augmentation이 차이남**: train phase에서 `RandomHorizontalFlip + RandomPerspective + RandomRotation(5°)`를 켠다 (`VP-CMJL/dataset.py:48-58`). LHP-CZSL는 224 resize+center crop만. 동일 환경 비교 시 augmentation 차이는 confound가 됨 — 결과 해석 시 명시 필요.
+- mit-states VP-CMJL run은 일단 미실행. UT-Zap 결과 본 후 가치 있으면 후속.
+- VP-CMJL은 fp32 학습이라 §3의 NaN guard와 무관. mem peak 8.4 GB / 10 GB는 안전 범위.

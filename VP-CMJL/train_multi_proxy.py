@@ -19,7 +19,7 @@ from loss_proxy import loss_calu
 import test_multi_proxy as test
 from dataset import CompositionDataset
 from utils import *
-import wandb
+# import wandb  # not used (all wandb calls commented out)
 import time
 # from com_sample import RandomIdentitySampler
 
@@ -139,7 +139,7 @@ def train_model(model, optimizer, config, train_dataset, val_dataset, test_datas
 def evaluate(model, dataset):
     model.eval()
     evaluator = test.Evaluator(dataset, model=None)
-    all_logits, all_attr_gt, all_obj_gt, all_pair_gt, loss_avg,out_dict= test.predict_logits(
+    all_logits, all_attr_gt, all_obj_gt, all_pair_gt, loss_avg = test.predict_logits(
             model, dataset, config)
     test_stats = test.test(
             dataset,
