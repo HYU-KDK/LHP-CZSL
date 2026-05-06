@@ -38,3 +38,23 @@ parser.add_argument('--threshold', type=float, help="optional threshold")
 parser.add_argument('--threshold_trials', type=int, default=50, help="how many threshold values to try")
 parser.add_argument('--N_CTX', default=5,type=float, help="optional threshold")
 parser.add_argument('--INPUT_SIZE', default=[224,224],type=float, help="optional threshold")
+
+# --- LLM-augmented prototype (Phase 2 / 3) ---
+# Phase 2: Contextual prototype via Description Manager + AD-CA/OD-CA gate
+parser.add_argument("--use_llm_desc", action="store_true",
+                    help="Phase 2: enable LLM-context-augmented Key/Value in AD-CA/OD-CA")
+parser.add_argument("--llm_attr_in_context_pt", type=str, default=None,
+                    help="path to attr_in_context_emb.pt (Phase 2 input)")
+
+# Phase 3: alpha-blend visual proxy init + unseen alignment loss
+parser.add_argument("--proxy_alpha", type=float, default=0.0,
+                    help="Phase 3: alpha-blend factor for visual proxy init "
+                         "(0 = pure CLIP text, 0.3 recommended)")
+parser.add_argument("--llm_proxy_init_pt", type=str, default=None,
+                    help="path to proxy_init_emb.pt (Phase 3 init source)")
+parser.add_argument("--unseen_alignment_weight", type=float, default=0.0,
+                    help="Phase 3: gamma weight on L_unseen_alignment (0 = disabled)")
+parser.add_argument("--unseen_alignment_sample_k", type=int, default=32,
+                    help="Phase 3: # unseen pairs sampled per step (0 = all)")
+parser.add_argument("--llm_unseen_pt", type=str, default=None,
+                    help="path to unseen_comp_emb.pt (Phase 3 alignment targets)")

@@ -11,6 +11,11 @@ from torch.nn.modules.loss import CrossEntropyLoss
 from clip_modules.clip_model import load_clip, QuickGELU
 from clip_modules.tokenization_clip import SimpleTokenizer
 from model.common import *
+from model.llm_desc import (
+    load_attr_obj_managers,
+    load_proxy_init,
+    load_unseen_alignment,
+)
 from functools import partial
 from transformers import GPT2Tokenizer, GPT2Model
 
@@ -114,8 +119,26 @@ class Base(nn.Module):
         self.attr_tf = self.clip.encode_text(attr_tokenized)
         obj_tokenized = self.tokenizer(self.classes, context_length=8).cuda()
         self.obj_tf = self.clip.encode_text(obj_tokenized)
-        self.attr_proxy = nn.Parameter(self.attr_tf).cuda()  # v^a
-        self.obj_proxy = nn.Parameter(self.obj_tf).cuda()  # v^o
+
+        # Phase 3: alpha-blend visual proxy init with LLM description embeddings
+        self.proxy_alpha = float(getattr(config, "proxy_alpha", 0.0))
+        if self.proxy_alpha > 0.0:
+            init_pt = getattr(config, "llm_proxy_init_pt", None)
+            assert init_pt, "proxy_alpha>0 requires --llm_proxy_init_pt"
+            attr_init_llm, obj_init_llm = load_proxy_init(
+                init_pt, n_attr=len(self.attributes), n_obj=len(self.classes),
+                dim=output_dim,
+            )
+            attr_blend = (1.0 - self.proxy_alpha) * self.attr_tf.float().cpu() \
+                         + self.proxy_alpha * attr_init_llm
+            obj_blend = (1.0 - self.proxy_alpha) * self.obj_tf.float().cpu() \
+                        + self.proxy_alpha * obj_init_llm
+            self.attr_proxy = nn.Parameter(attr_blend.to(self.attr_tf.dtype).cuda())
+            self.obj_proxy = nn.Parameter(obj_blend.to(self.obj_tf.dtype).cuda())
+            print(f"[Phase3] proxy_alpha={self.proxy_alpha}, blended init from {init_pt}")
+        else:
+            self.attr_proxy = nn.Parameter(self.attr_tf).cuda()  # v^a
+            self.obj_proxy = nn.Parameter(self.obj_tf).cuda()  # v^o
 
         self.attr_disentangler = Disentangler(output_dim)
         self.obj_disentangler = Disentangler(output_dim)
@@ -123,6 +146,32 @@ class Base(nn.Module):
         self.attr_ca = CrossResidualAttentionBlock(768, 16)
         self.obj_ca = CrossResidualAttentionBlock(768, 16)
         self.com_ca = CrossResidualAttentionBlock(768, 16)
+
+        # Phase 2: Description Manager + LLM context gate for AD-CA / OD-CA
+        self.use_llm_desc = bool(getattr(config, "use_llm_desc", False))
+        if self.use_llm_desc:
+            desc_pt = getattr(config, "llm_attr_in_context_pt", None)
+            assert desc_pt, "use_llm_desc requires --llm_attr_in_context_pt"
+            self.attr_desc_manager, self.obj_desc_manager = load_attr_obj_managers(desc_pt)
+            self.attr_desc_manager.cuda()
+            self.obj_desc_manager.cuda()
+            # Learnable gates, init to 0 -> sigmoid(0)=0.5 (balanced)
+            self.attr_llm_gate = nn.Parameter(torch.zeros(1))
+            self.obj_llm_gate = nn.Parameter(torch.zeros(1))
+            print(f"[Phase2] use_llm_desc=True, gate init=0 (sigmoid=0.5) from {desc_pt}")
+
+        # Phase 3: register unseen alignment buffers (only used when weight > 0)
+        self.unseen_alignment_weight = float(getattr(config, "unseen_alignment_weight", 0.0))
+        self.unseen_alignment_sample_k = int(getattr(config, "unseen_alignment_sample_k", 32))
+        if self.unseen_alignment_weight > 0.0:
+            unseen_pt = getattr(config, "llm_unseen_pt", None)
+            assert unseen_pt, "unseen_alignment_weight>0 requires --llm_unseen_pt"
+            pair_idx, target_emb = load_unseen_alignment(unseen_pt)
+            target_emb = target_emb / target_emb.norm(dim=-1, keepdim=True).clamp(min=1e-6)
+            self.register_buffer("unseen_pair_idx", pair_idx, persistent=False)
+            self.register_buffer("unseen_llm_target", target_emb, persistent=False)
+            print(f"[Phase3] unseen_alignment_weight={self.unseen_alignment_weight}, "
+                  f"N_unseen={pair_idx.shape[0]}, sample_k={self.unseen_alignment_sample_k}")
 
     def add_visual_tunable_params(self):
         adapter_num = 2 * self.clip.visual.transformer.layers
@@ -242,9 +291,26 @@ class Base(nn.Module):
         obj_features = self.text_encoder(self.token_ids[2], token_tensors[2], enable_pos_emb=self.enable_pos_emb)[0]
         normalized_obj_text = obj_features / obj_features.norm(dim=-1, keepdim=True)
 
+        # Phase 2: enrich AD-CA / OD-CA Key/Value with LLM context embedding
+        if self.use_llm_desc:
+            batch_attr_idx = batch[1].cuda()
+            batch_obj_idx = batch[2].cuda()
+            # AD-CA: per-attr embedding contextualized to dominant obj in batch
+            attr_llm = self.attr_desc_manager.get_context(batch_obj_idx)  # [N_attr, D] fp32
+            obj_llm = self.obj_desc_manager.get_context(batch_attr_idx)  # [N_obj, D] fp32
+            a_gate = torch.sigmoid(self.attr_llm_gate)
+            o_gate = torch.sigmoid(self.obj_llm_gate)
+            attr_features_kv = (1.0 - a_gate) * attr_features \
+                               + a_gate * attr_llm.to(attr_features.dtype)
+            obj_features_kv = (1.0 - o_gate) * obj_features \
+                              + o_gate * obj_llm.to(obj_features.dtype)
+        else:
+            attr_features_kv = attr_features
+            obj_features_kv = obj_features
+
         # Image feature disentangling in Textual Prototype Learning
-        attr_img, attr_weight = self.attr_ca(cls_img, attr_features)  # f_t^a, w^a
-        obj_img, obj_weight = self.obj_ca(cls_img, obj_features)  # f_t^o, w^o
+        attr_img, attr_weight = self.attr_ca(cls_img, attr_features_kv)  # f_t^a, w^a
+        obj_img, obj_weight = self.obj_ca(cls_img, obj_features_kv)  # f_t^o, w^o
         logits_attr_weight = attr_weight * self.clip.logit_scale.exp()  # s^a
         logits_obj_weight = obj_weight * self.clip.logit_scale.exp()  # s^o
         batch_img_features = [cls_img, attr_img, obj_img]
@@ -306,3 +372,34 @@ class Base(nn.Module):
             return logits, normalized_img_features[0]
         else:
             return logits, normalized_attr_proxy, normalized_obj_proxy
+
+    def compute_unseen_alignment_loss(self):
+        """Phase 3: cosine alignment between model's reconstructed unseen comp proxy
+        (linear([v^a, v^o])) and LLM target embedding for the same unseen pair.
+
+        Returns scalar tensor (no scaling). Caller multiplies by weight.
+        Returns 0 if alignment is disabled.
+        """
+        if self.unseen_alignment_weight <= 0.0:
+            return torch.zeros(1, device=self.attr_proxy.device).squeeze()
+
+        pair_idx = self.unseen_pair_idx       # [N_unseen, 2]
+        target = self.unseen_llm_target       # [N_unseen, D] already L2-normalized
+
+        N = pair_idx.shape[0]
+        K = self.unseen_alignment_sample_k
+        if 0 < K < N:
+            sel = torch.randperm(N, device=pair_idx.device)[:K]
+            pair_idx = pair_idx[sel]
+            target = target[sel]
+
+        attr_idx, obj_idx = pair_idx[:, 0], pair_idx[:, 1]
+        a_emb = self.attr_proxy[attr_idx].type(self.clip.dtype)
+        o_emb = self.obj_proxy[obj_idx].type(self.clip.dtype)
+        combined = torch.cat((a_emb, o_emb), dim=1)
+        unseen_built = self.linear(combined.float())  # [K, D] fp32
+
+        unseen_built_n = unseen_built / unseen_built.norm(dim=-1, keepdim=True).clamp(min=1e-6)
+        target_n = target.to(unseen_built_n.dtype)  # already normalized at load
+        cos = (unseen_built_n * target_n).sum(dim=-1)  # [K]
+        return (1.0 - cos).mean()

@@ -68,13 +68,20 @@ def train_model(model, optimizer, config, train_dataset, val_dataset, test_datas
             batch_pair=batch[3].cuda()
             predict= model(batch, train_pairs)
 
-            loss, loss_logit_com_proxy, loss_logit_attr_proxy, loss_logit_obj_proxy = loss_calu(predict, batch, config)[:4]
-            loss_logit_com_text, loss_logit_attr_text, loss_logit_obj_text, loss_com= loss_calu(predict, batch, config)[4:]
-            # decorrelation_loss=predict[3]
-            
-            loss=loss
+            losses = loss_calu(predict, batch, config)
+            loss, loss_logit_com_proxy, loss_logit_attr_proxy, loss_logit_obj_proxy = losses[:4]
+            loss_logit_com_text, loss_logit_attr_text, loss_logit_obj_text, loss_com = losses[4:]
+
+            # Phase 3: unseen alignment loss (only if model has it enabled)
+            unseen_w = float(getattr(config, "unseen_alignment_weight", 0.0))
+            if unseen_w > 0.0:
+                loss_unseen = model.compute_unseen_alignment_loss()
+                loss = loss + unseen_w * loss_unseen
+            else:
+                loss_unseen = None
+
             # normalize loss to account for batch accumulation
-            loss= loss / config.gradient_accumulation_steps
+            loss = loss / config.gradient_accumulation_steps
 
             # backward pass
             loss.backward()
@@ -97,6 +104,16 @@ def train_model(model, optimizer, config, train_dataset, val_dataset, test_datas
         print(f"epoch {i +1} time: {epoch_time:.2f}s")
         progress_bar.write(f"epoch {i +1} train loss {np.mean(epoch_train_losses)}")
         train_losses.append(np.mean(epoch_train_losses))
+
+        # LLM gate / proxy diagnostic
+        if getattr(config, "use_llm_desc", False):
+            ag = torch.sigmoid(model.attr_llm_gate).item()
+            og = torch.sigmoid(model.obj_llm_gate).item()
+            print(f"[Phase2] attr_gate(sig)={ag:.4f} obj_gate(sig)={og:.4f}")
+        if float(getattr(config, "unseen_alignment_weight", 0.0)) > 0.0:
+            with torch.no_grad():
+                lu = model.compute_unseen_alignment_loss().item()
+            print(f"[Phase3] unseen_align_loss={lu:.4f}")
 
         if (i + 1) % config.save_every_n == 0:
             torch.save(model.state_dict(), os.path.join(config.save_path, f"{config.fusion}_epoch_{i}.pt"))
