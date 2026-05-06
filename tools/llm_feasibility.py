@@ -93,48 +93,70 @@ def call_anthropic_batch(pairs, model="claude-sonnet-4-5"):
     return out
 
 
-def call_gemini_batch(pairs, model="gemini-2.5-flash-lite"):
+def _call_gemini_one(client, model, attr, obj):
+    """Single Gemini call with 3-attempt retry; used by parallel worker."""
+    last_err = None
+    for attempt in range(3):
+        try:
+            resp = client.models.generate_content(
+                model=model,
+                contents=SYSTEM_PROMPT + "\n\n" + USER_PROMPT_TEMPLATE.format(attr=attr, obj=obj),
+            )
+            text = resp.text or ""
+            m = re.search(r"\{.*\}", text, re.DOTALL)
+            if not m:
+                raise ValueError(f"no JSON in response: {text[:200]}")
+            data = json.loads(m.group(0))
+            score = int(data.get("score", 0))
+            reason = data.get("reason", "")
+            return {"attr": attr, "obj": obj, "score": max(0, min(10, score)),
+                    "reason": reason}
+        except Exception as e:
+            last_err = e
+            msg = str(e)
+            if "503" in msg or "429" in msg or "UNAVAILABLE" in msg.upper():
+                time.sleep(5 * (attempt + 1))
+                continue
+            break
+    return {"attr": attr, "obj": obj, "score": None, "reason": str(last_err)}
+
+
+def call_gemini_batch(pairs, model="gemini-2.5-flash-lite", pace_sec=4.1, workers=1):
     """Call Gemini API. Free tier varies by model -- Flash-Lite is most
-    generous. The script paces calls at ~15 RPM (4 s gap) to stay inside
-    Flash free quotas. Transient 503/429 errors retried up to 3 times.
+    generous. Default workers=1, pace_sec=4.1 (~15 RPM for free-tier safety).
+
+    For paid tier, use workers=10+ with pace_sec=0 to parallelize. With
+    workers>1, pace_sec is ignored (workers fire as fast as the API allows).
+
+    Transient 503 / 429 errors retried up to 3 times per call.
     """
     from google import genai
     api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if not api_key:
         raise RuntimeError("set GEMINI_API_KEY (or GOOGLE_API_KEY)")
     client = genai.Client(api_key=api_key)
-    out = []
-    for attr, obj in pairs:
-        last_err = None
-        result = None
-        for attempt in range(3):
-            try:
-                resp = client.models.generate_content(
-                    model=model,
-                    contents=SYSTEM_PROMPT + "\n\n" + USER_PROMPT_TEMPLATE.format(attr=attr, obj=obj),
-                )
-                text = resp.text or ""
-                m = re.search(r"\{.*\}", text, re.DOTALL)
-                if not m:
-                    raise ValueError(f"no JSON in response: {text[:200]}")
-                data = json.loads(m.group(0))
-                score = int(data.get("score", 0))
-                reason = data.get("reason", "")
-                result = {"attr": attr, "obj": obj, "score": max(0, min(10, score)),
-                          "reason": reason}
-                break
-            except Exception as e:
-                last_err = e
-                msg = str(e)
-                if "503" in msg or "429" in msg or "UNAVAILABLE" in msg.upper():
-                    time.sleep(5 * (attempt + 1))  # backoff: 5,10,15s
-                    continue
-                break  # non-retryable
-        if result is None:
-            print(f"  [WARN] failed for ({attr}, {obj}): {last_err}")
-            result = {"attr": attr, "obj": obj, "score": None, "reason": str(last_err)}
-        out.append(result)
-        time.sleep(4.1)  # 15 RPM cap on free tier
+
+    if workers <= 1:
+        out = []
+        for attr, obj in pairs:
+            r = _call_gemini_one(client, model, attr, obj)
+            if r["score"] is None:
+                print(f"  [WARN] failed for ({attr}, {obj}): {r['reason']}")
+            out.append(r)
+            time.sleep(pace_sec)
+        return out
+
+    from concurrent.futures import ThreadPoolExecutor
+    out = [None] * len(pairs)
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        futs = {ex.submit(_call_gemini_one, client, model, a, o): i
+                for i, (a, o) in enumerate(pairs)}
+        for fut in futs:
+            i = futs[fut]
+            r = fut.result()
+            out[i] = r
+            if r["score"] is None:
+                print(f"  [WARN] failed for ({r['attr']}, {r['obj']}): {r['reason']}")
     return out
 
 
@@ -179,6 +201,12 @@ def main():
     p.add_argument("--save_every", type=int, default=20)
     p.add_argument("--max_pairs", type=int, default=None,
                    help="cap number of pairs (for quick smoke test)")
+    p.add_argument("--pace_sec", type=float, default=4.1,
+                   help="seconds between API calls (gemini sequential mode); default 4.1 "
+                        "(~15 RPM, free safe). Set 1.0 for paid tier sequential.")
+    p.add_argument("--workers", type=int, default=1,
+                   help="gemini parallel worker count. workers>1 ignores pace_sec and "
+                        "fires concurrent requests. Use 10-20 with billing-enabled key.")
     args = p.parse_args()
 
     ds = CompositionDataset(args.dataset_path, "train")
@@ -202,11 +230,19 @@ def main():
         todo = todo[:args.max_pairs]
     print(f"[feasibility] pairs remaining: {len(todo)}")
 
-    call_fn = {
+    call_fn_raw = {
         "gemini": call_gemini_batch,
         "anthropic": call_anthropic_batch,
         "openai": call_openai_batch,
     }[args.provider]
+    if args.provider == "gemini":
+        call_fn = lambda batch, model=None: call_fn_raw(
+            batch,
+            **({"model": model} if model else {}),
+            pace_sec=args.pace_sec,
+            workers=args.workers)
+    else:
+        call_fn = call_fn_raw
 
     # Process in chunks, save incrementally
     CHUNK = args.save_every

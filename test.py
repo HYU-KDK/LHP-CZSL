@@ -597,9 +597,22 @@ def test(
 
 
 if __name__ == "__main__":
+    import sys
     config = parser.parse_args()
     if config.yml_path:
         load_args(config.yml_path, config)
+
+    # CLI overrides applied after yml so command-line takes precedence
+    if '--open_world' in sys.argv:
+        idx = sys.argv.index('--open_world')
+        val = sys.argv[idx + 1] if idx + 1 < len(sys.argv) else 'True'
+        config.open_world = str(val).lower() in ('true', '1', 'yes')
+    if '--feasibility_path' in sys.argv:
+        idx = sys.argv.index('--feasibility_path')
+        config.feasibility_path = sys.argv[idx + 1]
+    if '--load_model' in sys.argv:
+        idx = sys.argv.index('--load_model')
+        config.load_model = sys.argv[idx + 1]
 
     # set the seed value
     print("----")
@@ -636,8 +649,9 @@ if __name__ == "__main__":
     print('evaluating on the validation set')
     if config.open_world and config.threshold is None:
         evaluator = Evaluator(val_dataset, model=None)
-        feasibility_path = os.path.join(
-            DIR_PATH, f'data/feasibility_{config.dataset}.pt')
+        feasibility_path = (config.feasibility_path or
+            os.path.join(DIR_PATH, f'data/feasibility_{config.dataset}.pt'))
+        print(f'loading feasibility scores from {feasibility_path}')
         unseen_scores = torch.load(
             feasibility_path,
             map_location='cpu')['feasibility']
@@ -678,8 +692,9 @@ if __name__ == "__main__":
         evaluator = Evaluator(val_dataset, model=None)
         unseen_scores = None
         if config.open_world:
-            feasibility_path = os.path.join(
-                DIR_PATH, f'data/feasibility_{config.dataset}.pt')
+            feasibility_path = (config.feasibility_path or
+                os.path.join(DIR_PATH, f'data/feasibility_{config.dataset}.pt'))
+            print(f'loading feasibility scores from {feasibility_path}')
             unseen_scores = torch.load(
                 feasibility_path,
                 map_location='cpu')['feasibility']

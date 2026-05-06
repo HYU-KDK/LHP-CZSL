@@ -33,6 +33,8 @@ parser.add_argument("--topk", help="eval topk", type=int, default=1)
 parser.add_argument("--text_encoder_batch_size", help="batch size of the text encoder", default=16, type=int)
 parser.add_argument('--threshold', type=float, default=None, help="optional threshold")
 parser.add_argument('--threshold_trials', type=int, default=50, help="how many threshold values to try")
+parser.add_argument('--feasibility_path', type=str, default=None,
+                    help="override path to feasibility .pt (default: data/feasibility_{dataset}.pt)")
 
 parser.add_argument("--adapter_dim", help="middle dimension of Adapter", type=int, default=64)
 parser.add_argument("--adapter_dropout", help="adapter dropout", type=float, default=0.1)
