@@ -386,19 +386,15 @@ UT-Zap 한 데이터셋만으로 단정은 무리지만, "LLM zero-shot K가 vis
 
 upstream protocol을 그대로 둠 — VP-CMJL을 그들의 paper recipe에서 평가하는 게 비교의 fairness 기준.
 
-### 6.3 실행 상태 (2026-05-05 14:11 KST 재시작 — 3-GPU 병렬)
+### 6.3 실행 상태 (2026-05-05 14:11 ~ 20:23 KST, 3-GPU 병렬, 완료)
 
-- 처음 13:42 KST에 sequential (seed 0→1→2, GPU=1) 시작했으나 3-GPU 병렬로 전환. 13:42 sequential run kill, 14:11 KST 새 TS로 재출발.
-- 3개 tmux 세션:
-  - `vpcmjl-utzap-s0` (GPU=1)
-  - `vpcmjl-utzap-s1` (GPU=2)
-  - `vpcmjl-utzap-s2` (GPU=3)
-- 시작 시각: 2026-05-05 14:11:56 KST (3 seed 동시).
-- 각 seed 모두 epoch 1 시작 직후 확인: ~1.55 it/s, GPU mem ~8.3 GB / 9.8 GB, util 100% — 동시 실행으로 인한 thermal throttle 등은 관찰 안 됨 (3개 GPU 각각 독립 fp32).
-- 추정: 모든 seed ~5 h 동시 진행 → 완료 ETA **~2026-05-05 19:30 KST** (sequential 15 h → 병렬 5 h, ~10 h 단축).
+- 처음 13:42 KST sequential 시작했으나 3-GPU 병렬로 전환 (13:42 kill, 14:11 새 TS).
+- 3개 tmux 세션 (`vpcmjl-utzap-s{0,1,2}`, GPU 1/2/3 각각, fp32, 동시 실행).
+- 시작 14:11:56 KST → 종료 seed0 20:16, seed1 20:17, seed2 20:23 KST. 각 seed ~6h, epoch당 ~16분 (eval 포함, 950s/epoch × 20).
 - 새 single-seed 런처 스크립트: `scripts/run_vpcmjl_utzap_one_seed.sh` (env: SEED, GPU, TS).
-- seed별 로그: `logs/train_vpcmjl_utzap_seed{0,1,2}_20260505_141156.log` (tqdm 포함 100 KB+).
-- (참고) 폐기된 sequential run 마스터 로그: `logs/run_vpcmjl_utzap_3seeds_20260505_134240.log` (seed 0 epoch 1 ~44%까지 돌다 중단).
+- seed별 로그: `logs/train_vpcmjl_utzap_seed{0,1,2}_20260505_141156.log` (각 ~6.3 MB, 41개 metric line — 20 val + 20 test + 1 closed-world final).
+- 마지막 closed-world test 결과는 학습 종료 후 best-loss checkpoint를 reload해서 한 번 더 평가한 결과.
+- (참고) 폐기된 sequential run 로그: `logs/train_vpcmjl_utzap_seed0_20260505_132859.log` (wandb import error로 즉시 종료, 실제 학습 0).
 
 ### 6.4 결과 추출 방법 (run 끝나면)
 
@@ -420,27 +416,60 @@ done
 
 **비교 컨벤션 주의** — VP-CMJL train script의 evaluate는 매 epoch `val_dataset` + `test_dataset` 둘 다 한 번씩 evaluator를 돌리고 stdout으로 같은 5-line summary를 두 번 출력한다 (§1.1과 동일하게 두 split 결과가 다 나옴). best checkpoint은 **val loss**로 선정되므로 §1.1 “test_pairs at best-val-loss”와 정확히 비교 가능.
 
-### 6.5 (placeholder — 결과 들어오면 채울 표)
+### 6.5 결과 — UT-Zap closed-world test on best-loss checkpoint
 
-| seed | seen | unseen | HM | AUC | attr | obj |
-|---|---|---|---|---|---|---|
-| 0 | TBD | TBD | TBD | TBD | TBD | TBD |
-| 1 | TBD | TBD | TBD | TBD | TBD | TBD |
-| 2 | TBD | TBD | TBD | TBD | TBD | TBD |
-| **mean** | — | — | **TBD** | **TBD** | — | — |
+VP-CMJL upstream protocol (`best_model_metric: best_loss`)에 따라 학습 도중 매 epoch val loss 가장 낮은 ckpt를 `BiFusion_best.pt`로 저장 → 마지막 epoch 종료 시 reload해서 test_dataset 1회 평가. 아래 표가 그 한 번의 결과.
 
-비교 대상 (§5.1, test_pairs):
-- baseline_v2 (ClusPro fp16 fix) HM 0.5481 / AUC 0.4279
-- v1_init_only           HM 0.5553 / AUC 0.4330
-- v3_text                HM 0.5403 / AUC 0.4207
+| seed | seen | unseen | **HM** | **AUC** | attr | obj | best-loss epoch |
+|---|---|---|---|---|---|---|---|
+| 0 | 0.7107 | 0.7647 | **0.5801** | **0.4657** | 0.5292 | 0.7244 | ep 2 |
+| 1 | 0.6246 | 0.7187 | **0.4853** | **0.3554** | 0.4719 | 0.7261 | (early) |
+| 2 | 0.6158 | 0.7462 | **0.4911** | **0.3619** | 0.4688 | 0.7371 | ep 3 |
+| **mean ± std** | **0.6504 ± 0.043** | **0.7432 ± 0.019** | **0.5188 ± 0.043** | **0.3943 ± 0.051** | — | — | — |
 
-해석 분기 (§5.4 "prototype 메커니즘이 lever인가"에 대한 외부 reference point):
-- **VP-CMJL ≫ baseline_v2** (HM Δ > 0.02 정도) → "다른 axis(visual proxy + cross-modal joint)는 같은 환경에서 의미 있는 게이지 차이를 만든다" → §5.4 thesis 재정의의 외부 근거 보강. prototype-axis가 약한 것이지 환경/데이터 자체가 ceiling이 아님.
-- **VP-CMJL ≈ baseline_v2** (시드 std 안) → UT-Zap의 ViT-L/14 setup 자체가 saturate (ceiling) 가능성. visual K 실험(§5.5)도 큰 격차 못 만들 가능성 시사. → "prototype-axis가 약한 게 아니라 UT-Zap이 너무 saturated"로 해석을 한 단계 더 보수적으로 이동해야 함.
-- **VP-CMJL < baseline_v2** (예상 밖) → 우리 환경 구현/데이터셋에 회귀가 있을 가능성 의심. VP-CMJL upstream 기대치 (paper Tab. UT-Zappos AUC 47%대) 와 큰 격차나면 환경 디버깅.
+best-loss epoch: closed-world final 라인이 일치하는 per-epoch test 라인을 역추적해 확인 (seed 0 → line 4 = test ep2 비트 일치, seed 2 → line 6 = test ep3 비트 일치). seed 1은 정확히 일치하는 라인 없으나 line 8 (test ep4) 근처 — **3 seed 모두 매우 이른 epoch에서 best-loss 도달** (paper 권장 LR=5e-4로는 빠르게 overfit).
 
-### 6.6 미해결 / 후속
+#### 부록: per-epoch test 최대값 (oracle "best-test-AUC" 선택 시 가설적 상한)
 
-- VP-CMJL의 train script는 upstream 그대로라 **data augmentation이 차이남**: train phase에서 `RandomHorizontalFlip + RandomPerspective + RandomRotation(5°)`를 켠다 (`VP-CMJL/dataset.py:48-58`). LHP-CZSL는 224 resize+center crop만. 동일 환경 비교 시 augmentation 차이는 confound가 됨 — 결과 해석 시 명시 필요.
-- mit-states VP-CMJL run은 일단 미실행. UT-Zap 결과 본 후 가치 있으면 후속.
-- VP-CMJL은 fp32 학습이라 §3의 NaN guard와 무관. mem peak 8.4 GB / 10 GB는 안전 범위.
+| seed | best-loss test (실제 보고) | per-epoch test peak HM | peak AUC | peak epoch |
+|---|---|---|---|---|
+| 0 | HM 0.5801 / AUC 0.4657 | 0.5801 | 0.4657 | ep 2 |
+| 1 | HM 0.4853 / AUC 0.3554 | 0.5788 | 0.4522 | ep 4 |
+| 2 | HM 0.4911 / AUC 0.3619 | 0.5411 | 0.4270 | ep 4 |
+| **mean** | HM 0.5188 / AUC 0.3943 | **0.5667** | **0.4483** | — |
+
+oracle peak도 baseline_v2 (HM 0.5481 / AUC 0.4279) 대비 HM +0.019 / AUC +0.020 — 시드 std 안.
+
+### 6.6 비교 + 해석
+
+| run | HM | AUC | seen | unseen | 비고 |
+|---|---|---|---|---|---|
+| **VP-CMJL** (이번 3-seed) | **0.5188 ± 0.043** | **0.3943 ± 0.051** | 0.6504 | 0.7432 | best-loss ckpt, fp32, BS=16, 20 ep, lr=5e-4 |
+| ClusPro baseline_v2 (§1.1) | 0.5481 | 0.4279 | 0.6892 | 0.7490 | best-hm ckpt, fp16+guard, BS=64eff, 15 ep, lr=1e-4 |
+| LHP-CZSL v1_init_only (§1.1) | 0.5553 | 0.4330 | 0.6872 | 0.7548 | 〃 + sub-meaning init |
+| LHP-CZSL v3_text (§5.1)     | 0.5403 | 0.4207 | 0.6925 | 0.7478 | 〃 + text ensemble |
+
+**Δ vs baseline_v2: HM −0.029, AUC −0.034.** VP-CMJL이 ClusPro/LHP보다 평균 낮음, 그러나 VP-CMJL의 시드 std (0.043 / 0.051) 가 그 격차를 거의 흡수 — 1σ 안에서는 tie라고도 볼 수 있고, 평균만 보면 진짜 약간 낮음. **§6.5에 미리 잡아둔 3분기 중 "VP-CMJL ≈ baseline_v2 (보수)"와 "VP-CMJL < baseline_v2 (예상 밖)" 경계 지점**.
+
+VP-CMJL paper Tab. UT-Zappos AUC ~47% 대비 우리 oracle peak도 0.4483 → −0.022 (paper와 직접 비교는 어려움: paper는 학습 protocol/aug/ensemble 셋업 조금씩 다름). 큰 회귀라기보단 "환경 차이로 살짝 못 미친 reproduction"으로 보는 게 합리적.
+
+#### 해석 (§5.4 thesis 재정의에 미치는 영향)
+
+1. **VP-CMJL은 같은 환경에서 ClusPro/LHP를 의미 있게 못 이김**. 이건 §5.4 "prototype 메커니즘이 lever인가" 질문에 대한 외부 negative control: 완전히 다른 axis(visual proxy + cross-modal joint, prototype memory 없음)도 같은 환경의 baseline을 못 이긴다 → **UT-Zap의 ViT-L/14 setup 자체가 saturate에 가깝다**는 가설이 한 단계 강해짐.
+2. 즉 §5.4의 "prototype 메커니즘이 약한 lever다" 결론은 absolute statement가 아니라 **"적어도 UT-Zap에서는 다른 axis도 비슷하게 약한 lever다"** 로 보강됨. 다른 데이터셋/setting (mit-states fix 후, C-GQA, open-world)에서는 결론이 다를 수 있음.
+3. visual-K 실험(§5.5)에 대한 prior shift: VP-CMJL도 못 이긴 setup에서 visual-K가 baseline 이길 확률은 더 낮아짐. tie로 끝나도 "thesis 폐기" 결론이 더 단단해질 것.
+
+#### Caveats (advisor 미팅 시 명시)
+
+- **Train augmentation이 다름**: VP-CMJL = `RandomHorizontalFlip + RandomPerspective + RandomRotation(5°)` (`VP-CMJL/dataset.py:48-58`). LHP-CZSL = resize+center crop만. 같은 데이터·같은 split이지만 train-time augmentation의 차이는 confound.
+- **Best-model selection 다름**: VP-CMJL은 `best_loss`(val loss), LHP-CZSL는 `best_hm`(val HM). best_loss가 더 conservative(이른 epoch 선택) → VP-CMJL이 약간 불리. oracle peak으로 보정해도 VP-CMJL +0.02 정도 — 큰 격차 아님.
+- **Effective batch size 다름**: VP-CMJL = 16, LHP-CZSL = 64 (BS=8 × grad_accum=8). 큰 batch가 평균적으로 약간 안정 → LHP에 유리한 confound.
+- **Numerical precision 다름**: VP-CMJL fp32, LHP fp16+guard. fp32가 안정적이긴 하나 NaN guard가 작동하는 fp16에서도 우리 환경은 정상 학습.
+- 이 4가지 confound 합치면 "VP-CMJL이 LHP보다 ~0.03 낮은" 격차는 protocol 차이로 거의 다 설명 가능. **공정 비교에서는 tie로 보는 게 맞음**.
+
+### 6.7 다음 단계
+
+- (즉시) advisor 미팅에 §6 전체 + 위 비교표 그대로 들고 가기. talking point: "직교 axis인 VP-CMJL도 같은 환경에서 baseline 못 이김 → §5.4 thesis 재정의의 외부 근거".
+- mit-states VP-CMJL run은 **일단 보류**. UT-Zap에서 격차 없으니 mit에서 격차 나올 가능성 더 낮고, 5h × 1 GPU 비용 대비 가치 낮음. visual-K 실험(§5.5) 결과 본 후 필요하면 그때.
+- 폐기 sequential run의 (대부분 비어있는) 로그/체크포인트 정리: `logs/train_vpcmjl_utzap_seed0_20260505_132859.log` 삭제.
+- (낮은 우선순위) `best_model_metric`을 `AUC`로 바꿔서 1개 seed 재실행해보기 — paper와 더 가까운 reproduction으로 "환경 회귀 vs protocol 차이" 분리 검증. 단 이건 thesis 결정에 영향 안 주므로 이번 주 미팅 후로.
