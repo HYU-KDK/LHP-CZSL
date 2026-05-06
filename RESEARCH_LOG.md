@@ -1,6 +1,6 @@
 # LHP-CZSL Research Log
 
-작성일 2026-05-02 16:15 KST. 4-27 ClusPro baseline (K=5) 시작 시점부터 오늘 3-seed 본런 시작 직전까지의 정리. **5-3 09:00 업데이트**: UT-Zap v1_init_only 3-seed 결과 (§1) + baseline tie 결론 + 다음 단계 후보 (§4). **5-3 21:35 업데이트**: v3_text 3-seed 본런이 16:08 KST에 끝났으나 train loss와 test 숫자가 v1_init_only와 비트 일치 → **invalid run으로 폐기**, §4.5에 디버깅 단서 정리.
+작성일 2026-05-02 16:15 KST. 4-27 ClusPro baseline (K=5) 시작 시점부터 오늘 3-seed 본런 시작 직전까지의 정리. **5-3 09:00 업데이트**: UT-Zap v1_init_only 3-seed 결과 (§1) + baseline tie 결론 + 다음 단계 후보 (§4). **5-3 21:35 업데이트**: v3_text 3-seed 본런이 16:08 KST에 끝났으나 train loss와 test 숫자가 v1_init_only와 비트 일치 → **invalid run으로 폐기**, §4.5에 디버깅 단서 정리. **5-5 20:35 업데이트**: mit-states LLM feasibility 점수 28,175 조합 생성 완료 (§6). **5-6 10:54 업데이트**: v3_text refinement Phase A — LLM visual descriptions를 mit-states에 적용한 3-seed 본런 launch (§10).
 
 모든 실험: ViT-L/14 backbone, fp16 AMP, batch_size=8, grad_accum=8, 15 epochs (probe 제외), seed=0 (3-seed run 제외), val_metric=best_hm. 데이터셋 경로 등 환경 설정은 [LHP-CZSL setup memory](/home/student/.claude/projects/-home-student-dongki/memory/project_lhp_czsl_setup.md) 참고.
 
@@ -350,3 +350,153 @@ UT-Zap 한 데이터셋만으로 단정은 무리지만, "LLM zero-shot K가 vis
    - (b) ClusPro baseline은 K=5를 사실상 안 씀 (eff_K ≈ 1.08)
 3. **Thesis 재정의 제안**: "어떤 K가 좋은가"가 아니라 "prototype 수 자체가 lever인가"
 4. **Falsifiable next step 제안**: visual K로 학습해서 thesis 운명 결정 (1~2일)
+
+---
+
+## 6. mit-states LLM feasibility 생성 완료 — 5-5 20:35
+
+open-world masking 자산 확보 차원에서 mit-states 전체 (attr × obj) 28,175 조합에 대해 LLM(Gemini Flash) feasibility 0–10 점수 생성. `tools/llm_feasibility.py --pace_sec 1.0 --save_every 50`, output `data/feasibility_mit.json` (5.38 MB). 5-5 00:03 시작 → 20:35 종료, 약 20.5h, 실패(None) 1개.
+
+| score | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | mean |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| count | 133 | 4136 | 1727 | 1704 | 883 | 321 | 2401 | 4812 | 3867 | 7099 | 1091 | 6.09 |
+
+- **score ≤ 2**: 5,996 / 28,175 (~21%) — open-world에서 마스킹할 후보 풀.
+- **score = 9**가 7,099개로 가장 큼 → LLM이 "자연스러운 조합"에 9를 자주 부여. calibration은 그럭저럭.
+- UT-Zap feasibility는 별도 `data/feasibility_utzap.json`에 이미 존재 (5-3 생성, RESEARCH_LOG에 기록 누락).
+- **5-5 21:00 추가**: `data/feasibility_ut-zap50k.pt` (5-5 12:15)은 LLM JSON에서 변환된 파일로 확인 (byte-identical to LLM 변환 결과). 즉 cosine-feasibility 변형이 아니라 LLM-feasibility. RESEARCH_LOG에는 변환 이력이 누락됐었음.
+
+용도:
+- **A.** 학습 변경 없는 inference-time multiplicative mask로 open-world AUC 비교 (baseline / v1_init_only / v3_text on UT-Zap, single seed로 cheap pilot 가능).
+- **B.** §5.4의 "다른 axis로 pivot" 후보 중 하나 — sub-meaning 방향 dead end 굳어진 만큼, open-world feasibility-aware decoding이 thesis 새 방향이 될지 검토.
+
+### 6.1 평가 코드 mask 통합 (5-5 21:00)
+- `parameters.py`: `--feasibility_path` 추가 (없으면 기존 `data/feasibility_{dataset}.pt` lookup 그대로).
+- `test.py:639-643, 681-685`: 두 분기(open-world threshold sweep / fixed-threshold) 모두 override 사용; 로드 직전 `loading feasibility scores from {path}` 로깅.
+- `tools/feasibility_json_to_pt.py`: 이미 존재. `--open_world` 플래그로 `list(product(attrs, objs))` 순서 정렬, 0-10 → 0-1 정규화, 누락 pair는 0.5 (neutral).
+
+변환 결과:
+- `data/feasibility_mit-states_llm.pt` — 28,175 pairs, feas mean **0.609**, min 0.0, max 1.0. 누락 1개(`barren fig`) → 0.5.
+- `data/feasibility_ut-zap50k_llm.pt` — 192 pairs, feas mean **0.830**, min 0.1, max 1.0. 누락 1개(`Suede Slippers`) → 0.5. 기존 `feasibility_ut-zap50k.pt`와 byte-identical.
+
+mit-states 분포 sanity check (LLM이 실제로 의미 있는 정렬을 만드는지):
+- 가장 infeasible: `young lake`, `dry water`, `bent sky`, `peeled smoke`, `cooked diamond` — 모두 nonsensical.
+- 가장 feasible: `wet glass`, `open fire`, `closed book`, `winding stream`, `new tie` — 모두 자연.
+
+남은 작업:
+- mit-states fix 후 재학습 결정 시 (§4.4 caveat) open-world 평가는 `data/feasibility_mit-states_llm.pt`로.
+- 실패 1개씩(`barren fig`, `Suede Slippers`) 채우려면 `GEMINI_API_KEY=... python tools/llm_feasibility.py ... --output data/feasibility_{name}.json` 한 번 더 → 다시 변환 (incremental, ~몇 초).
+
+### 6.2 UT-Zap open-world pilot (5-5 20:48, seed 0, with LLM mask)
+
+3 모델 × seed 0 × `--open_world --feasibility_path data/feasibility_ut-zap50k_llm.pt`. test.py의 50-step threshold sweep으로 val AUC 최대화 → 그 threshold로 test 평가. 전부 **threshold=0.504** 선택 (LLM score ≥ ~5 유지). 약 4분 소요.
+
+| 모델 | split | seen | unseen | HM | AUC |
+|---|---|---|---|---|---|
+| baseline_v2_seed0 | val | 0.7377 | 0.6021 | **0.5412** | **0.3959** |
+| baseline_v2_seed0 | test | 0.6637 | 0.6192 | **0.3942** | **0.2553** |
+| v1_init_only_seed0 | val | 0.7389 | 0.6350 | **0.5464** | **0.4149** |
+| v1_init_only_seed0 | test | 0.6706 | 0.5939 | **0.3985** | **0.2637** |
+| v3_text_seed0 | val | 0.7286 | 0.6183 | **0.5286** | **0.3962** |
+| v3_text_seed0 | test | 0.6833 | 0.6034 | **0.4021** | **0.2647** |
+
+closed-world test_pairs 대비 open-world drop:
+- baseline_v2: HM −0.144 / AUC −0.158
+- v1_init_only: HM −0.139 / AUC −0.146
+- v3_text: HM −0.149 / AUC −0.168
+
+세 모델 다 closed → open 격차가 비슷. open-world 안에서의 상대 순위는 test HM 기준 **v3 > v1 > baseline** (격차 ≤ 0.008) — 3-seed std (HM ±0.013, AUC ±0.016) 안이므로 single-seed로는 tie.
+
+**관찰**:
+1. CLI 오버라이드 (`--open_world`, `--feasibility_path`, `--load_model`) 정상 동작 — load 로그에 `loading feasibility scores from data/feasibility_ut-zap50k_llm.pt` 출력 확인.
+2. 결과 저장 경로: `checkpoint/{run}/val_best.open.calibrated.json` (closed-world `val_best.closed.json`과 분리됨).
+3. seed 0 pilot은 closed-world tie 결론을 open-world에서도 재현. 단 mask 자체의 기여는 unmasked baseline 없이는 정량 불가.
+
+다음 후보:
+- **mask off baseline** (`--threshold 0` 또는 all-ones feasibility) 1회 — mask 기여분 측정.
+- **3-seed로 확장** — 동일 스크립트로 seed 1, 2 (각 ~4분).
+- baseline checkpoint의 `epoch_*.pt`에서 다른 epoch 평가하면 closed-trained model의 open-world generalization 변화 추적 가능. (현재 val_best는 closed-world best_hm 기준이라 open-world에는 sub-optimal일 수 있음.)
+
+로그: `logs/openworld_pilot/{model}_{ts}.log`, `logs/openworld_pilot/master_{ts}.log`.
+
+### 6.3 Mask off vs Mask on + 3-seed 확장 (5-5 21:14)
+
+mask off seed 0 (`--threshold 0`, mask 비활성과 동등) + mask on seed 1, 2 = 9 runs sequential, 약 10분 소요. 모든 결과 `checkpoint/{run}/val_best.open.{masked,unmasked}.json`로 분리 저장.
+
+**Open-world 3-seed (with mask) — test_pairs**
+
+| 모델 | HM (mean ± std) | AUC (mean ± std) | vs baseline |
+|---|---|---|---|
+| baseline_v2 | 0.4010 ± 0.013 | 0.2653 ± 0.011 | — |
+| v1_init_only | 0.4114 ± 0.012 | 0.2794 ± 0.015 | HM +0.010, AUC +0.014 |
+| v3_text | 0.4094 ± 0.015 | 0.2748 ± 0.019 | HM +0.008, AUC +0.010 |
+
+closed-world (val_pairs HM peak)과 같은 ranking 재현: **v1 ≥ v3 ≥ baseline**, 격차는 시드 std 안. open-world에서도 sub-meaning 방향 dead-end 결론 일관.
+
+**Mask off 3-seed (test_pairs)** — 5-5 21:30 추가:
+
+| 모델 | HM (mean ± std) | AUC (mean ± std) |
+|---|---|---|
+| baseline_v2 | 0.4137 ± 0.015 | 0.2804 ± 0.013 |
+| v1_init_only | 0.4221 ± 0.013 | 0.2925 ± 0.016 |
+| v3_text | 0.4239 ± 0.015 | 0.2912 ± 0.019 |
+
+**Mask Δ — 3-seed (mask on − mask off, test_pairs):**
+
+| 모델 | ΔHM (mean ± std) | **ΔAUC (mean ± std)** |
+|---|---|---|
+| baseline_v2 | −0.0127 ± 0.0022 | **−0.0151 ± 0.0021** (≈ 7σ) |
+| v1_init_only | −0.0107 ± 0.0093 | **−0.0130 ± 0.0114** (≈ 1σ; noisy) |
+| v3_text | −0.0145 ± 0.0029 | **−0.0164 ± 0.0036** (≈ 4.5σ) |
+
+**핵심 발견** — image-agnostic LLM feasibility mask는 **val→test transfer 실패**:
+- val에서 미세 + (threshold가 val AUC 최대화로 선택됐으니 당연)
+- test에선 모든 3 모델에서 일관되게 −0.014 ~ −0.021 AUC 손실
+- threshold 0.504 (LLM score ≥ 5)가 val 기준 best지만 test에선 정상 페어 over-mask
+
+이는 **§8-3 axis (B) "Image-conditional feasibility (VLM 기반)"의 직접적 motivation**:
+- FLM류 image-agnostic LLM prior는 val→test에서 calibration 깨짐.
+- 다음 step: VLM (Gemini Pro Vision / GPT-4V)으로 image × pair conditional feasibility 시도.
+- "axis B 우선순위 격상" 결론을 advisor 미팅에서 깔끔히 전달 가능.
+
+**Phase 1 (§9) 의사결정**: α' ≈ −0.02 (음수) → "Phase 1 결과가 negative" 분기 활성. axis B (image-conditional) 또는 axis G (reality-check 논문) 진행.
+
+
+---
+
+## 10. v3_text refinement Phase A — LLM visual descriptions on mit-states — 5-6 10:54 launch
+
+§8 의사결정의 자연 후속. 사용자가 **mit-states 먼저** 결정 (UT-Zap은 후순위). 핵심 가설: v3_text의 +1.5pp HM (UT-Zap)이 sub-meaning이 너무 짧고 image-agnostic mean pool인 탓 → primitive마다 K_p≥3, 각 sub를 LLM 시각 description으로 교체하면 description content가 lever인지 가려진다.
+
+### 10-1. 생성 (10:53 완료, ~10분)
+
+- 도구: `tools/llm_descriptions.py` (Gemini 2.5 Flash Lite, `--K 3 --tokens 40 --pace_sec 0.5`)
+- 출력: `data/descriptions_mit.json` (115 attr + 245 obj × 3 desc = **1080 sub-prompt**)
+- 품질 sanity: CLIP token 길이 max 28 / mean 17.4 / p95 22 → 77 limit 여유. LLM 실패 0건.
+- 샘플 (`ancient`):
+  - "weathered, cracked leather-bound book with faded gold lettering on its cover"
+  - "rough stone sculpture with moss growing in its crevices, showing signs of age"
+  - "chipped ceramic vase with intricate, hand-painted designs and a dusty patina"
+
+### 10-2. 학습 설정
+
+- yml: `config/lhp_czsl_v3_text_mit_l14_seed{0,1,2}.yml` 신규 — `sub_meanings_path: data/descriptions_mit.json`, `text_ensemble: True`, `decorr_weight=0`, `sem_weight=0`. 나머지는 기존 v1_init_only mit l14와 동일 (lr=1e-4, bs=8, ga=8, 15ep, ViT-L/14).
+- runner: `scripts/run_v3_text_mit_3seeds.sh` (UT-Zap runner mirror)
+- v3_text는 sem_weight=decorr_weight=0이라 description JSON의 `d_sem={}` 비어 있어도 무관 — **description 컨텐츠 단일 변수만 변동**.
+
+### 10-3. 런 진행
+
+- 10:54 launch, GPU 1, seed0부터 순차. `_load_sub_meanings`: `attrs K>1=115/115 sum_K=345 | objs K>1=245/245 sum_K=735` (목표 1080 일치).
+- 속도: ~2.8 it/s × 3793 step/epoch → **epoch ~22분, per-seed ~5.5h, 3-seed 합 ~16-17h**. (당초 30-40h 추정보다 빠름 — text encoder pass는 dominant cost가 아니었음.)
+- GPU 1 utilization 94%, 13.5GB / 24GB.
+
+### 10-4. 비교 baseline
+
+- 비교 대상: §1 mit-states 표의 v1_init_only HM 0.3886 / AUC 0.2182 (1-seed, sem_weight=0, decorr=0). 같은 yml 변형이 v3_text로 description만 바꾼 셈이므로 controlled.
+- 끝나면 mask on/off + test_pairs/val_pairs 모두 산출 → §1 표에 row 추가, 3-seed mean±std로.
+
+### 10-5. 결과 분기 (binary)
+
+- **HM ≥ +0.005, std 안에서 분리**: description content가 lever → Phase B (image-conditional selection)으로 차별화 작업.
+- **HM ≤ +0.002 또는 std 안 동률**: Phase A ❌. axis G(reality-check paper) pivot 또는 Phase B만 단독 시도.
+
